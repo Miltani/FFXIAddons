@@ -199,10 +199,6 @@ function custom_precast(spell)
 			if buffactive["Climactic Flourish"] or buffactive["Sneak Attack"] or buffactive["Trick Attack"] then
 				set_to_use = set_combine(set_to_use, sets["CritDmg"])
 			end
-			if th_next then
-				set_to_use = set_combine(set_to_use, sets["TH"])
-				th_next = false
-			end
 			equip(set_to_use)
 		end
 		return true

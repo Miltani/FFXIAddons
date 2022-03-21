@@ -76,6 +76,8 @@ function custom_get_sets()
 	ws["Hot Shot"] = { set = sets["Trueflight"], tp_bonus = true }
 	ws["Trueflight"] = { set = sets["Trueflight"], tp_bonus = true }
 	ws["Wildfire"] = { set = sets["Trueflight"], tp_bonus = false }
+	ws["Slug Shot"] = { set = sets["Blast Shot"], tp_bonus = false }
+	ws["Blast Shot"] = { set = sets["Blast Shot"], tp_bonus = false }
 	ws["Heavy Shot"] = { set = sets["Heavy Shot"], tp_bonus = false }
 	ws["Last Stand"] = { set = sets["Last Stand"], tp_bonus = true }
 	
@@ -83,11 +85,15 @@ function custom_get_sets()
 	ws["Viper Bite"] = { set = sets["Evisceration"], tp_bonus = true }
 	ws["Aeolian Edge"] = { set = sets["Aeolian Edge"], tp_bonus = true }
 	
+	ws["Burning Blade"] = { set = sets["Aeolian Edge"], tp_bonus = true }
+	ws["Red Lotus Blade"] = { set = sets["Aeolian Edge"], tp_bonus = true }
+	ws["Flat Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
 	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
 	
 	ws["Ruinator"] = { set = sets["Decimation"], tp_bonus = false }
 	ws["Decimation"] = { set = sets["Decimation"], tp_bonus = false }
 	
+	ws["Dulling Arrow"] = { set = sets["Dulling Arrow"], tp_bonus = false }
 	ws["Flaming Arrow"] = { set = sets["Flaming Arrow"], tp_bonus = true }
 	ws["Empyreal Arrow"] = { set = sets["Apex Arrow"], tp_bonus = true }
 	ws["Apex Arrow"] = { set = sets["Apex Arrow"], tp_bonus = false }
@@ -97,6 +103,21 @@ function custom_get_sets()
 	update_rng_info()	
 	
 	send_command('@input /macro book 7;wait 1;input /macro set 1')
+end
+
+function pretarget(spell)
+	if player.equipment.ammo == "Hauksbok Arrow" then
+		if spell.action_type == "Ranged Attack" 
+		or spell.name == "Bounty Shot" or spell.name == "Shadowbind"
+		then
+			if player.inventory["Chrono Arrow"] and player.inventory["Chrono Arrow"].count > 0 then
+				equip({ammo = "Chrono Arrow"})
+			else
+				add_to_chat("Get more Arrows or spend your Hauksbok!")
+				cancel_spell()
+			end
+		end
+	end
 end
  
 function custom_precast(spell)
@@ -111,6 +132,9 @@ function custom_precast(spell)
 				if (player.equipment.range == "Fomalhaut" and spell.skill == "Marksmanship")
 				or (player.equipment.range == "Fail-Not" and spell.skill == "Archery") then
 					maxTP = maxTP - 500
+				end
+				if player.equipment.range == "Accipiter" then
+					maxTP = maxTP - 1000
 				end
 				if player.sub_job == "WAR" then
 					maxTP = maxTP - 200

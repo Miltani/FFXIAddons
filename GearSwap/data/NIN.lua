@@ -32,15 +32,17 @@ end
 
 function custom_precast(spell)
 	if spell.type=="WeaponSkill" and ws[spell.english] then
-		local setToUse = ws[spell.english].set
+		equip(ws[spell.english].set)
 		local maxTP = 3000
 		if player.equipment.main == "Heishi Shorinken" then
 			maxTP = maxTP - 500
 		end
-		if player.tp < maxTP then
-			setToUse = set_combine(setToUse, sets["TPBonus"])
+		if ws[spell.english].set.head.name == "Mpaca's Cap" then
+			maxTP = maxTP - 200
 		end
-		equip(setToUse)
+		if player.tp < maxTP then
+			equip(sets["TPBonus"])
+		end
 		return true
 	end
 end

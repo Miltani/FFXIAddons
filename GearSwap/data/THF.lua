@@ -47,10 +47,6 @@ function custom_precast(spell)
 				setToUse = set_combine(setToUse, sets["WeatherObi"])
 			end
 			setToUse = SATA_check(setToUse)
-			if th_next and spell.english == "Aeolian Edge" then
-				setToUse = set_combine(setToUse, sets["TH"])
-				th_next = false
-			end
 			equip(setToUse)
 			return true
 		end
