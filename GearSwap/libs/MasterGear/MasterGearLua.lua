@@ -1,4 +1,4 @@
--- Version 1.5.0
+-- Version 1.5.1
 
 include("MasterGear/MasterGearFunctions.lua")
 include('THHelper/THHelper.lua')
@@ -62,16 +62,16 @@ function precast(spell)
 			if killer_effect then
 				setToUse = set_combine(setToUse, sets["KillerEffect"])
 			end
-			if th_next then
-				th_next = false
-				setToUse = set_combine(setToUse, sets["TH"])
-			end
 			equip(setToUse)
 		end
 	elseif spell.action_type == "Ranged Attack" then equip(sets["Snapshot"])
 	elseif sets["Precast_" .. modes[mode].name .. spell.english] then equip(sets["Precast_" .. modes[mode].name .. spell.english])
 	elseif sets["Precast_" .. spell.english] then equip(sets["Precast_" .. spell.english])
     end
+	if th_next then
+		th_next = false
+		setToUse = set_combine(setToUse, sets["TH"])
+	end
 end
 
 function midcast(spell)
@@ -91,10 +91,10 @@ function midcast(spell)
 		if spell.element == world.weather_element or spell.element == world.day_element then 
 			equip(sets["WeatherObi"])
 		end
-		if th_next then
-			th_next = false
-			equip(sets["TH"])
-		end
+	end
+	if th_next then
+		th_next = false
+		equip(sets["TH"])
 	end
 end
 

@@ -1,4 +1,8 @@
 # MasterGear
+1.5.1
+MasterGeaLua
+- always handle thnext in precast and midcast
+
 1.5.0
 MasterGearLua
 - added thnext command, to equip TH gear for next weaponskill or spellcast
