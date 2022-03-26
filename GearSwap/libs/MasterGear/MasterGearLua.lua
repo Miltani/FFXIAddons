@@ -1,4 +1,4 @@
--- Version 1.5.1
+-- Version 1.5.2
 
 include("MasterGear/MasterGearFunctions.lua")
 include('THHelper/THHelper.lua')
@@ -70,7 +70,7 @@ function precast(spell)
     end
 	if th_next then
 		th_next = false
-		setToUse = set_combine(setToUse, sets["TH"])
+		equip(sets["TH"])
 	end
 end
 

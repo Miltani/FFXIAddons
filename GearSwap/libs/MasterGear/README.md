@@ -1,4 +1,8 @@
 # MasterGear
+1.5.2
+MasterGeaLua
+- fix thnext to actually equip the TH set
+
 1.5.1
 MasterGeaLua
 - always handle thnext in precast and midcast
