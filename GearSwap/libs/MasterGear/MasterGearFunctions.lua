@@ -1,4 +1,4 @@
--- Version 1.5.2
+-- Version 1.6.0
 
 res = require 'resources'
 slips = require 'slips'
@@ -26,9 +26,7 @@ local default_gear_list = {
 
 jobs = { "WAR", "MNK", "WHM", "BLM", "RDM", "THF", "PLD", "DRK", "BST", "BRD", "RNG", "SAM", "NIN", "DRG", "SMN", "BLU", "COR", "PUP", "DNC", "SCH", "GEO", "RUN" }
 
-equipable_bags = { 0, 8, 10, 11, 
-12 -- Bug in Windower where if you have wardrobe 3 but not 4, 4 returns as enabled. Comment out this line if you do not have 4.
-}
+equipable_bags = { 0, 8, 10, 11, 12, 13, 14, 15, 16 }
 					
 storage_bags = { 0, 1, 2, 5, 6, 7, 9 } 
 
@@ -61,58 +59,58 @@ end
 
 gear_list = load_json_setting()
 
-function save_gear_slots(slots_csv, set_name)
+function save_gear_slots(slots_csv, set_name, job)
 	local slots = slots_csv:lower():split(',') 
 	local equipment = windower.ffxi.get_items().equipment
 	for k, v in pairs(slots) do
 		if v == 'main' then
 			local main = windower.ffxi.get_items(equipment.main_bag, equipment.main)
-			save_gear_to_slot(main, gear_list.main, set_name)
+			save_gear_to_slot(main, gear_list.main, set_name, job)
 		elseif v == 'sub' then
 			local sub = windower.ffxi.get_items(equipment.sub_bag, equipment.sub)
-			save_gear_to_slot(sub, gear_list.sub, set_name)
+			save_gear_to_slot(sub, gear_list.sub, set_name, job)
 		elseif v == 'range' then
 			local range = windower.ffxi.get_items(equipment.range_bag, equipment.range)
-			save_gear_to_slot(range, gear_list.range, set_name)
+			save_gear_to_slot(range, gear_list.range, set_name, job)
 		elseif v == 'ammo' then
 			local ammo = windower.ffxi.get_items(equipment.ammo_bag, equipment.ammo)
-			save_gear_to_slot(ammo, gear_list.ammo, set_name)
+			save_gear_to_slot(ammo, gear_list.ammo, set_name, job)
 		elseif v == 'head' then
 			local head = windower.ffxi.get_items(equipment.head_bag, equipment.head)
-			save_gear_to_slot(head, gear_list.head, set_name)
+			save_gear_to_slot(head, gear_list.head, set_name, job)
 		elseif v == 'neck' then
 			local neck = windower.ffxi.get_items(equipment.neck_bag, equipment.neck)
-			save_gear_to_slot(neck, gear_list.neck, set_name)
+			save_gear_to_slot(neck, gear_list.neck, set_name, job)
 		elseif v == 'ear1' then
 			local ear1 = windower.ffxi.get_items(equipment.left_ear_bag, equipment.left_ear)
-			save_gear_to_slot(ear1, gear_list.ear1, set_name)
+			save_gear_to_slot(ear1, gear_list.ear1, set_name, job)
 		elseif v == 'ear2' then
 			local ear2 = windower.ffxi.get_items(equipment.right_ear_bag, equipment.right_ear)
-			save_gear_to_slot(ear2, gear_list.ear2, set_name)
+			save_gear_to_slot(ear2, gear_list.ear2, set_name, job)
 		elseif v == 'body' then
 			local body = windower.ffxi.get_items(equipment.body_bag, equipment.body)
-			save_gear_to_slot(body, gear_list.body, set_name)
+			save_gear_to_slot(body, gear_list.body, set_name, job)
 		elseif v == 'hands' then
 			local hands = windower.ffxi.get_items(equipment.hands_bag, equipment.hands)
-			save_gear_to_slot(hands, gear_list.hands, set_name)
+			save_gear_to_slot(hands, gear_list.hands, set_name, job)
 		elseif v == 'ring1' then
 			local ring1 = windower.ffxi.get_items(equipment.left_ring_bag, equipment.left_ring)
-			save_gear_to_slot(ring1, gear_list.ring1, set_name)
+			save_gear_to_slot(ring1, gear_list.ring1, set_name, job)
 		elseif v == 'ring2' then
 			local ring2 = windower.ffxi.get_items(equipment.right_ring_bag, equipment.right_ring)
-			save_gear_to_slot(ring2, gear_list.ring2, set_name)
+			save_gear_to_slot(ring2, gear_list.ring2, set_name, job)
 		elseif v == 'back' then
 			local back = windower.ffxi.get_items(equipment.back_bag, equipment.back)
-			save_gear_to_slot(back, gear_list.back, set_name)
+			save_gear_to_slot(back, gear_list.back, set_name, job)
 		elseif v == 'waist' then
 			local waist = windower.ffxi.get_items(equipment.waist_bag, equipment.waist)
-			save_gear_to_slot(waist, gear_list.waist, set_name)
+			save_gear_to_slot(waist, gear_list.waist, set_name, job)
 		elseif v == 'legs' then
 			local legs = windower.ffxi.get_items(equipment.legs_bag, equipment.legs)
-			save_gear_to_slot(legs, gear_list.legs, set_name)
+			save_gear_to_slot(legs, gear_list.legs, set_name, job)
 		elseif v == 'feet' then
 			local feet = windower.ffxi.get_items(equipment.feet_bag, equipment.feet)
-			save_gear_to_slot(feet, gear_list.feet, set_name)
+			save_gear_to_slot(feet, gear_list.feet, set_name, job)
 		end
 	end
 end
@@ -131,22 +129,23 @@ function get_hp(description)
 	end
 end
 
-function save_gear_to_slot(item, slot, set_name)
+function save_gear_to_slot(item, slot, set_name, job)
 	if not item or item.id == 65535 then return end -- equipping empty returns gil for some stupid reason
 	remove_set_from_slot(slot, set_name)
 	local item_name = res.items[item.id].name
 	local augments = extdata.decode(item).augments
+	if job == nil then job = player.main_job end
 	for k,v in pairs(slot) do
 		if item_name == v.name then
 			if (not augments and not v.augments) or 
 			   (augments and v.augments and extdata.compare_augments(v.augments ,augments)) then 
 				for k2, v2 in pairs(v.set_list) do
-					if v2[player.main_job] then
-						table.insert(v2[player.main_job], set_name)
+					if v2[job] then
+						table.insert(v2[job], set_name)
 						return
 					else
-						v2[player.main_job] = T{}
-						table.insert(v2[player.main_job], set_name)
+						v2[job] = T{}
+						table.insert(v2[job], set_name)
 						return
 					end
 				end
@@ -161,8 +160,8 @@ function save_gear_to_slot(item, slot, set_name)
 	gear.priority = get_hp(helptext)
 	if augments then gear.augments = augments end
 	local set = { }
-	set[player.main_job] = T{ }
-	table.insert(set[player.main_job], set_name)
+	set[job] = T{ }
+	table.insert(set[job], set_name)
 	table.insert(gear.set_list, set)
 	table.insert(slot, gear)
 end
@@ -671,13 +670,14 @@ function print_help()
 	windower.add_to_chat(122, "//gs mastergear extragear (jobs:csv): List gear that is in wardrobes but not in the MasterGearList for jobs specified in second argument")
 	windower.add_to_chat(122, "//gs mastergear missinggear (jobs:csv): List gear that is in MasterGearList for jobs specified in second argument but not in wardrobes")
 	windower.add_to_chat(122, "//gs mastergear exportsets: Export all sets to a txt file")
-	windower.add_to_chat(122, "//gs mastergear saveeq (set_name): Saved equipped gear to a set. Won't save main, sub, ranged.")
-	windower.add_to_chat(122, "//gs mastergear saveslots (slots:csv) (set_name): Saved gear in specified slots to a set.")
+	windower.add_to_chat(122, "//gs mastergear saveeq (set_name): Save equipped gear to a set. Won't save main, sub, ranged.")
+	windower.add_to_chat(122, "//gs mastergear saveslots (slots:csv) (set_name): Save gear in specified slots to a set.")
 	windower.add_to_chat(122, "//gs mastergear removeset (slot, set_name): Remove specified set from slot. Use 'all' for all slots.")
 	windower.add_to_chat(122, "//gs mastergear update (gear_1_name,gear_2_name): Updates name of gear from gear_1_name to gear_2_name.")
 	windower.add_to_chat(122, "//gs mastergear slipstore (jobs:csv): Stores all gear that can be stored on slips except for gear for jobs specified. If no jobs specified, will use current job. Requires PorterPacker to be loaded.")
 	windower.add_to_chat(122, "//gs mastergear slipget (jobs:csv): Gets all gear that is stored on slips for jobs specified. If no jobs specified, will use current job. Requires PorterPacker to be loaded.")
 	windower.add_to_chat(122, "//gs mastergear slipmove: Moves slips to storage bags and slip gear to wardrobes.")
+	windower.add_to_chat(122, "//gs mastergear saveslotscustomjob (slots:csv) (job) (set_name): Save gear in specified slots to a set under specified job name. For example, you can save fishing gear to a FISH job and retrieve it using slipget FISH.")
 end
 
 function parse_command(...)
@@ -765,6 +765,15 @@ function parse_command(...)
 				return true
 			end
 			move_all_slip_gear()
+		elseif args[1] == "saveslotscustomjob" and args[2] and args[3] and args[4] then
+			local set_name = ""
+			for i = 4, #args do
+				set_name = set_name .. args[i] .. " "
+			end
+			set_name = string.sub(set_name, 1, #set_name - 1)
+			save_gear_slots(args[2], set_name, args[3])
+			save_json_setting()
+			windower.add_to_chat(122, args[2] .. " saved to " .. set_name .. " for custom job " .. args[3])
 		else
 			print_help()
 		end

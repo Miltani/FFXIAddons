@@ -1,4 +1,8 @@
 # MasterGear
+1.6.0
+MasterGearFunctions
+- Added a new command saveslotscustomjob to save equipment sets to a custom job name. Example saving Fishing gear to a FISH job so that it can be retrieved later with slipget FISH.
+
 1.5.2
 MasterGeaLua
 - fix thnext to actually equip the TH set
@@ -202,6 +206,12 @@ Gets all gear that is stored on slips for jobs specified. If no jobs specified, 
 ## //gs mastergear moveslipgear
 
 Moves slips to storage bags and slip gear to wardrobes.
+
+## //gs mastergear saveslotscustomjob (slots:csv) (job) (set_name)
+
+Save gear in specified slots to a set under specified job name. For example, you can save fishing gear to a FISH job and retrieve it using slipget FISH.
+
+> //gs mastergear saveslotscustomjob neck,body FISH Fishing
 
 # Limitations
 - No support for items with the same name (e.g 2x Varar Ring +1). Need to edit the json and add in the bag info yourself.
