@@ -2,6 +2,7 @@
 
 haste_level = 0
 cancel_haste = 0
+cancel_flurry = false
 debug_log = false
 
 local spells_started = {}
@@ -104,13 +105,22 @@ end
 
 local function time_change(new, old)
 	if not check_spell_started() then -- if someone still casting spell on player then don't cancel
+		local playerbuffs = windower.ffxi.get_player().buffs
 		if cancel_haste > 0 and cancel_haste >= haste_level then
-			local playerbuffs = windower.ffxi.get_player().buffs
 			for k, _buff_id in pairs(playerbuffs) do
 				if (_buff_id == 33 or _buff_id == 580) then
 					if debug_log then  windower.add_to_chat(122, "cancelling haste") end
 					cancel_buff(_buff_id)
 					haste_level = 0
+					return
+				end
+			end
+		end
+		if cancel_flurry then
+			for k, _buff_id in pairs(playerbuffs) do
+				if (_buff_id == 265 or _buff_id == 581) then
+					if debug_log then  windower.add_to_chat(122, "cancelling flurry") end
+					cancel_buff(_buff_id)
 					return
 				end
 			end
@@ -138,6 +148,10 @@ local function parse_command(...)
 		return true
 	elseif arg1 == "cancelhastedebug" then
 		debug_log = not debug_log
+		return true
+	elseif arg1 == "cancelflurry" then
+		cancel_flurry = not cancel_flurry
+		windower.add_to_chat(122, "Cancel Flurry " .. tostring(cancel_flurry))
 		return true
 	end
 	return false

@@ -1,4 +1,7 @@
 # HasteTracker
+1.0.5
+- Add cancelflurry command
+
 1.0.4
 - Don't do anything if cancelhaste set to 0
 
@@ -42,5 +45,9 @@ Automatically cancels all Haste I cast on you so that Haste II can be cast by Ko
 > //gs cancelhaste 0
 
 Don't cancel any haste spells.
+
+## //gs cancelflurry
+
+Toggle between cancelling flurry buff or not.
 
 
