@@ -94,6 +94,7 @@ function custom_get_sets()
 	
 	ws["Evisceration"] = { set = sets["Evisceration"], tp_bonus = true }
 	ws["Viper Bite"] = { set = sets["Viper Bite"], tp_bonus = false }
+	ws["Aeolian Edge"] = { set = sets["Primal Rend"], tp_bonus = true }
 	
 	ws["Savage Blade"] = { set = sets["Viper Bite"], tp_bonus = false }
 	

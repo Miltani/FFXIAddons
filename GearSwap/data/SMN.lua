@@ -170,8 +170,8 @@ end
 function get_set_to_use(spell_name)
 	if bps[pet.name] then
 		for _, v in pairs(bps[pet.name]) do 
-			if v.name == spell_name and v.setToUse then
-				return v.setToUse
+			if v.name == spell_name and v.set then
+				return v.set
 			end
 		end
 	end

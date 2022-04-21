@@ -23,6 +23,7 @@ function custom_get_sets()
 	ws["Earth Crusher"] = { set = sets["Rock Crusher"], tp_bonus = true }
 	
 	send_command('@input /macro book 18')
+	subjob_macro_page(player.sub_job)
 end
 
 function custom_precast(spell)
@@ -62,4 +63,29 @@ function custom_aftercast(spell)
 		equip(sets["Impetus_Swap"]) 
 	end
 	return true
+end
+
+function buff_change(name,gain,buff_details)
+	if name == "Boost" then
+		if gain then equip(sets["BoostRegain"])
+		else
+			if combat or player.status == "Engaged" then
+				equip(modes[mode].set)
+			else
+				equip(sets.Idle)
+			end
+		end
+	end
+end
+
+function sub_job_change(new, old)
+	subjob_macro_page(new)
+end
+
+function subjob_macro_page(job)
+	if job == "WAR" then
+		send_command('@wait 1;input /macro set 1')
+	elseif job == "DRG" then
+		send_command('@wait 1;input /macro set 2')
+	end
 end
