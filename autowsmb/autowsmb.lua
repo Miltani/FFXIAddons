@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.2.0'
+_addon.version  = '1.2.1'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -210,7 +210,7 @@ local function get_next_ws(player_tp, time_since_last_skillchain, buffs, target_
 	if am_level > 0 and am_level <= 3 then
 		local current_am_level = 0
 		for _, v in pairs(buffs) do
-			if v == 270 then 
+			if v == 270 or v == 273 then 
 				current_am_level = 1
 				break
 			elseif v == 271 then
@@ -749,7 +749,7 @@ local function handle_command(...)
 		notice("//awsmb setsclevel (1-3): Will only try to skillchain and make skillchains of the level set here or above.")
 		notice("//awsmb setspellpriority (spell_name,hpp,spell_name,hpp,...): Sets priority for spells to burst with. Will go in order of input and check elements. Hpp is amount of Hpp (HP percent) mob must have in order for spell to be used. Set to 0 for always use.")
 		notice("//awsmb spam (on/off): Starts/Stops spamming opener ws.")
-		notice("//awsmb amlvl (0-3, optional: ws_name): Holds TP to trigger aftermath.")
+		notice("//awsmb amlvl (0-3, optional: ws_name): Holds TP to trigger aftermath. Set to 0 to disable. 1-3 will trigger AM level 1-3. Use 1 for relic aftermath.")
 		notice("//awsmb fastcast (0-80): Sets fastcast value for mb recast calculation. Default 80.")
 		notice("//awsmb status: Prints current configuration to chatlog.")
     end

@@ -1,4 +1,7 @@
 #Auto WS and MB
+1.2.1:
+- amlvl to support relic aftermath. Set lvl to 1 to maintain relic aftermath.
+
 1.2.0:
 - Changed am3 command to amlvl.
 - Removed buffer time for AM3 maintenance.
@@ -115,7 +118,7 @@ Starts/Stops spamming opener ws
 
 ## //awsmb amlvl (0-3, optional: ws_name)
 
-Holds TP to trigger aftermath. Set to 0 to disable. 1-3 will trigger AM level 1-3.
+Holds TP to trigger aftermath. Set to 0 to disable. 1-3 will trigger AM level 1-3. Use 1 for relic aftermath.
 
 ## //awsmb fastcast (0-80) 
 
