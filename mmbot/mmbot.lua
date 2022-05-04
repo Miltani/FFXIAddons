@@ -1,6 +1,6 @@
 _addon.name = 'Mandragora Mania Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.1.1'
+_addon.version = '1.1.2'
 _addon.commands = {'mmbot'}
 
 packets = require('packets')
@@ -76,7 +76,16 @@ windower.register_event('addon command', function(...)
 		end
 	elseif args[1] == "start" then
 		started = true
-		notice("Getting " .. jingly_cap .. " jingly.")
+		if args[2] then
+			local jingly_arg = tonumber(args[2])
+			if jingly_arg ~= nil then
+				jingly_cap = jingly_arg
+			end
+		end
+		if jingly_cap > 0 then notice("Getting " .. jingly_cap .. " jingly.")
+		else
+			notice("Getting all the jingly.")
+		end
 	elseif args[1] == "stop" then
 		started = false
 		game_state = 2
@@ -101,7 +110,7 @@ windower.register_event('addon command', function(...)
 			end
 		end
 	elseif args[1] == "help" then
-		notice("//mmbot start <number>: Starts Automating for <number> of games")
+		notice("//mmbot start <number_of_jingly_to_get>: Starts automating until you get the amount of jingly specified. 300 is default. Set to 0 automate until you tell it to stop.")
 		notice("//mmbot stop: Stops automation")
 		notice("//mmbot setdelay <keypress / keydownup / ack / waitforack> <number>: Configures the delay for the various events")
 		notice("//mmbot debug: Toggles debug output")
@@ -137,7 +146,7 @@ windower.register_event('incoming chunk', function(id, data)
 			if p then
 				if p["Player"] == npc_ids[current_zone_id].npc_id then -- game ended
 					game_state = 2
-					if p["Param 2"] >= jingly_cap then 
+					if jingly_cap > 0 and p["Param 2"] >= jingly_cap then 
 						started = false
 						notice("Got the jingly")
 					end

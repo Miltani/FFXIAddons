@@ -14,11 +14,11 @@ This is for automating the Mandragora Mania mini game. This only reads packets a
 
 use //mmbot to send commands
 
-## mmbot start (number)
+## mmbot start <number_of_jingly_to_get>: 
 
-> mmbot start 20
+> mmbot start 0
 
-Will automate through 20 games.
+Starts automating until you get the amount of jingly specified. 300 is default. Set to 0 automate until you tell it to stop.
 
 ## mmbot stop
 
@@ -45,6 +45,9 @@ Toggles between printing debug messages to console or not. Default is off.
 Make sure your cursor is on the item you want to buy, then enter the command with the number you want to buy. This sends an enter input, then left arrow key input, and finally another enter input to select the item and then select yes.
 
 # Version History
+1.1.2:
+- Start command now accepts 2nd argument again. Use 0 to go back to automate until you drop.
+
 1.1.1:
 - Update npc ids for the permanent mandy mania patch
 - Changed start functionality to play until you get 300 jingly
