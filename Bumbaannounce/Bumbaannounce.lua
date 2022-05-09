@@ -1,6 +1,6 @@
 _addon.name     = 'Bumbannounce'
-_addon.author   = 'Kenshi'
-_addon.version  = '1.1.2'
+_addon.author   = 'Kenshi, Dabidobido'
+_addon.version  = '1.1.3'
 _addon.command  = 'bumba'
 
 require('logger')
@@ -8,7 +8,6 @@ require('chat')
 require('tables')
 packets = require('packets')
 local chat_helper = require('ChatHelper')
-local start_loop = true
 local Debug = false
 local party_chat = true
 
@@ -111,14 +110,6 @@ windower.register_event('incoming chunk', function(id, data)
     end
 end)
 
-function update_loop()
-	chat_helper.print_lines()
-end
-
-function should_loop()
-	return start_loop
-end
-
 windower.register_event('addon command', function(command)
     if command:lower() == 'debug' then
         Debug = not Debug
@@ -132,10 +123,6 @@ windower.register_event('addon command', function(command)
     end
 end)
 
-windower.register_event('load', function()
-	update_loop:loop(1, should_loop)
-end)
-
-windower.register_event('unload', function()
-	start_loop = false
+windower.register_event('prerender', function()
+	chat_helper.print_lines()
 end)
