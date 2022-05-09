@@ -1,12 +1,14 @@
 _addon.name     = 'Bumbannounce'
 _addon.author   = 'Kenshi'
-_addon.version  = '1.1.1'
+_addon.version  = '1.1.2'
 _addon.command  = 'bumba'
 
 require('logger')
 require('chat')
 require('tables')
 packets = require('packets')
+local chat_helper = require('ChatHelper')
+local start_loop = true
 local Debug = false
 local party_chat = true
 
@@ -47,7 +49,7 @@ windower.register_event('incoming chunk', function(id, data)
                 if animation_map[animation] then
                     if animation_map[animation].Param == packet.Param then
 						if party_chat then
-							windower.chat.input("/p Bumba is now absorbing: " ..animation_map[animation].element)
+							chat_helper.add_line("/p Bumba is now absorbing: " ..animation_map[animation].element)
 						else
 							windower.add_to_chat(200, 'Bumba is now absorbing: '..animation_map[animation].element..' '..animation_map[animation].icon)
 						end
@@ -109,12 +111,31 @@ windower.register_event('incoming chunk', function(id, data)
     end
 end)
 
+function update_loop()
+	chat_helper.print_lines()
+end
+
+function should_loop()
+	return start_loop
+end
+
 windower.register_event('addon command', function(command)
     if command:lower() == 'debug' then
         Debug = not Debug
         log('Debug mode set to '..tostring(Debug))
 	elseif command:lower() == "partychat" then
 		party_chat = not party_chat
+		if party_chat then chat_helper.PrintMode = 4
+		else chat_helper.PrintMode = -1
+		end
 		log('Party Chat set to '..tostring(party_chat))
     end
+end)
+
+windower.register_event('load', function()
+	update_loop:loop(1, should_loop)
+end)
+
+windower.register_event('unload', function()
+	start_loop = false
 end)
