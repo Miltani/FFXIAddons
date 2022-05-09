@@ -1,4 +1,4 @@
--- Version 1.6.0
+-- Version 1.6.1
 
 res = require 'resources'
 slips = require 'slips'
@@ -131,10 +131,10 @@ end
 
 function save_gear_to_slot(item, slot, set_name, job)
 	if not item or item.id == 65535 then return end -- equipping empty returns gil for some stupid reason
-	remove_set_from_slot(slot, set_name)
+	if job == nil then job = player.main_job end
+	remove_set_from_slot(slot, set_name, job)
 	local item_name = res.items[item.id].name
 	local augments = extdata.decode(item).augments
-	if job == nil then job = player.main_job end
 	for k,v in pairs(slot) do
 		if item_name == v.name then
 			if (not augments and not v.augments) or 
@@ -166,38 +166,38 @@ function save_gear_to_slot(item, slot, set_name, job)
 	table.insert(slot, gear)
 end
 
-function remove_set(set_name, slot_name)
-	if slot_name == "all" or slot_name == "main" then remove_set_from_slot(gear_list.main, set_name) end
-	if slot_name == "all" or slot_name == "sub" then remove_set_from_slot(gear_list.sub, set_name) end
-	if slot_name == "all" or slot_name == "range" then remove_set_from_slot(gear_list.range, set_name) end
-	if slot_name == "all" or slot_name == "ammo" then remove_set_from_slot(gear_list.ammo, set_name) end
-	if slot_name == "all" or slot_name == "head" then remove_set_from_slot(gear_list.head, set_name) end
-	if slot_name == "all" or slot_name == "neck" then remove_set_from_slot(gear_list.neck, set_name) end
-	if slot_name == "all" or slot_name == "ear1" then remove_set_from_slot(gear_list.ear1, set_name) end
-	if slot_name == "all" or slot_name == "ear2" then remove_set_from_slot(gear_list.ear2, set_name) end
-	if slot_name == "all" or slot_name == "body" then remove_set_from_slot(gear_list.body, set_name) end
-	if slot_name == "all" or slot_name == "hands" then remove_set_from_slot(gear_list.hands, set_name) end
-	if slot_name == "all" or slot_name == "ring1" then remove_set_from_slot(gear_list.ring1, set_name) end
-	if slot_name == "all" or slot_name == "ring2" then remove_set_from_slot(gear_list.ring2, set_name) end
-	if slot_name == "all" or slot_name == "back" then remove_set_from_slot(gear_list.back, set_name) end
-	if slot_name == "all" or slot_name == "waist" then remove_set_from_slot(gear_list.waist, set_name) end
-	if slot_name == "all" or slot_name == "legs" then remove_set_from_slot(gear_list.legs, set_name) end
-	if slot_name == "all" or slot_name == "feet" then remove_set_from_slot(gear_list.feet, set_name) end
+function remove_set(set_name, slot_name, job)
+	if slot_name == "all" or slot_name == "main" then remove_set_from_slot(gear_list.main, set_name, job) end
+	if slot_name == "all" or slot_name == "sub" then remove_set_from_slot(gear_list.sub, set_name, job) end
+	if slot_name == "all" or slot_name == "range" then remove_set_from_slot(gear_list.range, set_name, job) end
+	if slot_name == "all" or slot_name == "ammo" then remove_set_from_slot(gear_list.ammo, set_name, job) end
+	if slot_name == "all" or slot_name == "head" then remove_set_from_slot(gear_list.head, set_name, job) end
+	if slot_name == "all" or slot_name == "neck" then remove_set_from_slot(gear_list.neck, set_name, job) end
+	if slot_name == "all" or slot_name == "ear1" then remove_set_from_slot(gear_list.ear1, set_name, job) end
+	if slot_name == "all" or slot_name == "ear2" then remove_set_from_slot(gear_list.ear2, set_name, job) end
+	if slot_name == "all" or slot_name == "body" then remove_set_from_slot(gear_list.body, set_name, job) end
+	if slot_name == "all" or slot_name == "hands" then remove_set_from_slot(gear_list.hands, set_name, job) end
+	if slot_name == "all" or slot_name == "ring1" then remove_set_from_slot(gear_list.ring1, set_name, job) end
+	if slot_name == "all" or slot_name == "ring2" then remove_set_from_slot(gear_list.ring2, set_name, job) end
+	if slot_name == "all" or slot_name == "back" then remove_set_from_slot(gear_list.back, set_name, job) end
+	if slot_name == "all" or slot_name == "waist" then remove_set_from_slot(gear_list.waist, set_name, job) end
+	if slot_name == "all" or slot_name == "legs" then remove_set_from_slot(gear_list.legs, set_name, job) end
+	if slot_name == "all" or slot_name == "feet" then remove_set_from_slot(gear_list.feet, set_name, job) end
 	save_json_setting()
 end
 
-function remove_set_from_slot(slot, set_name)
+function remove_set_from_slot(slot, set_name, job)
 	for k,v in pairs(slot) do
 		for k2, v2 in pairs(v.set_list) do
-			if v2[player.main_job] then
-				for k3, v3 in pairs(v2[player.main_job]) do
+			if v2[job] then
+				for k3, v3 in pairs(v2[job]) do
 					if v3 == set_name then
-						table.remove(v2[player.main_job], k3)
+						table.remove(v2[job], k3)
 						break
 					end
 				end
-				if #v2[player.main_job] == 0 then
-					v2[player.main_job] = nil
+				if #v2[job] == 0 then
+					v2[job] = nil
 				end
 			end
 		end
@@ -310,7 +310,7 @@ function get_list_of_gear_in_json(filter)
 			if filter ~= nil then
 				for k2, v2 in pairs(gear.set_list) do
 					for k3, v3 in pairs(v2) do
-						if filter:contains(string.lower(k3)) then
+						if filter:contains(string.lower(k3)) or string.lower(k3) == 'all' then
 							table.insert(gearSet, gear)
 						end
 					end
@@ -718,7 +718,7 @@ function parse_command(...)
 				set_name = set_name .. args[i] .. " "
 			end
 			set_name = string.sub(set_name, 1, #set_name - 1)
-			remove_set(set_name, slot_name)
+			remove_set(set_name, slot_name, player.main_job)
 			windower.add_to_chat(122, "Removing " .. slot_name .. " from " .. set_name)
 		elseif args[1] == 'update' and args[2] then
 			local commandstring = ""

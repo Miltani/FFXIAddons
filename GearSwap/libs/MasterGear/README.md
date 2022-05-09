@@ -1,4 +1,8 @@
 # MasterGear
+1.6.1
+MasterGearFunctions
+- Fix removing gear from custom jobs when adding another gear in the same slot
+
 1.6.0
 MasterGearFunctions
 - Added a new command saveslotscustomjob to save equipment sets to a custom job name. Example saving Fishing gear to a FISH job so that it can be retrieved later with slipget FISH.
