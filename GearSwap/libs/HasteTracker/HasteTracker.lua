@@ -1,4 +1,4 @@
--- Version 1.0.4
+-- Version 1.0.6
 
 haste_level = 0
 cancel_haste = 0
@@ -108,8 +108,8 @@ local function time_change(new, old)
 		local playerbuffs = windower.ffxi.get_player().buffs
 		if cancel_haste > 0 and cancel_haste >= haste_level then
 			for k, _buff_id in pairs(playerbuffs) do
-				if (_buff_id == 33 or _buff_id == 580) then
-					if debug_log then  windower.add_to_chat(122, "cancelling haste") end
+				if _buff_id == 33 then
+					if debug_log then windower.add_to_chat(122, "cancelling haste because of buff id ".. tostring(_buff_id)) end
 					cancel_buff(_buff_id)
 					haste_level = 0
 					return
@@ -119,7 +119,7 @@ local function time_change(new, old)
 		if cancel_flurry then
 			for k, _buff_id in pairs(playerbuffs) do
 				if (_buff_id == 265 or _buff_id == 581) then
-					if debug_log then  windower.add_to_chat(122, "cancelling flurry") end
+					if debug_log then windower.add_to_chat(122, "cancelling flurry") end
 					cancel_buff(_buff_id)
 					return
 				end
@@ -129,7 +129,8 @@ local function time_change(new, old)
 end
 
 local function lose_buff(id)
-	if id == 33 or id == 580 then
+	if id == 33 then
+		if debug_log then windower.add_to_chat(122, "lost haste buff id " .. tostring(id)) end
 		haste_level = 0
 	end
 end

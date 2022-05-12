@@ -1,4 +1,7 @@
 # HasteTracker
+1.0.6
+- Fix cancelling haste buffs when starting unity fight if there is indi-haste or geo-haste on the player. Players will lose indi-haste buff (id 580) and then regain it when starting a unity fight (probably any fight with level restriction).
+
 1.0.5
 - Add cancelflurry command
 
