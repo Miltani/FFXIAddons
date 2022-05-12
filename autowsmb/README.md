@@ -1,4 +1,7 @@
 #Auto WS and MB
+1.2.2:
+- fixed using the wrong weapon skill when the first element of the weapon skill creates a skillchain of lower level than desired. (E.g Sniper Shot -> King's Justice trying for distortion when it would actually make scission)
+
 1.2.1:
 - amlvl to support relic aftermath. Set lvl to 1 to maintain relic aftermath.
 

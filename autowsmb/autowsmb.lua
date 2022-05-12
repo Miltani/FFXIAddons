@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.2.1'
+_addon.version  = '1.2.2'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -203,6 +203,52 @@ local function job_ability_check(ws_info, ja_recasts)
 	return true
 end
 
+function get_next_skillchain_level(target_index, element_to_use)
+	if last_skillchain[target_index] then
+		for _,v in pairs(last_skillchain[target_index].name) do
+			local element = string.lower(v)
+			if element == 'transfixion' then
+				if element_to_use == "scission" then return 2
+				elseif element_to_use == "compression" or element_to_use == "reverberation" then return 1 end
+			elseif element == 'compression' then
+				if element_to_use == "transfixion" or element_to_use == "detonation" then return 1 end
+			elseif element == 'liquefaction' then
+				if element_to_use == "impaction" then return 2
+				elseif element_to_use == "scission" then return 1 end
+			elseif element == 'scission' then
+				if element_to_use == "liquefaction" or element_to_use == "reverberation" or element_to_use == "detonation" then return 1 end
+			elseif element == "reverberation" then
+				if element_to_use == "induration" or element_to_use == "impaction" then return 1 end
+			elseif element == "detonation" then
+				if element_to_use == "compression" then return 2
+				elseif element_to_use == "scission" then return 1 end
+			elseif element == "induration" then
+				if element_to_use == "reverberation" then return 2
+				elseif element_to_use == "compression" or element_to_use == "impaction" then return 1 end
+			elseif element == "impaction" then
+				if element_to_use == "liquefaction" or element_to_use == "detonation" then return 1 end
+			elseif element == "gravitation" then
+				if element_to_use == "distortion" then return 3
+				elseif element_to_use == "fragmentation" then return 2 end
+			elseif element == "distortion" then
+				if element_to_use == "gravitation" then return 3
+				elseif element_to_use == "fusion" then return 2 end
+			elseif element == "fusion" then
+				if element_to_use == "fragmentation" then return 3
+				elseif element_to_use == "gravitation" then return 2 end
+			elseif element == "fragmentation" then
+				if element_to_use == "fusion" then return 3
+				elseif element_to_use == "distortion" then return 2 end
+			elseif element == "light" then
+				if element_to_use == "light" then return 3 end
+			elseif element == "darkness" then
+				if element_to_use == "darkness" then return 3 end
+			end
+		end
+	end
+	return 0
+end
+
 local function get_next_ws(player_tp, time_since_last_skillchain, buffs, target_index)
 	if not started then return end
 	local time_now = os.clock()
@@ -243,20 +289,25 @@ local function get_next_ws(player_tp, time_since_last_skillchain, buffs, target_
 					end
 					local job_ability_ok = job_ability_check(parsed_wses[i], ja_recasts)
 					if job_ability_ok then
-						for _, v2 in pairs(parsed_wses[i].elements) do
-							for _, v3 in pairs(elements_to_continue) do
-								if string.lower(v3) == string.lower(v2) then 
+						local sc_level_to_use = settings[current_main_job]["sc_level"]
+						if got_aeonic then
+							local next_sc_level = get_next_skillchain_level(target_index, string.lower(parsed_wses[i].aeonic))
+							if next_sc_level >= sc_level_to_use then
+								ws_to_return = parsed_wses[i]
+							end
+						end
+						if ws_to_return == nil then
+							for _, v2 in pairs(parsed_wses[i].elements) do
+								local next_sc_level = get_next_skillchain_level(target_index, string.lower(v2))
+								if next_sc_level >= sc_level_to_use then
 									ws_to_return = parsed_wses[i]
 									break
-								elseif got_aeonic then
-									if string.lower(parsed_wses[i].aeonic) == string.lower(v3) then
-										ws_to_return = parsed_wses[i]
-										break
-									end
+								elseif next_sc_level > 0 then
+									break
 								end
 							end
-							if ws_to_return ~= nil then break end
 						end
+						if ws_to_return ~= nil then break end
 					end
 				else
 					ws_to_return = parsed_wses[i]
