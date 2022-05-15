@@ -1,4 +1,7 @@
 #Auto WS and MB
+1.3.0:
+- Added function to MB only when the skillchain is at a certain step or above.
+
 1.2.2:
 - fixed using the wrong weapon skill when the first element of the weapon skill creates a skillchain of lower level than desired. (E.g Sniper Shot -> King's Justice trying for distortion when it would actually make scission)
 
@@ -126,6 +129,10 @@ Holds TP to trigger aftermath. Set to 0 to disable. 1-3 will trigger AM level 1-
 ## //awsmb fastcast (0-80) 
 
 Sets fastcast value for mb recast calculation. Default 80.
+
+## //awsmb mbstep (number 1+)
+
+MB only after skillchain has reached a specific step. Default 1.
 
 ## //awsmb status:
 

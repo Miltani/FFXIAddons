@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.2.2'
+_addon.version  = '1.3.0'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -18,6 +18,7 @@ local default_setting = {
 	["ws_priority"] = "",
 	["spell_priority"] = "",
 	["am_ws"] = "",
+	["mb_step"] = 1,
 }
 
 local aeonic_weapon = {
@@ -403,8 +404,12 @@ local function check_mb()
 	local target_index = player.target_index
 	local time_now = os.clock()
 	if debug_print then notice("Checking MB") end
-	if last_skillchain[target_index] and last_skillchain[target_index].name ~= nil and #last_skillchain[target_index].name >= 1 
-	and time_now - last_skillchain[target_index].time < sc_window_end and target_sc_step >= 1
+	if last_skillchain[target_index] 
+	and last_skillchain[target_index].name ~= nil 
+	and #last_skillchain[target_index].name >= 1 
+	and time_now - last_skillchain[target_index].time < sc_window_end 
+	and target_sc_step >= 1
+	and (target_sc_step + 1 >= settings[current_main_job]["mb_step"] or double_light_darkness) -- +1 here cos I start from 0
 	then
 		local time_left = 8 + sc_window_delay - (time_now - last_skillchain[target_index].time) - target_sc_step
 		local mob = windower.ffxi.get_mob_by_index(target_index)
@@ -784,6 +789,15 @@ local function handle_command(...)
 		else
 			notice("AM Level should be between 0 and 3. " .. args[2])
 		end
+	elseif args[1] == "mbstep" and args[2] then
+		local mb_step = tonumber(args[2])
+		if mb_step and mb_step >= 1 then 
+			settings[current_main_job]["mb_step"] = mb_step
+			config.save(settings)
+			notice("MB at step: " .. tostring(settings[current_main_job]["mb_step"]) .. "+")
+		else 
+			notice("MB step should be number more than or equal to 1 " .. args[2])
+		end
 	elseif args[1] == "debug" and args[2] then
 		if args[2] == "on" then debug_print = true
 		elseif args[2] == "off" then debug_print = false end
@@ -802,6 +816,7 @@ local function handle_command(...)
 		notice("//awsmb spam (on/off): Starts/Stops spamming opener ws.")
 		notice("//awsmb amlvl (0-3, optional: ws_name): Holds TP to trigger aftermath. Set to 0 to disable. 1-3 will trigger AM level 1-3. Use 1 for relic aftermath.")
 		notice("//awsmb fastcast (0-80): Sets fastcast value for mb recast calculation. Default 80.")
+		notice("//awsmb mbstep (number 1+): MB only after skillchain has reached a specific step. Default 1.")
 		notice("//awsmb status: Prints current configuration to chatlog.")
     end
 end
