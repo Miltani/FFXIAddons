@@ -1,6 +1,6 @@
 _addon.name = 'Mandragora Mania Madness Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.0.0'
+_addon.version = '1.1.1'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
@@ -357,16 +357,24 @@ end
 function enemy_wins_next_move(area)
 	if area == 6 then 
 		return (game_board[5] == 0 and game_board[7] == 10 and game_board[8] == 10)
+		or (game_board[5] == 10 and game_board[7] == 0 and game_board[8] == 10)
 		or (game_board[2] == 0 and game_board[10] == 10 and game_board[14] == 10)
+		or (game_board[2] == 10 and game_board[10] == 0 and game_board[14] == 10)
 	elseif area == 7 then
 		return (game_board[8] == 0 and game_board[5] == 10 and game_board[6] == 10)
+		or (game_board[8] == 10 and game_board[5] == 10 and game_board[6] == 0)
 		or (game_board[3] == 0 and game_board[11] == 10 and game_board[15] == 10)
+		or (game_board[3] == 10 and game_board[11] == 0 and game_board[15] == 10)
 	elseif area == 10 then
 		return (game_board[9] == 0 and game_board[11] == 10 and game_board[12] == 10)
+		or (game_board[9] == 10 and game_board[11] == 0 and game_board[12] == 10)
 		or (game_board[14] == 0 and game_board[2] == 10 and game_board[6] == 10)
+		or (game_board[14] == 10 and game_board[2] == 10 and game_board[6] == 0)
 	elseif area == 11 then
 		return (game_board[12] == 0 and game_board[9] == 10 and game_board[10] == 10)
+		or (game_board[12] == 10 and game_board[9] == 10 and game_board[10] == 0)
 		or (game_board[15] == 0 and game_board[3] == 10 and game_board[7] == 10)
+		or (game_board[15] == 10 and game_board[3] == 10 and game_board[7] == 0)
 	end
 end
 
