@@ -5,29 +5,27 @@ This is to make it easier to trade lots of goblin keys to a nearby goblin. This 
 # How to Use
 
 1. Stand near a goblin so that /targetnpc will target the goblin
-2. //gkt tradekey (number of times)
+2. //gkt trade
 
 # Commands
 
 use //gkt to send commands
 
-## gkt tradekey (number)
+## gkt trade
 
-> gkt tradekey 20
+Will automate trading all keys in inventory to the nearby goblin until inventory is full.
 
-Will automate trading 20 keys to the nearby goblin.
-
-## mmbot stop
+## gkt stop
 
 Will stop the automation.
 
-## mmbot setitem (item name)
-
-> gkt setitem SP Gobbie Key
-
-Sets the item to trade to SP Gobbie Key. Default item is Dial Key #Fo.
-
 # Version History
+2.0.0:
+- Will now trade all keys in inventory.
+
+1.0.1:
+- Increase delay to 13 seconds
+- Default item is now SP Gobbie Key
 
 1.0.0: 
 - First version.
