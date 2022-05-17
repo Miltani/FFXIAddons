@@ -1,6 +1,6 @@
 _addon.name = 'Mandragora Mania Madness Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.1.2'
+_addon.version = '1.1.3'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
@@ -231,17 +231,17 @@ end)
 function do_player_turn()
 	if game_state ~= 1 or not player_turn then return end
 	player_action_started = true
-	local row_1 = game_board[1] + game_board[2] + game_board[3] + game_board[4]
-	local row_2 = game_board[5] + game_board[6] + game_board[7] + game_board[8]
-	local row_3 = game_board[9] + game_board[10] + game_board[11] + game_board[12]
-	local row_4 = game_board[13] + game_board[14] + game_board[15] + game_board[16]
-	local column_1 = game_board[1] + game_board[5] + game_board[9] + game_board[13]
-	local column_2 = game_board[2] + game_board[6] + game_board[10] + game_board[14]
-	local column_3 = game_board[3] + game_board[7] + game_board[11] + game_board[15]
-	local column_4 = game_board[4] + game_board[8] + game_board[12] + game_board[16]
-	local row_4 = game_board[13] + game_board[14] + game_board[15] + game_board[16]
-	local right_diag = game_board[1] + game_board[6] + game_board[11] + game_board[16]
-	local left_diag = game_board[4] + game_board[7] + game_board[10] + game_board[13]
+	row_1 = game_board[1] + game_board[2] + game_board[3] + game_board[4]
+	row_2 = game_board[5] + game_board[6] + game_board[7] + game_board[8]
+	row_3 = game_board[9] + game_board[10] + game_board[11] + game_board[12]
+	row_4 = game_board[13] + game_board[14] + game_board[15] + game_board[16]
+	column_1 = game_board[1] + game_board[5] + game_board[9] + game_board[13]
+	column_2 = game_board[2] + game_board[6] + game_board[10] + game_board[14]
+	column_3 = game_board[3] + game_board[7] + game_board[11] + game_board[15]
+	column_4 = game_board[4] + game_board[8] + game_board[12] + game_board[16]
+	row_4 = game_board[13] + game_board[14] + game_board[15] + game_board[16]
+	right_diag = game_board[1] + game_board[6] + game_board[11] + game_board[16]
+	left_diag = game_board[4] + game_board[7] + game_board[10] + game_board[13]
 	local selected_option = false
 	-- win simple 
 	if row_1 == 12 and game_board[1] == 1 and game_board[4] == 1 then
@@ -307,59 +307,67 @@ function do_player_turn()
 		if not selected_option and left_diag == 30 then selected_option = block_without_bust(4,7,10,13) end
 		
 		if not selected_option then
-			-- try to get corner that forces a move
-			if row_1 == 11 then
-				if game_board[1] == 0 then 
-					navigate_to_menu_option(1)
-					selected_option = true
-				elseif game_board[4] == 0 then
-					navigate_to_menu_option(4)
-					selected_option = true
-				end
-			elseif row_4 == 11 then
-				if game_board[13] == 0 then 
-					navigate_to_menu_option(13)
-					selected_option = true
-				elseif game_board[16] == 0 then
-					navigate_to_menu_option(16)
-					selected_option = true
-				end
-			elseif column_1 == 11 then
-				if game_board[1] == 0 then 
-					navigate_to_menu_option(1)
-					selected_option = true
-				elseif game_board[13] == 0 then
-					navigate_to_menu_option(13)
-					selected_option = true
-				end
-			elseif column_4 == 11 then
-				if game_board[4] == 0 then 
-					navigate_to_menu_option(4)
-					selected_option = true
-				elseif game_board[16] == 0 then
-					navigate_to_menu_option(16)
-					selected_option = true
-				end
-			elseif right_diag == 11 then
-				if game_board[1] == 0 then 
-					navigate_to_menu_option(1)
-					selected_option = true
-				elseif game_board[16] == 0 then
-					navigate_to_menu_option(16)
-					selected_option = true
-				end
-			elseif left_diag == 11 then
-				if game_board[4] == 0 then 
-					navigate_to_menu_option(4)
-					selected_option = true
-				elseif game_board[13] == 0 then
-					navigate_to_menu_option(13)
-					selected_option = true
+			-- skip getting corner under this condition
+			local skip_corner_pick = game_board[1] + game_board[4] + game_board[13] + game_board[16] == 3 
+			and (row_1 == 22 and row_4 == 11)
+			or (row_1 == 11 and row_4 == 22)
+			or (column_1 == 22 and column_4 == 11)
+			or (column_1 == 11 and column_4 == 22)
+			
+			if not skip_corner_pick then
+				if row_1 == 11 then -- try to get corner that forces a move
+					if game_board[1] == 0 then 
+						navigate_to_menu_option(1)
+						selected_option = true
+					elseif game_board[4] == 0 then
+						navigate_to_menu_option(4)
+						selected_option = true
+					end
+				elseif row_4 == 11 then
+					if game_board[13] == 0 then 
+						navigate_to_menu_option(13)
+						selected_option = true
+					elseif game_board[16] == 0 then
+						navigate_to_menu_option(16)
+						selected_option = true
+					end
+				elseif column_1 == 11 then
+					if game_board[1] == 0 then 
+						navigate_to_menu_option(1)
+						selected_option = true
+					elseif game_board[13] == 0 then
+						navigate_to_menu_option(13)
+						selected_option = true
+					end
+				elseif column_4 == 11 then
+					if game_board[4] == 0 then 
+						navigate_to_menu_option(4)
+						selected_option = true
+					elseif game_board[16] == 0 then
+						navigate_to_menu_option(16)
+						selected_option = true
+					end
+				elseif right_diag == 11 then
+					if game_board[1] == 0 then 
+						navigate_to_menu_option(1)
+						selected_option = true
+					elseif game_board[16] == 0 then
+						navigate_to_menu_option(16)
+						selected_option = true
+					end
+				elseif left_diag == 11 then
+					if game_board[4] == 0 then 
+						navigate_to_menu_option(4)
+						selected_option = true
+					elseif game_board[13] == 0 then
+						navigate_to_menu_option(13)
+						selected_option = true
+					end
 				end
 			end
 			
 			-- get corners
-			if not selected_option then
+			if not selected_option and not skip_corner_pick then
 				if game_board[1] == 0 then 
 					navigate_to_menu_option(1)
 					selected_option = true
@@ -376,13 +384,15 @@ function do_player_turn()
 			end
 		end
 		if not selected_option then
+			-- fill up 
+		
 			-- fill up row or diagonal
-			if not selected_option and right_diag == 2 then selected_option = set_line_to_3(1,6,11,16) end
-			if not selected_option and left_diag == 2 then selected_option = set_line_to_3(4,7,10,13) end
-			if not selected_option and row_1 == 2 then selected_option = set_line_to_3(1,2,3,4) end
-			if not selected_option and column_1 == 2 then selected_option = set_line_to_3(1,5,9,13) end
-			if not selected_option and column_4 == 2 then selected_option = set_line_to_3(4,8,12,16) end
-			if not selected_option and row_4 == 2 then selected_option = set_line_to_3(13,14,15,16) end
+			if not selected_option and right_diag == 2 then selected_option = fill_up_diagonal(1,6,11,16) end
+			if not selected_option and left_diag == 2 then selected_option = fill_up_diagonal(4,7,10,13) end
+			if not selected_option and row_1 == 2 then selected_option = fill_up_sides(1,2,3,4) end
+			if not selected_option and column_1 == 2 then selected_option = fill_up_sides(1,5,9,13) end
+			if not selected_option and column_4 == 2 then selected_option = fill_up_sides(4,8,12,16) end
+			if not selected_option and row_4 == 2 then selected_option = fill_up_sides(13,14,15,16) end
 			
 			-- just get random
 			if not selected_option then
@@ -454,12 +464,55 @@ function two_enemies_besides_area(area)
 end
 
 -- 4 areas should be in a line
-function set_line_to_3(area1, area2, area3, area4)
+function fill_up_diagonal(area1, area2, area3, area4)
 	if game_board[area1] == 1 and game_board[area4] == 1 then 
-		if game_board[area2] == 0 and two_enemies_besides_area(area2) and not enemy_wins_next_move(area2) then 
+		if game_board[area2] == 0 and two_enemies_besides_area(area2) and not enemy_wins_next_move(area2) and not enemy_gets_3_in_a_line_next_move(area2) then 
 			navigate_to_menu_option(area2)
 			return true
-		elseif game_board[area3] == 0 and two_enemies_besides_area(area3) and not enemy_wins_next_move(area3) then 
+		elseif game_board[area3] == 0 and two_enemies_besides_area(area3) and not enemy_wins_next_move(area3) and not enemy_gets_3_in_a_line_next_move(area3) then 
+			navigate_to_menu_option(area3)
+			return true
+		end
+	end
+	return false
+end
+
+function enemy_gets_3_in_a_line_next_move(area)
+	if area == 2 and row_1 == 2 and column_3 == 20 and game_board[7] == 0 then return true
+	elseif area == 3 and row_1 == 2 and column_2 == 20 and game_board[6] == 0 then return true
+	elseif area == 5 and column_1 == 2 and row_3 == 20 and game_board[10] == 0 then return true
+	elseif area == 9 and column_1 == 2 and row_2 == 20 and game_board[6] == 0 then return true
+	elseif area == 8 and column_4 == 2 and row_3 == 20 and game_board[11] == 0 then return true
+	elseif area == 12 and column_4 == 2 and row_2 == 20 and game_board[7] == 0 then return true
+	elseif area == 14 and row_4 == 2 and column_3 == 20 and game_board[11] == 0 then return true
+	elseif area == 15 and row_4 == 2 and column_2 == 20 and game_board[10] == 0 then return true
+	elseif area == 6 then
+		if right_diag == 2 and (row_3 == 20 or column_3 == 20) then return true end
+		if row_2 == 2 and column_3 == 20 then return true end
+		if column_2 == 2 and row_3 == 20 then return true end
+	elseif area == 7 then
+		if left_diag == 2 and (row_2 == 20 or column_2 == 20) then return true end
+		if row_2 == 2 and column_2 == 20 then return true end
+		if column_3 == 2 and row_3 == 20 then return true end
+	elseif area == 10 then
+		if left_diag == 2 and (row_2 == 20 or column_3 == 20) then return true end
+		if row_3 == 2 and column_3 == 20 then return true end
+		if column_2 == 2 and row_2 == 20 then return true end
+	elseif area == 11 then
+		if right_diag == 2 and (row_2 == 20 or column_2 == 20) then return true end
+		if row_3 == 2 and column_2 == 20 then return true end
+		if column_3 == 2 and row_2 == 20 then return true end
+	end
+	return false
+end
+
+-- 4 areas should be in a line
+function fill_up_sides(area1, area2, area3, area4)
+	if game_board[area1] == 1 and game_board[area4] == 1 then 
+		if game_board[area2] == 0 and not enemy_wins_next_move(area2) and not enemy_gets_3_in_a_line_next_move(area2) then 
+			navigate_to_menu_option(area2)
+			return true
+		elseif game_board[area3] == 0 and not enemy_wins_next_move(area3) and not enemy_gets_3_in_a_line_next_move(area3) then 
 			navigate_to_menu_option(area3)
 			return true
 		end
