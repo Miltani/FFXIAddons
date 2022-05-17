@@ -42,5 +42,9 @@ waitforack is the delay the bot will wait if no ack packet is sent (usually when
 Toggles between printing debug messages to console or not. Default is off.
 
 # Version History
+1.1.0:
+- Smarter bot
+- Buy keys in bulk
+
 1.0.0: 
 - First version. Algorithim is quite stupid so will lose sometimes.

@@ -4,6 +4,7 @@ _addon.version = '1.0.0'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
+require('functions')
 require('logger')
 socket = require('socket')
 
@@ -38,6 +39,10 @@ option_indexes =
 }
 
 quit_option_index = 5
+buy_key = 0
+buy_key_fo_option_index = 6
+interact_distance_square = 5*5
+npc_index = 0
 
 zone = nil -- get zone from the incoming and use it for outgoing
 
@@ -103,12 +108,20 @@ windower.register_event('addon command', function(...)
 				notice("Delay Between Key Down and Up:" .. delay_between_key_down_and_up)
 			end
 		end
-	elseif args[1] == "debugprint" then
-		notice(tostring(started) .. "," .. tostring(game_state) .. "," .. tostring(#coroutines) .. "," .. tostring(player_turn) .. "," .. tostring(os.time()) .. "," .. tostring(last_board_update) .. "," .. tostring(opponent_move_time) )
+	elseif args[1] == "buykey" and args[2] then
+		local number = tonumber(args[2])
+		if number and number > 0 then
+			buy_key = number
+			poke_chacharoon()
+			notice("Buying " .. buy_key .. " Dial Key #FO")
+		else
+			notice("buykey needs an argument more than 0: " .. args[2])
+		end
 	elseif args[1] == "help" then
 		notice("//mmmbot start <number_of_jingly_to_get>: Starts automating until you get the amount of jingly specified. 300 is default. Set to 0 automate until you tell it to stop.")
 		notice("//mmmbot stop: Stops automation")
 		notice("//mmmbot setdelay <keypress / keydownup / ack / waitforack> <number>: Configures the delay for the various events")
+		notice("//mmmbot buykey <number>: Buys <number> of Dial Key #FO.")
 		notice("//mmmbot debug: Toggles debug output")
 	end
 end)
@@ -117,26 +130,33 @@ windower.register_event('incoming chunk', function(id, data)
 	if id == 0x34 then
 		local p = packets.parse('incoming',data)
 		if p then
-			current_zone_id = p['Zone']
-			if npc_ids[current_zone_id] then 
-				if p['NPC'] == npc_ids[current_zone_id].npc_id then
-					if debugging then notice("Got menu packet menu id " .. p['Menu ID']) end
-					if game_state == 1 then game_state = 2 end
-					if game_state == 0 or game_state == 2 then
-						if p['Menu ID'] == npc_ids[current_zone_id].game_menu_id then
-							if debugging then notice("Game State Start") end
-							game_state = 1
-							reset_state()
-							game_started_time = os.time()
-						elseif p['Menu ID'] == npc_ids[current_zone_id].menu_id and started and game_state == 2 then
-							go_first = nil
-							reset_key_coroutine_and_state()
-							navigate_to_menu_option(1, 3, true)
+			if wait_for_chacharoon_0x034 then
+				if buy_key > 0 then
+					buy_key_routine:schedule(1)
+					return true
+				end
+			else
+				current_zone_id = p['Zone']
+				if npc_ids[current_zone_id] then 
+					if p['NPC'] == npc_ids[current_zone_id].npc_id then
+						if debugging then notice("Got menu packet menu id " .. p['Menu ID']) end
+						if game_state == 1 then game_state = 2 end
+						if game_state == 0 or game_state == 2 then
+							if p['Menu ID'] == npc_ids[current_zone_id].game_menu_id then
+								if debugging then notice("Game State Start") end
+								game_state = 1
+								reset_state()
+								game_started_time = os.time()
+							elseif p['Menu ID'] == npc_ids[current_zone_id].menu_id and started and game_state == 2 then
+								go_first = nil
+								reset_key_coroutine_and_state()
+								navigate_to_menu_option(1, 3, true)
+							end
 						end
 					end
+				elseif debugging then
+					notice("Couldn't find zone_id defined in npc_ids " .. current_zone_id)
 				end
-			elseif debugging then
-				notice("Couldn't find zone_id defined in npc_ids " .. current_zone_id)
 			end
 		end
 	elseif id == 0x02A then
@@ -178,6 +198,7 @@ function reset_state()
 	navigation_finished = false
 	last_board_update = 0
 	opponent_move_time = 0
+	wait_for_chacharoon_0x034 = false
 end
 
 windower.register_event('outgoing chunk', function(id, original, modified, injected, blocked)
@@ -198,6 +219,9 @@ windower.register_event('outgoing chunk', function(id, original, modified, injec
 							end
 						end
 					end
+				elseif p['Menu ID'] == npc_ids[current_zone_id].menu_id and  p['Option Index'] == 0 then --escaped out
+					reset_state()
+					game_state = 0
 				end
 			end
 		end
@@ -330,17 +354,34 @@ function fill_empty(area1, area2, area3, area4)
 	end
 end
 
+function enemy_wins_next_move(area)
+	if area == 6 then 
+		return (game_board[5] == 0 and game_board[7] == 10 and game_board[8] == 10)
+		or (game_board[2] == 0 and game_board[10] == 10 and game_board[14] == 10)
+	elseif area == 7 then
+		return (game_board[8] == 0 and game_board[5] == 10 and game_board[6] == 10)
+		or (game_board[3] == 0 and game_board[11] == 10 and game_board[15] == 10)
+	elseif area == 10 then
+		return (game_board[9] == 0 and game_board[11] == 10 and game_board[12] == 10)
+		or (game_board[14] == 0 and game_board[2] == 10 and game_board[6] == 10)
+	elseif area == 11 then
+		return (game_board[12] == 0 and game_board[9] == 10 and game_board[10] == 10)
+		or (game_board[15] == 0 and game_board[3] == 10 and game_board[7] == 10)
+	end
+end
+
 -- 4 areas should be in a line
 function set_line_to_3(area1, area2, area3, area4)
 	if game_board[area1] == 1 and game_board[area4] == 1 then 
-		if game_board[area2] == 0 then 
+		if game_board[area2] == 0 and not enemy_wins_next_move(area2) then 
 			navigate_to_menu_option(area2)
 			return true
-		elseif game_board[area3] == 0 then 
+		elseif game_board[area3] == 0 and not enemy_wins_next_move(area3) then 
 			navigate_to_menu_option(area3)
 			return true
 		end
 	end
+	return false
 end
 
 function fill_without_bust(area)
@@ -508,6 +549,56 @@ function update_loop()
 		elseif game_started_time == 0 and player_turn and opponent_move_time > 0 and time_now - opponent_move_time > 2 then
 			do_player_turn()
 		end
+	end
+end
+
+function poke_thing(npc)
+	local p = packets.new('outgoing', 0x1a, {
+		['Target'] = npc.id,
+		['Target Index'] = npc.index,
+	})
+	packets.inject(p)
+end
+
+function poke_chacharoon()
+	current_zone_id = windower.ffxi.get_info().zone
+	if npc_ids[current_zone_id] then
+		local npc = windower.ffxi.get_mob_by_id(npc_ids[current_zone_id].npc_id)
+		if npc and npc.distance <= interact_distance_square then
+			log('poke chacharoon')
+			npc_index = npc.index
+			wait_for_chacharoon_0x034 = true
+			poke_thing(npc)
+		end
+	end
+end
+
+function buy_key_routine()
+	local p = packets.new('outgoing', 0x5b, {
+            ['Target'] =  npc_ids[current_zone_id].npc_id,
+            ['Target Index'] = npc_index,
+			['Menu ID'] = npc_ids[current_zone_id].menu_id,
+			['Zone'] = current_zone_id,
+			['Option Index'] = buy_key_fo_option_index,
+			['_unknown1'] = 1,
+			["Automated Message"] = true
+		})
+	packets.inject(p)
+	buy_key = buy_key - 1
+	if buy_key > 0 then
+		buy_key_routine:schedule(1)
+	else
+		notice('Stopping buy key')
+		local p = packets.new('outgoing', 0x5b, {
+            ['Target'] =  npc_ids[current_zone_id].npc_id,
+            ['Target Index'] = npc_index,
+			['Menu ID'] = npc_ids[current_zone_id].menu_id,
+			['Zone'] = current_zone_id,
+			['Option Index'] = 0,
+			['_unknown1'] = 0,
+		})
+		packets.inject(p)
+		wait_for_chacharoon_0x034 = false
 	end
 end
 
