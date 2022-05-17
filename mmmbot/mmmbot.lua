@@ -1,6 +1,6 @@
 _addon.name = 'Mandragora Mania Madness Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.1.1'
+_addon.version = '1.1.2'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
@@ -244,72 +244,135 @@ function do_player_turn()
 	local left_diag = game_board[4] + game_board[7] + game_board[10] + game_board[13]
 	local selected_option = false
 	-- win simple 
-	if row_1 == 3 or row_1 == 12 then
+	if row_1 == 12 and game_board[1] == 1 and game_board[4] == 1 then
 		fill_empty(1,2,3,4)
 		selected_option = true
-	elseif column_1 == 3 or column_1 == 12 then
-		fill_empty(1,5,9,13)
+	elseif row_2 == 12 and game_board[5] == 1 and game_board[8] == 1 then
+		fill_empty(5,6,7,8)
 		selected_option = true
-	elseif column_4 == 3 or column_4 == 12 then
-		fill_empty(4,8,12,16)
+	elseif row_3 == 12 and game_board[9] == 1 and game_board[12] == 1 then
+		fill_empty(9,10,11,12)
 		selected_option = true
-	elseif row_4 == 3 or row_4 == 12 then
+	elseif row_4 == 12 and game_board[13] == 1 and game_board[16] == 1 then
 		fill_empty(13,14,15,16)
 		selected_option = true
-	elseif right_diag == 3 or right_diag == 12 then
+	elseif column_1 == 12 and game_board[1] == 1 and game_board[13] == 1 then
+		fill_empty(1,5,9,13)
+		selected_option = true
+	elseif column_2 == 12 and game_board[2] == 1 and game_board[14] == 1 then
+		fill_empty(2,6,10,14)
+		selected_option = true
+	elseif column_3 == 12 and game_board[3] == 1 and game_board[15] == 1 then
+		fill_empty(3,7,11,15)
+		selected_option = true
+	elseif column_4 == 12 and game_board[4] == 1 and game_board[16] == 1 then
+		fill_empty(4,8,12,16)
+		selected_option = true
+	elseif right_diag == 12 and game_board[1] == 1 and game_board[16] == 1 then
 		fill_empty(1,6,11,16)
 		selected_option = true
-	elseif left_diag == 3 or left_diag == 12 then
+	elseif left_diag == 12 and game_board[4] == 1 and game_board[13] == 1 then
+		fill_empty(4,7,10,13)
+		selected_option = true
+	elseif row_1 == 3 then
+		fill_empty(1,2,3,4)
+		selected_option = true
+	elseif column_1 == 3 then
+		fill_empty(1,5,9,13)
+		selected_option = true
+	elseif column_4 == 3 then
+		fill_empty(4,8,12,16)
+		selected_option = true
+	elseif row_4 == 3 then
+		fill_empty(13,14,15,16)
+		selected_option = true
+	elseif right_diag == 3 then
+		fill_empty(1,6,11,16)
+		selected_option = true
+	elseif left_diag == 3 then
 		fill_empty(4,7,10,13)
 		selected_option = true
 	end
 	if not selected_option then
 		-- block enemy
-		if row_1 == 30 then
-			fill_empty(1,2,3,4)
-			selected_option = true
-		elseif row_2 == 30 then
-			fill_empty(5,6,7,8)
-			selected_option = true
-		elseif row_3 == 30 then
-			fill_empty(9,10,11,12)
-			selected_option = true
-		elseif row_4 == 30 then
-			fill_empty(13,14,15,16)
-			selected_option = true
-		elseif column_1 == 30 then
-			fill_empty(1,5,9,13)
-			selected_option = true
-		elseif column_2 == 30 then
-			fill_empty(2,6,10,14)
-			selected_option = true
-		elseif column_3 == 30 then
-			fill_empty(3,7,11,15)
-			selected_option = true
-		elseif column_4 == 30 then
-			fill_empty(4,8,12,16)
-			selected_option = true
-		elseif right_diag == 30 then
-			fill_empty(1,6,11,16)
-			selected_option = true
-		elseif left_diag == 30 then
-			fill_empty(4,7,10,13)
-			selected_option = true
-		end
-		if not selected_option then 
+		if row_1 == 30 then selected_option = block_without_bust(1,2,3,4) end
+		if not selected_option and row_2 == 30 then selected_option = block_without_bust(5,6,7,8) end
+		if not selected_option and row_3 == 30 then selected_option = block_without_bust(9,10,11,12) end
+		if not selected_option and row_4 == 30 then selected_option = block_without_bust(13,14,15,16) end
+		if not selected_option and column_1 == 30 then selected_option = block_without_bust(1,5,9,13) end
+		if not selected_option and column_2 == 30 then selected_option = block_without_bust(2,6,10,14) end
+		if not selected_option and column_3 == 30 then selected_option = block_without_bust(3,7,11,15) end
+		if not selected_option and column_4 == 30 then selected_option = block_without_bust(4,8,12,16) end
+		if not selected_option and right_diag == 30 then selected_option = block_without_bust(1,6,11,16) end
+		if not selected_option and left_diag == 30 then selected_option = block_without_bust(4,7,10,13) end
+		
+		if not selected_option then
+			-- try to get corner that forces a move
+			if row_1 == 11 then
+				if game_board[1] == 0 then 
+					navigate_to_menu_option(1)
+					selected_option = true
+				elseif game_board[4] == 0 then
+					navigate_to_menu_option(4)
+					selected_option = true
+				end
+			elseif row_4 == 11 then
+				if game_board[13] == 0 then 
+					navigate_to_menu_option(13)
+					selected_option = true
+				elseif game_board[16] == 0 then
+					navigate_to_menu_option(16)
+					selected_option = true
+				end
+			elseif column_1 == 11 then
+				if game_board[1] == 0 then 
+					navigate_to_menu_option(1)
+					selected_option = true
+				elseif game_board[13] == 0 then
+					navigate_to_menu_option(13)
+					selected_option = true
+				end
+			elseif column_4 == 11 then
+				if game_board[4] == 0 then 
+					navigate_to_menu_option(4)
+					selected_option = true
+				elseif game_board[16] == 0 then
+					navigate_to_menu_option(16)
+					selected_option = true
+				end
+			elseif right_diag == 11 then
+				if game_board[1] == 0 then 
+					navigate_to_menu_option(1)
+					selected_option = true
+				elseif game_board[16] == 0 then
+					navigate_to_menu_option(16)
+					selected_option = true
+				end
+			elseif left_diag == 11 then
+				if game_board[4] == 0 then 
+					navigate_to_menu_option(4)
+					selected_option = true
+				elseif game_board[13] == 0 then
+					navigate_to_menu_option(13)
+					selected_option = true
+				end
+			end
+			
 			-- get corners
-			if game_board[1] == 0 then 
-				navigate_to_menu_option(1)
-				selected_option = true
-			elseif game_board[4] == 0 then 
-				navigate_to_menu_option(4)
-				selected_option = true
-			elseif game_board[13] == 0 then 
-				navigate_to_menu_option(13)
-				selected_option = true
-			elseif game_board[16] == 0 then 
-				navigate_to_menu_option(16)
-				selected_option = true
+			if not selected_option then
+				if game_board[1] == 0 then 
+					navigate_to_menu_option(1)
+					selected_option = true
+				elseif game_board[4] == 0 then 
+					navigate_to_menu_option(4)
+					selected_option = true
+				elseif game_board[13] == 0 then 
+					navigate_to_menu_option(13)
+					selected_option = true
+				elseif game_board[16] == 0 then 
+					navigate_to_menu_option(16)
+					selected_option = true
+				end
 			end
 		end
 		if not selected_option then
@@ -378,16 +441,45 @@ function enemy_wins_next_move(area)
 	end
 end
 
+function two_enemies_besides_area(area)
+	if area == 6 then 
+		return game_board[2] == 10 and game_board[5] == 10 and game_board[7] == 0 and game_board[10] == 0
+	elseif area == 7 then
+		return game_board[3] == 10 and game_board[8] == 10 and game_board[6] == 0 and game_board[11] == 0
+	elseif area == 10 then
+		return game_board[9] == 10 and game_board[14] == 10 and game_board[6] == 0 and game_board[11] == 0
+	elseif area == 11 then
+		return game_board[12] == 10 and game_board[15] == 10 and game_board[7] == 0 and game_board[10] == 0
+	end
+end
+
 -- 4 areas should be in a line
 function set_line_to_3(area1, area2, area3, area4)
 	if game_board[area1] == 1 and game_board[area4] == 1 then 
-		if game_board[area2] == 0 and not enemy_wins_next_move(area2) then 
+		if game_board[area2] == 0 and two_enemies_besides_area(area2) and not enemy_wins_next_move(area2) then 
 			navigate_to_menu_option(area2)
 			return true
-		elseif game_board[area3] == 0 and not enemy_wins_next_move(area3) then 
+		elseif game_board[area3] == 0 and two_enemies_besides_area(area3) and not enemy_wins_next_move(area3) then 
 			navigate_to_menu_option(area3)
 			return true
 		end
+	end
+	return false
+end
+
+function block_without_bust(area1,area2,area3,area4)
+	if game_board[area1] == 0 and fill_without_bust(area1) then 
+		navigate_to_menu_option(area1)
+		return true
+	elseif game_board[area2] == 0 and fill_without_bust(area2) then
+		navigate_to_menu_option(area2)
+		return true
+	elseif game_board[area3] == 0 and fill_without_bust(area3) then
+		navigate_to_menu_option(area3)
+		return true
+	elseif game_board[area4] == 0 and fill_without_bust(area4) then
+		navigate_to_menu_option(area4)
+		return true
 	end
 	return false
 end
