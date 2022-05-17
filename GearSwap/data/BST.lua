@@ -22,6 +22,12 @@ ready = {
 		["Ready1"] = { name = "Foul Waters", set = "PetMagicalTP", cost = 2 },
 		["Ready2"] = { name = "Pestilent Plume", set = "PetMagicalTP", cost = 2 },
 	},
+	["Leech"] = {
+		["Ready1"] = { name = "Suction", set = "PetPhysicalTP", cost = 1 },
+		["Ready2"] = { name = "Drain Kiss", set = "PetMagicalTP", cost = 1 },
+		["Ready3"] = { name = "Acid Mist", set = "PetMagicalTP", cost = 2 },
+		["Ready4"] = { name = "TP Drainkiss", set = "PetMagicalTP", cost = 2 },
+	},
 }
 
 pets = {
@@ -33,6 +39,7 @@ pets = {
 	["BouncingBertha"] = "Chapuli",
 	["AcuexFamiliar"] = "Acuex",
 	["FluffyBredo"] = "Acuex",
+	["FatsoFargann"] = "Leech",
 }
 
 pet_info = [[${pet_name|none}
@@ -126,6 +133,9 @@ function update_pet_info(name)
 		end
 		if ready[pets[name]]["Ready3"] then 
 			infoString = infoString .. "[CTRL+3] Ready3" .. ": " .. ready[pets[name]]["Ready3"].name .. "(" .. ready[pets[name]]["Ready3"].cost .. ")\n"
+		end
+		if ready[pets[name]]["Ready4"] then 
+			infoString = infoString .. "[CTRL+4] Ready4" .. ": " .. ready[pets[name]]["Ready4"].name .. "(" .. ready[pets[name]]["Ready4"].cost .. ")\n"
 		end
 		
 		pet_text_hub.info = infoString:sub(1, #infoString - 1)

@@ -25,18 +25,30 @@ function custom_get_sets()
 	ws["Weapon Break"] = { set = sets["Armor Break"], tp_bonus = false }
 	ws["Full Break"] = { set = sets["Armor Break"], tp_bonus = false }
 	
+	ws["Ground Strike"] = { set = sets["Steel Cyclone"], tp_bonus = true }
+	ws["Scourge"] = { set = sets["Steel Cyclone"], tp_bonus = false }
+	ws["Resolution"] = { set = sets["Upheaval"], tp_bonus = true }
+	
 	send_command('@input /macro book 19')
 end
 
 function custom_precast(spell)
 	if spell.type == "Weaponskill" then
-		local equipment = windower.ffxi.get_items().equipment
-		local main = windower.ffxi.get_items(equipment.main_bag, equipment.main)	
-		if res.items[main.id].name == "Shining One" then
+		if player.equipment.main == "Shining One" then
 			if ws["SO_" .. spell.english] then equip(ws["SO_" .. spell.english].set)
 			elseif ws[spell.english] then equip(ws[spell.english].set) end
 			if player.tp < 3000 then
 				equip(sets["TPBonus"])
+			end
+			return true
+		elseif player.equipment.main == "Lycurgos" and ws[spell.english] ~= nil then
+			local setToUse = ws[spell.english].set
+			local maxTP = 3000
+			local hp_bonus = math.floor(player.hp / 5)
+			if hp_bonus > 1000 then hp_bonus = 1000 end
+			maxTP = maxTP - hp_bonus
+			if player.tp < maxTP then
+				setToUse = set_combine(setToUse, sets["TPBonus"])
 			end
 			return true
 		end

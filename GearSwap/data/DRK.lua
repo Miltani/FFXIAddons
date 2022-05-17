@@ -45,13 +45,9 @@ function custom_precast(spell)
 			local setToUse = ws[spell.english].set
 			if ws[spell.english].tp_bonus then
 				local maxTP = 3000
-				local equipment = windower.ffxi.get_items().equipment
-				local main = windower.ffxi.get_items(equipment.main_bag, equipment.main)
-				if res.items[main.id].name == "Lycurgos" then
-					local hp_bonus = math.floor(player.hp / 5)
-					if hp_bonus > 1000 then hp_bonus = 1000 end
-					maxTP = maxTP - hp_bonus
-				end
+				local hp_bonus = math.floor(player.hp / 5)
+				if hp_bonus > 1000 then hp_bonus = 1000 end
+				maxTP = maxTP - hp_bonus
 				if player.tp < maxTP then
 					setToUse = set_combine(setToUse, sets["TPBonus"])
 				end

@@ -4,7 +4,35 @@ mp_recover = true
 
 function custom_get_sets()
 	ws = {}
-	ws["Myrkr"] = { set = sets["Myrkr"], tp_bonus = true }
+	ws["Dark Harvest"] = { set = sets["Shadow of Death"], tp_bonus = true }
+	ws["Shadow of Death"] = { set = sets["Shadow of Death"], tp_bonus = true }
+	ws["Infernal Scythe"] = { set = sets["Shadow of Death"], tp_bonus = false }
+	ws["Slice"] = { set = sets["Slice"], tp_bonus = true }
+	ws["Spinning Scythe"] = { set = sets["Slice"], tp_bonus = false }
+	ws["Vorpal Scythe"] = { set = sets["Vorpal Scythe"], tp_bonus = true }
+	ws["Spiral Hell"] = { set = sets["Spiral Hell"], tp_bonus = true }
+	
+	ws["Shining Strike"] = { set = sets["Flash Nova"], tp_bonus = true }
+	ws["Seraph Strike"] = { set = sets["Flash Nova"], tp_bonus = true }
+	ws["Flash Nova"] = { set = sets["Flash Nova"], tp_bonus = false }
+	ws["Brainshaker"] = { set = sets["Slice"], tp_bonus = false }
+	ws["Skullbreaker"] = { set = sets["Slice"], tp_bonus = false }
+	ws["True Strike"] = { set = sets["Vorpal Scythe"], tp_bonus = true }
+	ws["Judgment"] = { set = sets["Retribution"], tp_bonus = true }
+	ws["Black Halo"] = { set = sets["Retribution"], tp_bonus = true }
+	
+	ws["Heavy Swing"] = { set = sets["Slice"], tp_bonus = true }
+	ws["Shell Crusher"] = { set = sets["Slice"], tp_bonus = true }
+	ws["Full Swing"] = { set = sets["Slice"], tp_bonus = true }
+	ws["Spirit Taker"] = { set = sets["Spirit Taker"], tp_bonus = true }
+	ws["Retribution"] = { set = sets["Retribution"], tp_bonus = true }
+	ws["Rock Crusher"] = { set = sets["Flash Nova"], tp_bonus = true }
+	ws["Earth Crusher"] = { set = sets["Flash Nova"], tp_bonus = true }
+	ws["Starburst"] = { set = sets["Shadow of Death"], tp_bonus = true }
+	ws["Sunburst"] = { set = sets["Shadow of Death"], tp_bonus = true }
+	ws["Cataclysm"] = { set = sets["Shadow of Death"], tp_bonus = true }
+	ws["Vidohunir"] = { set = sets["Shadow of Death"], tp_bonus = false }
+	ws["Myrkr"] = { set = sets["Mode_3Death"], tp_bonus = true }
 	
 	sets["Midcast_Fire VI"] = sets["MagicBurst"]
 	sets["Midcast_Fire V"] = sets["MagicBurst"]
@@ -76,6 +104,16 @@ function custom_get_sets()
 	
 	sets["Midcast_Comet"] = sets["CometBurst"]
 	
+	sets["DeathFastcast"] = sets["Mode_3Death"]
+	sets["Midcast_Death"] = sets["Mode_3Death"]
+	
+	sets["Midcast_Aspir III"] = sets["Mode_3Death"]
+	sets["Midcast_Aspir II"] = sets["Mode_3Death"]
+	sets["Midcast_Aspir I"] = sets["Mode_3Death"]
+	
+	sets["Midcast_Drain"] = sets["Drain"]
+	
+	
 	sets["Midcast_Burn"] = sets["MagicAccuracy"]
 	sets["Midcast_Frost"] = sets["MagicAccuracy"]
 	sets["Midcast_Choke"] = sets["MagicAccuracy"]
@@ -112,6 +150,12 @@ function custom_command(args)
 			mp_recover = true
 		end
 		add_to_chat(122, "MP Recovery: " .. tostring(mp_recover))
+	elseif args[1] == "aspir" then
+		local recasts = windower.ffxi.get_spell_recasts()
+		if recasts[881] == 0 then send_command('input /ma "Aspir III" <t>')
+		elseif recasts[248] == 0 then send_command('input /ma "Aspir II" <t>')
+		elseif recasts[247] == 0 then send_command('input /ma "Aspir" <t>')
+		end
 	end
 end
 

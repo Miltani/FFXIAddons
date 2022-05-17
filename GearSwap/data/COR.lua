@@ -247,7 +247,7 @@ end
 local spells_started = {}
 
 local function get_flurry_level(id)
-	if id == 845 then return 1
+	if id == 845 or id == 228 then return 1
 	elseif id == 846 then return 2
 	else return 0
 	end

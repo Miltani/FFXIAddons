@@ -47,10 +47,10 @@ function setup_text_window()
     dnc_text_hub:show()
 end
 
-climactic_combo = { name = "CF+RS", command = 'input /ja "Climactic Flourish" <me>;wait 1;input /ws "Rudra\'s Storm" <t>' }
-reverse_combo = { name = "RF+RS", command = 'input /ja "Reverse Flourish" <me>;wait 1;input /ws "Rudra\'s Storm" <t>' }
-grand_combo = { name = "RF+GP+RS", command = 'input /ja "Reverse Flourish" <me>;wait 1;input /ja "Grand Pas" <me>;wait 1;input /ws "Rudra\'s Storm" <t>' }
-trance_combo = { name = "TR+RS", command = 'input /ja "Trance" <me>;wait 1;input /ws "Rudra\'s Storm" <t>' }
+climactic_combo = { name = "CF+WS", command = 'input /ja "Climactic Flourish" <me>;wait 1;input /ws "'.. current_ws .. '" <t>' }
+reverse_combo = { name = "RF+WS", command = 'input /ja "Reverse Flourish" <me>;wait 1;input /ws "'.. current_ws .. '" <t>' }
+grand_combo = { name = "RF+GP+WS", command = 'input /ja "Reverse Flourish" <me>;wait 1;input /ja "Grand Pas" <me>;wait 1;input /ws "'.. current_ws .. '" <t>' }
+trance_combo = { name = "TR+WS", command = 'input /ja "Trance" <me>;wait 1;input /ws "'.. current_ws .. '" <t>'' }
 
 combo_steps = {
 	climactic_combo,

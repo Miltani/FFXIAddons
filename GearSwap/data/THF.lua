@@ -18,7 +18,7 @@ function custom_get_sets()
 	ws["Cyclone"] = { set = sets["MagicAtk"], tp_bonus = true }
 	ws["Gust Slash"] = { set = sets["MagicAtk"], tp_bonus = true }
 	
-	ws["Savage Blade"] = { set = sets["STR_WS"], tp_bonus = true }
+	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
 	ws["Asuran Fists"] = { set = sets["Dancing Edge"], tp_bonus = false }
 	
 	print_current_ws()

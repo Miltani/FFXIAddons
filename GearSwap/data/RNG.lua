@@ -4,11 +4,22 @@ packets = require('packets')
 require('chat')
 
 ranger_info = [[${ammo_name}:${ammo_count}
-flurry: ${flurry|0}
+Flurry: ${flurry|0}
 Hover Shot: ${distance}
 True Strike: ${distance_correction}
 Last Attack: ${dmg}
+Shooting Status: ${shoot_status}
 ]]
+
+shoot_statuses = 
+{
+	["Idle"] = string.text_color("Idle", 0, 255, 0),
+	["Shooting"] = string.text_color("Shooting", 255, 255, 0),
+	["Interrupted"] = string.text_color("Interrupted", 255, 0, 0),
+	["Shot"] = string.text_color("Shot", 0, 255, 0),
+	["Wait Longer"] = string.text_color("Wait Longer", 255, 0, 0),
+	["Too Far"] = string.text_color("Too Far", 255, 0, 0),
+}
 
 function setup_text_window()
 	local default_settings = {}
@@ -66,9 +77,12 @@ function custom_get_sets()
 	AM3Mode = false
 	DT = false
 	ShootNextPosUpdate = false
+	AssistedShooting = false
+	AssistedShootingID = nil
 	RecordPosNextRangedAttack = false
 	HoverShotTarget = nil
 	cancel_haste = 2
+	shoot_status = "Idle"
 	
 	setup_text_window()
 		
@@ -97,7 +111,7 @@ function custom_get_sets()
 	ws["Flaming Arrow"] = { set = sets["Flaming Arrow"], tp_bonus = true }
 	ws["Empyreal Arrow"] = { set = sets["Apex Arrow"], tp_bonus = true }
 	ws["Apex Arrow"] = { set = sets["Apex Arrow"], tp_bonus = false }
-	ws["Jishnu's Radiance"] = { set = sets["Jishnu's Radiance"], tp_bonus = false }
+	ws["Jishnu's Radiance"] = { set = sets["Jishnu's Radiance"], tp_bonus = true }
 	
 	check_buffs()
 	update_rng_info()	
@@ -220,11 +234,18 @@ function custom_command(args)
 		else
 			shoot_now_or_wait_for_pos_update(playerpos)
 		end
+	elseif args[1] == "raassist" then
+		AssistedShooting = not AssistedShooting
+		if AssistedShooting then
+			AssistedShootingID = windower.register_event('outgoing chunk', parse_outgoing)
+		else
+			windower.unregister_event(AssistedShootingID)
+		end
 	end
 end
 
 function shoot_now_or_wait_for_pos_update(playerpos)
-	local can_shoot = check_current_and_player_position(playerpos)
+	local can_shoot = not AssistedShooting or check_current_and_player_position(playerpos)
 	if can_shoot then
 		windower.send_command('input /ra <t>')
 		shot_position_0x015_x = playerpos.x
@@ -236,6 +257,8 @@ function shoot_now_or_wait_for_pos_update(playerpos)
 		ShootNextPosUpdate = true
 		RecordPosNextRangedAttack = false
 	end
+	shoot_status = "Shooting"
+	update_rng_info()
 end
 
 function get_preshot_set()
@@ -264,6 +287,7 @@ T{
 	265, -- flurry I
 	628, -- Hover Shot
 	433, -- Double Shot
+	845, -- Embrava
 }
 
 function check_buffs()
@@ -285,6 +309,7 @@ function check_buffs()
 					double_found = true
 				end
 			end
+			flurry = flurry + get_flurry_level(buff_id)
 		end
 	end
 	if not hover_found then hover_shot = false end
@@ -306,20 +331,18 @@ function update_rng_info()
 		ranger_info_hub.ammo_count = 0
 	end
 	ranger_info_hub.flurry = flurry
+	ranger_info_hub.shoot_status = shoot_statuses[shoot_status]
 end
 
 function buff_change(name, gain, buff_details)
-	if string.lower(name) == "flurry" and not gain then
-		flurry = 0
-	end
 	check_buffs()
 	update_rng_info()
 end
 
 local spells_started = {}
 
-local function get_flurry_level(id)
-	if id == 845 then return 1
+function get_flurry_level(id)
+	if id == 845 or id == 228 then return 1
 	elseif id == 846 then return 2
 	else return 0
 	end
@@ -378,6 +401,8 @@ function rng_action_helper(act)
 	elseif act.category == 12 then
 		if act.param == 28787 then -- ranged attack interrupted
 			RecordPosNextRangedAttack = false
+			shoot_status = "Interrupted"
+			update_rng_info()
 		end
 	elseif act.category == 2 then -- ranged attack
 		if act.actor_id == player.id then
@@ -408,6 +433,8 @@ function rng_action_helper(act)
 				last_shot_position_x = shot_position_0x015_x
 				last_shot_position_y = shot_position_0x015_y
 			end
+			shoot_status = "Shot"
+			update_rng_info()
 		end
 	elseif act.category == 3 then -- ws
 		if act.actor_id == player.id then
@@ -455,7 +482,7 @@ function clear_last_shot_position()
 end
 
 function parse_outgoing(id, original, modified, injected, blocked)
-	if id == 0x015 and not injected and not blocked then
+	if not injected and not blocked and id == 0x015 then
 		local p = packets.parse('outgoing', original)
 		current_position_0x015_x = p['X']
 		current_position_0x015_y = p['Y']
@@ -472,11 +499,18 @@ end
 function parse_action_message(actor_id, target_id, actor_index, target_index, message_id, param_1, param_2, param_3)
 	if (message_id == 6 or message_id == 20) and HoverShotTarget ~= nil and target_id == HoverShotTarget then
 		clear_last_shot_position()
+	elseif shoot_status == "Shooting" then
+		if message_id == 94 then
+			shoot_status = "Wait Longer"
+			update_rng_info()
+		elseif message_id == 78 then
+			shoot_status = "Too Far"
+			update_rng_info()
+		end
 	end
 end
 
 windower.register_event('action', rng_action_helper)
 windower.register_event('prerender', update_hover_shot_info)
 windower.register_event('zone change', clear_last_shot_position)
-windower.register_event('outgoing chunk', parse_outgoing)
 windower.register_event('action message', parse_action_message)
