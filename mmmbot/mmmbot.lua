@@ -1,6 +1,6 @@
 _addon.name = 'Mandragora Mania Madness Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.2.0'
+_addon.version = '1.2.1'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
@@ -79,16 +79,16 @@ opponent_move_time = 0
 windower.register_event('addon command', function(...)
 	local args = {...}
 	if args[1] == "debug" then
-		if debugging then 
-			debugging = false
-			notice("Debug output off")
+		if args[2] and args[2] == "nav" then
+			navigation_helper.debugging = not navigation_helper.debugging
+			notice("Navigation Debug output: " .. tostring(navigation_helper.debugging))
 		else
-			debugging = true
-			notice("Debug output on")
+			debugging = not debugging
+			notice("Debug output: " ..tostring(debugging))
 		end
 	elseif args[1] == "start" then
 		started = true
-		math.randomseed(os.time())
+		math.randomseed(os.clock())
 		notice("Started")
 	elseif args[1] == "stop" then
 		started = false
@@ -144,7 +144,7 @@ windower.register_event('incoming chunk', function(id, data)
 								if debugging then notice("Game State Start") end
 								game_state = 1
 								reset_state()
-								game_started_time = os.time()
+								game_started_time = os.clock()
 							elseif p['Menu ID'] == npc_ids[current_zone_id].menu_id and started and game_state == 2 then
 								go_first = nil
 								navigate_to_menu_option(1, 3, true)
@@ -163,7 +163,7 @@ windower.register_event('incoming chunk', function(id, data)
 				if p["Player"] == npc_ids[current_zone_id].npc_id then
 					if p["Param 2"] > 0 then -- round ended
 						reset_state()
-						game_started_time = os.time()
+						game_started_time = os.clock()
 					end
 				end
 			end
@@ -303,11 +303,51 @@ function do_player_turn()
 		
 		if not selected_option then
 			-- skip getting corner under this condition
-			local skip_corner_pick = game_board[1] + game_board[4] + game_board[13] + game_board[16] == 3 
-			and (row_1 == 22 and row_4 == 11)
-			or (row_1 == 11 and row_4 == 22)
-			or (column_1 == 22 and column_4 == 11)
-			or (column_1 == 11 and column_4 == 22)
+			local three_corners = game_board[1] + game_board[4] + game_board[13] + game_board[16] == 3 
+			local top_bottom = row_1 == 22 and row_4 == 11
+			local bottom_top = row_1 == 11 and row_4 == 22
+			local left_right = column_1 == 22 and column_4 == 11
+			local right_left = column_1 == 11 and column_4 == 22
+			local skip_corner_pick = three_corners and (top_bottom or bottom_top or left_right or right_left)
+			
+			if skip_corner_pick then 
+				if debugging then 
+					notice("Skipping corner pick: " .. tostring(top_bottom)..tostring(bottom_top)..tostring(left_right)..tostring(right_left)) 
+				end
+				if game_board[1] == 0 then
+					if row_1 == 1 then
+						navigate_to_menu_option(3)
+						selected_option = true
+					elseif column_1 == 1 then
+						navigate_to_menu_option(9)
+						selected_option = true
+					end
+				elseif game_board[4] == 0 then
+					if row_1 == 1 then
+						navigate_to_menu_option(2)
+						selected_option = true
+					elseif column_4 == 1 then
+						navigate_to_menu_option(12)
+						selected_option = true
+					end
+				elseif game_board[13] == 0 then
+					if row_4 == 1 then
+						navigate_to_menu_option(15)
+						selected_option = true
+					elseif column_1 == 1 then
+						navigate_to_menu_option(5)
+						selected_option = true
+					end
+				elseif game_board[16] == 0 then
+					if row_4 == 1 then
+						navigate_to_menu_option(14)
+						selected_option = true
+					elseif column_4 == 1 then
+						navigate_to_menu_option(8)
+						selected_option = true
+					end
+				end
+			end
 			
 			if not skip_corner_pick then
 				if row_1 == 11 then -- try to get corner that forces a move
@@ -612,7 +652,7 @@ function fill_without_bust(area)
 end
 
 function update_game_board(area_selected)
-	last_board_update = os.time()
+	last_board_update = os.clock()
 	if not player_turn then
 		game_board[area_selected] = 10
 		player_turn = true
@@ -635,7 +675,7 @@ function navigate_to_menu_option(option_index, override_delay, from_main_menu)
 end
 
 function update_loop()
-	local time_now = os.time()
+	local time_now = os.clock()
 	if navigation_helper.target_menu_option == 0 and not player_action_started then
 		if started and game_state == 1 then
 			if game_started_time > 0 and time_now - game_started_time > 10 then
