@@ -1875,7 +1875,6 @@
     "priority": 30,
     "set_list": [ {
       "COR": [ "Evisceration" ],
-      "DNC": [ "Rudra's Storm" ],
       "RNG": [ "Last Stand", "Apex Arrow", "Savage Blade", "Decimation", "Blast Shot" ],
       "RUN": [ "Savage Blade", "Requiescat", "Dimidiation" ]
     } ]
@@ -2160,7 +2159,7 @@
     "set_list": [ {
       "BLM": [ "IdleRegen", "Mode_1DT", "MagicBurst", "MagicAccuracy", "Fastcast", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Drain", "Mode_3Death" ],
       "BST": [ "Calamity", "Viper Bite" ],
-      "DNC": [ "XeviosoEvisceration" ],
+      "DNC": [ "XeviosoEvisceration", "Rudra's Storm" ],
       "DRG": [ "Mode_2MagEva" ],
       "GEO": [ "Elemental" ],
       "MNK": [ "Howling Fist", "Sunburst", "Rock Crusher", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
@@ -4305,7 +4304,6 @@
     "set_list": [ {
       "BLM": [ "Mode_2Melee", "Spiral Hell", "Slice", "Vorpal Scythe" ],
       "BST": [ "Viper Bite" ],
-      "DNC": [ "Rudra's Storm" ],
       "NIN": [ "Savage Blade", "Evisceration", "Blade: Ten", "Blade: Hi" ],
       "PUP": [ "Dragon Kick" ],
       "RUN": [ "Dimidiation" ],
@@ -4433,6 +4431,7 @@
     "name": "Kentarch Belt +1",
     "priority": 0,
     "set_list": [ {
+      "DNC": [ "Rudra's Storm" ],
       "THF": [ "Rudra's Storm" ]
     } ]
   } ]
