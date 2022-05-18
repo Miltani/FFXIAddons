@@ -9,7 +9,7 @@ This is for automating the Mandragora Mania Madness mini game. This only reads p
 3. Quit and Talk to Chacharoon again
 4. Go to the player selection sub menu (I couldn't find an incoming or outgoing packet when I went between the main menu and player selection sub menu)
 4. //mmmbot start
-5. Select player (Only tested logic against Green Thumb Moogle Pattern D. Quite possible algorithm will lose in some instances). 
+5. Select player (Only tested logic against Green Thumb Moogle. Quite possible algorithm will lose in some instances). 
 
 # Commands
 
@@ -42,6 +42,11 @@ waitforack is the delay the bot will wait if no ack packet is sent (usually when
 Toggles between printing debug messages to console or not. Default is off.
 
 # Version History
+1.2.0:
+- Add in support for Chacharoon in Windurst Waters and Southern Sandoria
+- Remove the coroutines cos it seems to crash luacore.dll. Bonus that the navigation is faster now.
+- Reduced time for first action after new game/round to 10 secs. This means it is very important to do the first game with long load manually before using this.
+
 1.1.3:
 - Remove some extra logic that prevented bot from filling up sides
 - Skip getting corner position under certain conditions

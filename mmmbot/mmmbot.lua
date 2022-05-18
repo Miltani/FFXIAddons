@@ -1,22 +1,24 @@
 _addon.name = 'Mandragora Mania Madness Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.1.3'
+_addon.version = '1.2.0'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
 require('functions')
 require('logger')
 socket = require('socket')
+require('navigationhelper')
 
+local navigation_helper = navigation_helper()
 debugging = false
+player_action_started = false
 
 npc_ids = 
 {
-	[235] = { npc_id = 17740023, menu_id = 690, game_menu_id = 692 } -- Bastok Mines
+	[230] = { npc_id = 17719722, menu_id = 3631, game_menu_id = 3633 }, -- Southern Sandoria
+	[235] = { npc_id = 17740023, menu_id = 690, game_menu_id = 692 }, -- Bastok Mines
+	[238] = { npc_id = 17752429, menu_id = 1170, game_menu_id = 1172 }, -- Windurst Waters
 }
-
-delay_between_keypress = 0.5
-delay_between_key_down_and_up = 0.1
 
 option_indexes =
 {
@@ -66,16 +68,13 @@ game_board = { -- 0 = empty, 1 = player, 10 = enemy
 	[15] = 0,
 	[16] = 0,
 }
-coroutines = {}
 current_zone_id = 0
-navigation_finished = false
 started = false
 game_started_time = 0
 go_first = nil
 rounds = 1
 last_board_update = 0
 opponent_move_time = 0
-player_action_started = false
 
 windower.register_event('addon command', function(...)
 	local args = {...}
@@ -96,16 +95,15 @@ windower.register_event('addon command', function(...)
 		game_state = 2
 		reset_state()
 		notice("Stopping.")
-		reset_key_coroutine_and_state()
 	elseif args[1] == "setdelay" and args[2] and args[3] then
 		local number = tonumber(args[3])
 		if number then
 			if args[2] == "keypress" then
-				delay_between_keypress = number
-				notice("Delay Between Keypress:" .. delay_between_keypress)
+				navigation_helper.delay_between_keypress = number
+				notice("Delay Between Keypress:" .. navigation_helper.delay_between_keypress)
 			elseif args[2] == "keydownup" then
-				delay_between_key_down_and_up = number
-				notice("Delay Between Key Down and Up:" .. delay_between_key_down_and_up)
+				navigation_helper.delay_between_key_down_and_up = number
+				notice("Delay Between Key Down and Up:" .. navigation_helper.delay_between_key_down_and_up)
 			end
 		end
 	elseif args[1] == "buykey" and args[2] then
@@ -149,7 +147,6 @@ windower.register_event('incoming chunk', function(id, data)
 								game_started_time = os.time()
 							elseif p['Menu ID'] == npc_ids[current_zone_id].menu_id and started and game_state == 2 then
 								go_first = nil
-								reset_key_coroutine_and_state()
 								navigate_to_menu_option(1, 3, true)
 							end
 						end
@@ -195,10 +192,10 @@ function reset_state()
 	[15] = 0,
 	[16] = 0,
 	}
-	navigation_finished = false
 	last_board_update = 0
 	opponent_move_time = 0
 	wait_for_chacharoon_0x034 = false
+	player_action_started = false
 end
 
 windower.register_event('outgoing chunk', function(id, original, modified, injected, blocked)
@@ -208,7 +205,6 @@ windower.register_event('outgoing chunk', function(id, original, modified, injec
 		if p then
 			if npc_ids[current_zone_id] then
 				if p['Menu ID'] == npc_ids[current_zone_id].game_menu_id and started then
-					navigation_finished = false
 					if p['Option Index'] == 5 then -- quit
 						reset_state()
 						game_state = 0
@@ -230,7 +226,6 @@ end)
 
 function do_player_turn()
 	if game_state ~= 1 or not player_turn then return end
-	player_action_started = true
 	row_1 = game_board[1] + game_board[2] + game_board[3] + game_board[4]
 	row_2 = game_board[5] + game_board[6] + game_board[7] + game_board[8]
 	row_3 = game_board[9] + game_board[10] + game_board[11] + game_board[12]
@@ -633,75 +628,30 @@ function update_game_board(area_selected)
 	end
 end
 
-function set_key_down_down()
-	windower.send_command('setkey down down')
-end
-
-function set_key_down_up()
-	windower.send_command('setkey down up')
-end
-
-function set_key_enter_down()
-	windower.send_command('setkey enter down')
-end
-
-function set_key_enter_up(from_reset)
-	windower.send_command('setkey enter up')
-	if not from_reset then
-		navigation_finished = true
-	end
-end
-
-function set_key_left_down()
-	windower.send_command('setkey left down')
-end
-
-function set_key_left_up()
-	windower.send_command('setkey left up')
-end
-
 function navigate_to_menu_option(option_index, override_delay, from_main_menu)
-	reset_key_coroutine_and_state()
 	if debugging then notice("Navigate to " .. option_index) end
-	if not from_main_menu then navigation_finished = false end
-	local next_delay = 1
-	if override_delay then next_delay = override_delay end
-	local times_to_press_down = option_index - 1
-	if times_to_press_down >= 1 then 
-		for i = 1, times_to_press_down, 1 do
-			table.insert(coroutines, coroutine.schedule(set_key_down_down, next_delay))
-			table.insert(coroutines, coroutine.schedule(set_key_down_up, next_delay + delay_between_key_down_and_up))
-			next_delay = next_delay + delay_between_keypress 
-		end	
-	end
-	table.insert(coroutines, coroutine.schedule(set_key_enter_down, next_delay))
-	table.insert(coroutines, coroutine.schedule(set_key_enter_up, next_delay + delay_between_key_down_and_up))	
-end
-
-function reset_key_coroutine_and_state()
-	for k, v in pairs(coroutines) do
-		coroutine.close(v)
-	end
-	coroutines = {}
-	set_key_enter_up(true)
-	set_key_down_up()
-	navigation_finished = false
+	player_action_started = true
+	navigation_helper.navigate_to_menu_option(option_index, override_delay)
 end
 
 function update_loop()
-	if started and game_state == 1 and not player_action_started then
-		local time_now = os.time()
-		if game_started_time > 0 and time_now - game_started_time > 20 then
-			game_started_time = 0
-			player_turn = true
-			go_first = "Player"
-			do_player_turn()
-		elseif game_started_time == 0 and time_now - last_board_update > 20 then
-			player_turn = true
-			do_player_turn()
-		elseif game_started_time == 0 and player_turn and opponent_move_time > 0 and time_now - opponent_move_time > 2 then
-			do_player_turn()
+	local time_now = os.time()
+	if navigation_helper.target_menu_option == 0 and not player_action_started then
+		if started and game_state == 1 then
+			if game_started_time > 0 and time_now - game_started_time > 10 then
+				game_started_time = 0
+				player_turn = true
+				go_first = "Player"
+				do_player_turn()
+			elseif game_started_time == 0 and time_now - last_board_update > 10 then
+				player_turn = true
+				do_player_turn()
+			elseif game_started_time == 0 and player_turn and opponent_move_time > 0 and time_now - opponent_move_time > 2 then
+				do_player_turn()
+			end
 		end
+	else
+		navigation_helper.update(time_now)
 	end
 end
 
@@ -758,6 +708,5 @@ end
 windower.register_event('prerender', update_loop)
 
 windower.register_event('logout', function()
-	reset_key_coroutine_and_state()
 	reset_state()
 end)
