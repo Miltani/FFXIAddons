@@ -3,7 +3,8 @@ function navigation_helper()
 		target_menu_option = 0,
 		delay_between_keypress = 0.3,
 		delay_between_key_down_and_up = 0.1,
-		debugging = false
+		debugging = false,
+		resetting = false
 	}
 	
 	local current_menu_option = 1
@@ -11,6 +12,31 @@ function navigation_helper()
 	local next_action_type = ""
 	local next_action_time = 0
 	local next_action = ""
+	local reset_delay = 2 -- hold left for 2 sec to reset position
+	
+	function self.reset_key_states()
+		windower.send_command('setkey left up')
+		windower.send_command('setkey enter up')
+		windower.send_command('setkey down up')
+		windower.send_command('setkey right up')
+	end
+	
+	function self.reset_position()
+		last_action_time = os.clock()
+		current_menu_option = 0
+		next_action = 'left'
+		next_action_type = 'down'
+		next_action_time = last_action_time + self.delay_between_keypress
+		self.target_menu_option = 1
+		resetting = true
+	end
+	
+	function self.press_enter()
+		last_action_time = os.clock()
+		current_menu_option = 1
+		self.target_menu_option = 1
+		self.set_next_action()
+	end
 	
 	function self.navigate_to_menu_option(option, override_delay, starting_position)
 		if self.target_menu_option == 0 then 
@@ -34,7 +60,11 @@ function navigation_helper()
 				end
 			else
 				next_action_type = 'up'
-				next_action_time = last_action_time + self.delay_between_key_down_and_up
+				if next_action == 'left' then 
+					next_action_time = last_action_time + reset_delay
+				else
+					next_action_time = last_action_time + self.delay_between_key_down_and_up
+				end
 			end
 		elseif current_menu_option == self.target_menu_option then
 			if next_action_type == "" or next_action_type == "up" then 
@@ -56,6 +86,10 @@ function navigation_helper()
 			local command = "setkey " .. next_action .. " " .. next_action_type
 			if next_action_type == 'up' then
 				if next_action == 'enter' then self.target_menu_option = 0
+				elseif	next_action == 'left' then 
+					current_menu_option = 1
+					self.target_menu_option = 0
+					self.resetting = false
 				elseif next_action == 'right' then current_menu_option = current_menu_option + 3
 				elseif next_action == 'down' then current_menu_option = current_menu_option + 1
 				end

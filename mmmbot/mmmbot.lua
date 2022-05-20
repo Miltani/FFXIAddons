@@ -1,6 +1,6 @@
 _addon.name = 'Mandragora Mania Madness Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.2.1'
+_addon.version = '1.2.2'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
@@ -12,6 +12,8 @@ require('navigationhelper')
 local navigation_helper = navigation_helper()
 debugging = false
 player_action_started = false
+player_action_start_time = 0
+need_to_reset = false
 
 npc_ids = 
 {
@@ -71,8 +73,6 @@ game_board = { -- 0 = empty, 1 = player, 10 = enemy
 current_zone_id = 0
 started = false
 game_started_time = 0
-go_first = nil
-rounds = 1
 last_board_update = 0
 opponent_move_time = 0
 
@@ -115,6 +115,14 @@ windower.register_event('addon command', function(...)
 		else
 			notice("buykey needs an argument more than 0: " .. args[2])
 		end
+	elseif args[1] == "test" then
+		notice("Started: " .. tostring(started))
+		notice("Game State: " .. tostring(game_state))
+		notice("Target Menu Option: " .. tostring(navigation_helper.target_menu_option))
+		notice("Player Action Started: " .. tostring(player_action_started))
+		notice("Game Started Time: " .. tostring(game_started_time))
+		notice("Last Board Update: " .. tostring(last_board_update))
+		notice("Time Now: " .. tostring(os.clock()))
 	elseif args[1] == "help" then
 		notice("//mmmbot start <number_of_jingly_to_get>: Starts automating until you get the amount of jingly specified. 300 is default. Set to 0 automate until you tell it to stop.")
 		notice("//mmmbot stop: Stops automation")
@@ -146,7 +154,6 @@ windower.register_event('incoming chunk', function(id, data)
 								reset_state()
 								game_started_time = os.clock()
 							elseif p['Menu ID'] == npc_ids[current_zone_id].menu_id and started and game_state == 2 then
-								go_first = nil
 								navigate_to_menu_option(1, 3, true)
 							end
 						end
@@ -196,6 +203,7 @@ function reset_state()
 	opponent_move_time = 0
 	wait_for_chacharoon_0x034 = false
 	player_action_started = false
+	navigation_helper.reset_key_states()
 end
 
 windower.register_event('outgoing chunk', function(id, original, modified, injected, blocked)
@@ -657,7 +665,6 @@ function update_game_board(area_selected)
 		game_board[area_selected] = 10
 		player_turn = true
 		if debugging then notice("Opponent selected Area " .. area_selected) end
-		if go_first == nil then go_first = "Opp" end
 		opponent_move_time = last_board_update
 		game_started_time = 0
 	else 
@@ -670,18 +677,22 @@ end
 
 function navigate_to_menu_option(option_index, override_delay, from_main_menu)
 	if debugging then notice("Navigate to " .. option_index) end
+	player_action_start_time = os.clock()
 	player_action_started = true
 	navigation_helper.navigate_to_menu_option(option_index, override_delay)
 end
 
 function update_loop()
 	local time_now = os.clock()
-	if navigation_helper.target_menu_option == 0 and not player_action_started then
-		if started and game_state == 1 then
+	if started and navigation_helper.target_menu_option == 0 and not player_action_started and not navigation_helper.resetting then
+		if need_to_reset then
+			need_to_reset = false
+			player_action_started = false 
+			navigation_helper.reset_position()
+		elseif game_state == 1 then
 			if game_started_time > 0 and time_now - game_started_time > 10 then
 				game_started_time = 0
 				player_turn = true
-				go_first = "Player"
 				do_player_turn()
 			elseif game_started_time == 0 and time_now - last_board_update > 10 then
 				player_turn = true
@@ -690,6 +701,10 @@ function update_loop()
 				do_player_turn()
 			end
 		end
+	elseif started and navigation_helper.target_menu_option == 0 and player_action_started and not navigation_helper.resetting 
+	and time_now - player_action_start_time > 10 then
+		player_action_started = false -- for cases where tried to input but no action, set this flag to false so that can do player turn again
+		navigation_helper.reset_position()
 	else
 		navigation_helper.update(time_now)
 	end
@@ -744,6 +759,20 @@ function buy_key_routine()
 		wait_for_chacharoon_0x034 = false
 	end
 end
+
+function parse_incoming_text(original, modified, original_mode, modified_mode, blocked)
+	if started then
+		if original:find("There is already a piece in this location.") ~= nil then
+			player_action_started = false
+			navigation_helper.reset_position()
+		elseif original:find("You will forfeit all mandy earned this game") ~= nil then
+			navigation_helper.press_enter()
+			need_to_reset = true
+		end
+	end
+end
+
+windower.register_event('incoming text', parse_incoming_text)
 
 windower.register_event('prerender', update_loop)
 

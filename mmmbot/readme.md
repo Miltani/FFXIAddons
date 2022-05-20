@@ -42,6 +42,9 @@ waitforack is the delay the bot will wait if no ack packet is sent (usually when
 Toggles between printing debug messages to console or not. Default is off.
 
 # Version History
+1.2.2:
+- Add some error handling
+
 1.2.1:
 - Change everything to use os.clock() instead of os.time() which only has 1 sec precision.
 - Fix some bugs with navigation helper.
