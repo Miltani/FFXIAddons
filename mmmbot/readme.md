@@ -42,6 +42,9 @@ waitforack is the delay the bot will wait if no ack packet is sent (usually when
 Toggles between printing debug messages to console or not. Default is off.
 
 # Version History
+1.2.3:
+- Add some error handling for lag when going back to main menu
+
 1.2.2:
 - Add some error handling
 

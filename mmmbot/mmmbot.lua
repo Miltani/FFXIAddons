@@ -154,7 +154,7 @@ windower.register_event('incoming chunk', function(id, data)
 								reset_state()
 								game_started_time = os.clock()
 							elseif p['Menu ID'] == npc_ids[current_zone_id].menu_id and started and game_state == 2 then
-								navigate_to_menu_option(1, 3, true)
+								navigate_to_menu_option(1, 3)
 							end
 						end
 					end
@@ -675,7 +675,7 @@ function update_game_board(area_selected)
 	end
 end
 
-function navigate_to_menu_option(option_index, override_delay, from_main_menu)
+function navigate_to_menu_option(option_index, override_delay)
 	if debugging then notice("Navigate to " .. option_index) end
 	player_action_start_time = os.clock()
 	player_action_started = true
@@ -703,8 +703,12 @@ function update_loop()
 		end
 	elseif started and navigation_helper.target_menu_option == 0 and player_action_started and not navigation_helper.resetting 
 	and time_now - player_action_start_time > 10 then
-		player_action_started = false -- for cases where tried to input but no action, set this flag to false so that can do player turn again
-		navigation_helper.reset_position()
+		if game_state == 1 then 
+			player_action_started = false -- for cases where tried to input but no action, set this flag to false so that can do player turn again
+			navigation_helper.reset_position()
+		elseif game_state == 2 then
+			navigate_to_menu_option(1)
+		end
 	else
 		navigation_helper.update(time_now)
 	end
