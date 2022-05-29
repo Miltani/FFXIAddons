@@ -1,6 +1,6 @@
 _addon.name = 'Mandragora Mania Madness Bot'
 _addon.author = 'Dabidobido'
-_addon.version = '1.2.2'
+_addon.version = '1.2.4'
 _addon.commands = {'mmmbot'}
 
 packets = require('packets')
@@ -316,7 +316,8 @@ function do_player_turn()
 			local bottom_top = row_1 == 11 and row_4 == 22
 			local left_right = column_1 == 22 and column_4 == 11
 			local right_left = column_1 == 11 and column_4 == 22
-			local skip_corner_pick = three_corners and (top_bottom or bottom_top or left_right or right_left)
+			local center = game_board[6] + game_board[7] + game_board[10] + game_board[11]
+			local skip_corner_pick = three_corners and (top_bottom or bottom_top or left_right or right_left) and center == 0
 			
 			if skip_corner_pick then 
 				if debugging then 
