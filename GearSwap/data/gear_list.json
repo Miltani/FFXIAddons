@@ -17,7 +17,7 @@
     "name": "Staunch Tathlum",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_1DT", "Mode_2Melee", "Fastcast" ],
+      "BLM": [ "Mode_1DT", "Mode_2Melee", "Fastcast", "IdleRegen" ],
       "BLU": [ "Fastcast" ],
       "BST": [ "IdleRegen", "Mode_2PetDT" ],
       "DNC": [ "IdleRegen" ],
@@ -83,7 +83,7 @@
     "name": "Ghastly Tathlum +1",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicBurst", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death" ],
+      "BLM": [ "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death", "DeathFastcast", "Midcast_Death", "Myrkr", "MagicBurst", "Drain" ],
       "BLU": [ "MagicAtk", "Sanguine Blade" ],
       "BST": [ "Primal Rend" ],
       "DNC": [ "MagicAtk" ],
@@ -132,7 +132,7 @@
     "name": "Pemphredo Tathlum",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicAccuracy", "Drain" ],
+      "BLM": [ "MagicAccuracy" ],
       "SCH": [ "Fastcast", "Flash Nova", "MagicBurst", "Cure" ],
       "THF": [ "Midcast_Absorb-TP" ],
       "WHM": [ "Flash Nova", "MagicBurst", "IdleRegen" ]
@@ -244,7 +244,7 @@
     "name": "Izdubar Mantle",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicBurst", "MagicAccuracy", "CometBurst" ],
+      "BLM": [ "MagicAccuracy", "CometBurst", "MagicBurst" ],
       "BLU": [ "MagicAtk", "MagicAcc", "Sanguine Blade" ],
       "DRK": [ "DarkMagicAtk", "MagicAtk" ],
       "GEO": [ "Elemental", "Flash Nova", "MACC" ],
@@ -272,7 +272,7 @@
     "name": "Solemnity Cape",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_1DT" ],
+      "BLM": [ "Mode_1DT" ],
       "GEO": [ "Healing" ],
       "NIN": [ "Fastcast" ],
       "WHM": [ "IdleRegen" ]
@@ -515,7 +515,7 @@
     "name": "Aurist's Cape +1",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Mode_2Melee", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Drain", "Mode_3Death" ],
+      "BLM": [ "Mode_2Melee", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death", "DeathFastcast", "Midcast_Death", "Myrkr", "Drain", "IdleRegen" ],
       "BLU": [ "Black Halo" ]
     } ]
   }, {
@@ -650,7 +650,6 @@
     "name": "Vrikodara Jupon",
     "priority": 54,
     "set_list": [ {
-      "BLM": [ "IdleRegen" ],
       "BLU": [ "IdleRegen" ],
       "GEO": [ "IdleRefresh", "Fastcast", "IdleRegen" ],
       "SCH": [ "IdleRegen", "Cure" ],
@@ -885,14 +884,14 @@
       "BLM": [ "EnhDur" ],
       "SCH": [ "EnhDur", "Regen" ],
       "SMN": [ "PhyBPDmg" ],
-      "WHM": [ "Midcast_Auspice", "Midcast_Stoneskin", "Enh500", "EnhDur" ]
+      "WHM": [ "Midcast_Stoneskin", "Enh500", "EnhDur", "Midcast_Auspice" ]
     } ]
   }, {
     "augments": [ "Path: B" ],
     "name": "Nyame Mail",
     "priority": 136,
     "set_list": [ {
-      "BLM": [ "Mode_1DT", "Mode_2Melee", "MagicBurst", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Drain" ],
+      "BLM": [ "Mode_1DT", "Mode_2Melee", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution" ],
       "BLU": [ "Savage Blade" ],
       "BST": [ "Calamity", "Viper Bite" ],
       "DRG": [ "Mode_2MagEva" ],
@@ -1014,7 +1013,14 @@
     "name": "Ros. Jaseran +1",
     "priority": 139,
     "set_list": [ {
-      "BLM": [ "Mode_3Death" ]
+      "BLM": [ "Mode_3Death", "DeathFastcast", "Myrkr", "Drain" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Agwu's Robe",
+    "priority": 61,
+    "set_list": [ {
+      "BLM": [ "Midcast_Death", "MagicBurst", "IdleRegen" ]
     } ]
   } ],
   "ear1": [ {
@@ -1035,6 +1041,7 @@
     "name": "Loquac. Earring",
     "priority": 0,
     "set_list": [ {
+      "BLM": [ "DeathFastcast" ],
       "BST": [ "Fastcast" ],
       "NIN": [ "Fastcast" ],
       "RUN": [ "FastcastEnhancing", "Fastcast" ],
@@ -1121,7 +1128,7 @@
     "name": "Evans Earring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_3Death" ],
+      "BLM": [ "Mode_3Death", "Myrkr", "Drain", "IdleRegen" ],
       "SCH": [ "Myrkr" ],
       "SMN": [ "Mode_1IdleDT", "Mode_2Melee", "DT" ]
     } ]
@@ -1175,7 +1182,7 @@
     "name": "Barkaro. Earring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicAccuracy", "Shadow of Death", "Flash Nova" ],
+      "BLM": [ "MagicAccuracy", "Shadow of Death", "Flash Nova", "Midcast_Death" ],
       "GEO": [ "Elemental", "Flash Nova" ],
       "SCH": [ "Flash Nova", "MagicBurst", "MagicBurstHelix" ]
     } ]
@@ -1183,7 +1190,7 @@
     "name": "Regal Earring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicBurst", "CometBurst", "Drain" ],
+      "BLM": [ "CometBurst", "MagicBurst" ],
       "BLU": [ "Black Halo", "Requiescat" ],
       "GEO": [ "MACC" ],
       "SCH": [ "Cure" ]
@@ -1304,7 +1311,7 @@
     "name": "Etiolation Earring",
     "priority": 50,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_1DT", "Mode_3Death" ],
+      "BLM": [ "Mode_1DT", "Mode_3Death", "DeathFastcast", "Midcast_Death", "Myrkr", "Drain", "IdleRegen" ],
       "BST": [ "Fastcast" ],
       "DNC": [ "IdleRegen" ],
       "DRG": [ "IdleRegen" ],
@@ -1349,7 +1356,7 @@
     "name": "Malignance Earring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicBurst", "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "Drain" ],
+      "BLM": [ "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "MagicBurst" ],
       "DRK": [ "DarkMagicAtk", "DrainAspir", "MagicAtk" ],
       "GEO": [ "Elemental", "Flash Nova", "MACC" ],
       "SCH": [ "Fastcast" ],
@@ -1557,7 +1564,7 @@
       "GEO": [ "Hexa Strike", "Black Halo", "Mode_3CombatIdleDT", "Mode_2MeleeDW", "Mode_4MeleeDWDT", "Flash Nova" ],
       "NIN": [ "Savage Blade" ],
       "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge", "Savage Blade", "Decimation" ],
-      "RUN": [ "EnhancingAny", "Lunge", "Fastcast", "Resolution", "Savage Blade", "Requiescat", "Sanguine Blade", "IdleRegen", "Dimidiation" ],
+      "RUN": [ "EnhancingAny", "Lunge", "Fastcast", "Savage Blade", "Requiescat", "Sanguine Blade", "IdleRegen", "Dimidiation" ],
       "SMN": [ "MACC" ],
       "THF": [ "MagicAtk", "Savage Blade", "Rudra's Storm" ],
       "WHM": [ "Mode_1MeleeDW", "Flash Nova", "MagicBurst", "IdleRegen" ]
@@ -1672,8 +1679,8 @@
       "BST": [ "Precast_Reward" ]
     } ]
   }, {
-    "name": "Maxixi Toe Shoes +2",
-    "priority": 49,
+    "name": "Maxixi Toe Shoes +3",
+    "priority": 59,
     "set_list": [ {
       "DNC": [ "Waltz", "Jig" ]
     } ]
@@ -1726,14 +1733,14 @@
     "name": "Ebers Duckbills +1",
     "priority": 51,
     "set_list": [ {
-      "WHM": [ "Midcast_Auspice", "Midcast_Stoneskin", "Enh500", "EnhDur" ]
+      "WHM": [ "Midcast_Stoneskin", "Enh500", "EnhDur", "Midcast_Auspice" ]
     } ]
   }, {
     "augments": [ "Path: B" ],
     "name": "Nyame Sollerets",
     "priority": 68,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_1DT", "Mode_2Melee", "MagicBurst", "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Drain", "Mode_3Death" ],
+      "BLM": [ "Mode_1DT", "Mode_2Melee", "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death", "Myrkr", "IdleRegen" ],
       "BLU": [ "Savage Blade" ],
       "BST": [ "Calamity", "Viper Bite" ],
       "DRG": [ "Mode_2MagEva" ],
@@ -1742,7 +1749,7 @@
       "NIN": [ "Blade: Ten", "Blade: Chi", "Blade: Ei", "Aeolian Edge", "Fastcast" ],
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Sanguine Blade", "Midcast_Holy", "Torcleaver" ],
       "RNG": [ "Blast Shot" ],
-      "RUN": [ "Mode_2TankPhy", "Midcast_DT", "Mode_1Hybrid", "Mode_3TankMag" ],
+      "RUN": [ "Mode_2TankPhy", "Midcast_DT", "Mode_1Hybrid", "Mode_3TankMag", "Resolution" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_1DT", "Flash Nova", "MagicBurst", "MagicBurstHelix", "Black Halo", "Mode_3Melee", "Myrkr", "Regen" ],
       "SMN": [ "DT" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
@@ -1869,16 +1876,15 @@
     "set_list": [ {
       "SMN": [ "Mode_1IdleDT", "Mode_2Melee" ]
     } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Agwu's Pigaches",
+    "priority": 27,
+    "set_list": [ {
+      "BLM": [ "DeathFastcast", "Midcast_Death", "MagicBurst", "Drain" ]
+    } ]
   } ],
   "hands": [ {
-    "name": "Meg. Gloves +2",
-    "priority": 30,
-    "set_list": [ {
-      "COR": [ "Evisceration" ],
-      "RNG": [ "Last Stand", "Apex Arrow", "Savage Blade", "Decimation", "Blast Shot" ],
-      "RUN": [ "Savage Blade", "Requiescat", "Dimidiation" ]
-    } ]
-  }, {
     "augments": [ "Rng.Atk.+20", "\"Mag.Atk.Bns.\"+12", "\"Store TP\"+6" ],
     "name": "Carmine Fin. Ga. +1",
     "priority": 27,
@@ -2058,7 +2064,7 @@
       "MNK": [ "IdleRegen", "Mode_2DT" ],
       "NIN": [ "Mode_1Hybrid", "IdleRegen" ],
       "PUP": [ "IdleRegen" ],
-      "RNG": [ "MidshotDT", "Midshot", "Mode_1RangedIdleDT", "Mode_2MeleeHybrid", "IdleRegen", "AM3DT", "Dulling Arrow" ],
+      "RNG": [ "MidshotDT", "Midshot", "Mode_1RangedIdleDT", "Mode_2MeleeHybrid", "IdleRegen", "AM3DT", "Dulling Arrow", "Last Stand", "Savage Blade", "Blast Shot", "Apex Arrow", "Decimation" ],
       "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Midcast_Absorb-TP" ]
     } ]
   }, {
@@ -2087,10 +2093,10 @@
       "BST": [ "PetTP", "PetPhysicalTP", "PetMagicalTP" ]
     } ]
   }, {
-    "name": "Maxixi Bangles +2",
-    "priority": 67,
+    "name": "Maxixi Bangles +3",
+    "priority": 77,
     "set_list": [ {
-      "DNC": [ "Step" ]
+      "DNC": [ "Step", "Rudra's Storm" ]
     } ]
   }, {
     "name": "Mpaca's Gloves",
@@ -2138,7 +2144,7 @@
       "BLM": [ "EnhDur" ],
       "SCH": [ "EnhDur", "Cure", "Regen" ],
       "SMN": [ "PhyBPDmg" ],
-      "WHM": [ "Midcast_Auspice", "EnhDur" ]
+      "WHM": [ "EnhDur", "Midcast_Auspice" ]
     } ]
   }, {
     "name": "Inyan. Dastanas +2",
@@ -2157,18 +2163,19 @@
     "name": "Nyame Gauntlets",
     "priority": 91,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_1DT", "MagicBurst", "MagicAccuracy", "Fastcast", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Drain", "Mode_3Death" ],
+      "BLM": [ "Mode_1DT", "MagicAccuracy", "Fastcast", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death", "Myrkr", "IdleRegen" ],
       "BST": [ "Calamity", "Viper Bite" ],
-      "DNC": [ "XeviosoEvisceration", "Rudra's Storm" ],
+      "COR": [ "Evisceration" ],
+      "DNC": [ "XeviosoEvisceration" ],
       "DRG": [ "Mode_2MagEva" ],
       "GEO": [ "Elemental" ],
       "MNK": [ "Howling Fist", "Sunburst", "Rock Crusher", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
       "NIN": [ "Blade: Ten", "Blade: Chi", "Blade: Ei", "Aeolian Edge" ],
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Sanguine Blade", "Midcast_Holy", "Torcleaver" ],
-      "RUN": [ "Midcast_DT", "Mode_1Hybrid", "Mode_3TankMag" ],
+      "RUN": [ "Midcast_DT", "Mode_1Hybrid", "Mode_3TankMag", "Savage Blade", "Requiescat", "Dimidiation" ],
       "SCH": [ "Mode_1DT", "IdleRegen", "Flash Nova", "MagicBurst", "MagicBurstHelix", "Black Halo", "Myrkr" ],
       "SMN": [ "DT" ],
-      "THF": [ "Savage Blade", "Rudra's Storm" ],
+      "THF": [ "Rudra's Storm", "Savage Blade" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
     } ]
   }, {
@@ -2232,6 +2239,13 @@
     "priority": 29,
     "set_list": [ {
       "PUP": [ "PetEnmity" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Agwu's Gages",
+    "priority": 38,
+    "set_list": [ {
+      "BLM": [ "DeathFastcast", "Midcast_Death", "MagicBurst", "Drain" ]
     } ]
   } ],
   "head": [ {
@@ -2361,7 +2375,7 @@
     "name": "Pixie Hairpin +1",
     "priority": -35,
     "set_list": [ {
-      "BLM": [ "CometBurst", "Shadow of Death", "Drain", "Mode_3Death" ],
+      "BLM": [ "CometBurst", "Shadow of Death", "Mode_3Death", "DeathFastcast", "Midcast_Death", "Myrkr", "Drain" ],
       "BLU": [ "Sanguine Blade" ],
       "COR": [ "Leaden Salute" ],
       "DRK": [ "DarkMagicAtk", "DrainAspir" ],
@@ -2431,7 +2445,6 @@
       "GEO": [ "Mode_2MeleeDW", "Hexa Strike" ],
       "PLD": [ "Chant Du Cygne", "Impulse Drive" ],
       "RNG": [ "Decimation", "Evisceration" ],
-      "RUN": [ "Resolution" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_3Melee" ],
       "WAR": [ "Ukko's Fury" ]
     } ]
@@ -2513,13 +2526,12 @@
       "BLM": [ "EnhDur" ],
       "SCH": [ "EnhDur" ],
       "SMN": [ "PhyBPDmg" ],
-      "WHM": [ "Midcast_Auspice", "EnhDur" ]
+      "WHM": [ "EnhDur", "Midcast_Auspice" ]
     } ]
   }, {
     "name": "Befouled Crown",
     "priority": 36,
     "set_list": [ {
-      "BLM": [ "IdleRegen" ],
       "WHM": [ "Midcast_Stoneskin", "Enh500" ]
     } ]
   }, {
@@ -2533,7 +2545,7 @@
     "name": "Nyame Helm",
     "priority": 91,
     "set_list": [ {
-      "BLM": [ "Mode_1DT", "MagicBurst", "Flash Nova", "Spiral Hell", "Slice", "Spirit Taker", "Retribution" ],
+      "BLM": [ "Mode_1DT", "Flash Nova", "Spiral Hell", "Slice", "Spirit Taker", "Retribution", "IdleRegen" ],
       "BLU": [ "Savage Blade" ],
       "BST": [ "Calamity" ],
       "DRG": [ "Mode_2MagEva" ],
@@ -2543,7 +2555,7 @@
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Torcleaver" ],
       "PUP": [ "Mode_4Gigetank" ],
       "RNG": [ "Savage Blade", "Blast Shot" ],
-      "RUN": [ "Mode_2TankPhy", "Mode_3TankMag" ],
+      "RUN": [ "Mode_2TankPhy", "Mode_3TankMag", "Resolution" ],
       "SCH": [ "Mode_1DT", "IdleRegen", "Flash Nova", "MagicBurstHelix", "Black Halo" ],
       "SMN": [ "Mode_2Melee", "DT" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
@@ -2588,6 +2600,7 @@
     "name": "Agwu's Cap",
     "priority": 38,
     "set_list": [ {
+      "BLM": [ "MagicBurst" ],
       "GEO": [ "Elemental" ],
       "RUN": [ "SIR", "Midcast_DT" ],
       "SCH": [ "MagicBurst" ]
@@ -2706,7 +2719,6 @@
     "name": "Assid. Pants +1",
     "priority": 43,
     "set_list": [ {
-      "BLM": [ "IdleRegen" ],
       "GEO": [ "IdleRefresh", "IdleRegen" ],
       "SCH": [ "IdleRegen" ],
       "SMN": [ "Fastcast", "Mode_1IdleDT", "Mode_2Melee" ],
@@ -2875,7 +2887,7 @@
       "BLM": [ "EnhDur" ],
       "SCH": [ "EnhDur", "Regen" ],
       "SMN": [ "PhyBPDmg" ],
-      "WHM": [ "Midcast_Auspice", "Enh500", "EnhDur" ]
+      "WHM": [ "Enh500", "EnhDur", "Midcast_Auspice" ]
     } ]
   }, {
     "name": "Ebers Pant. +1",
@@ -2894,7 +2906,7 @@
     "name": "Nyame Flanchard",
     "priority": 114,
     "set_list": [ {
-      "BLM": [ "Mode_2Melee", "MagicBurst", "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Drain", "Mode_3Death" ],
+      "BLM": [ "Mode_2Melee", "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death" ],
       "BLU": [ "Savage Blade", "Black Halo" ],
       "BST": [ "Calamity" ],
       "DNC": [ "XeviosoEvisceration" ],
@@ -2905,7 +2917,7 @@
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Sanguine Blade", "Midcast_Holy", "Torcleaver" ],
       "PUP": [ "Mode_4Gigetank" ],
       "RNG": [ "Savage Blade", "Blast Shot" ],
-      "RUN": [ "Resolution", "Mode_2TankPhy", "Midcast_DT", "Mode_3TankMag" ],
+      "RUN": [ "Mode_2TankPhy", "Midcast_DT", "Mode_3TankMag" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_1DT", "Flash Nova", "MagicBurst", "MagicBurstHelix", "Black Halo", "Mode_3Melee", "Myrkr" ],
       "SMN": [ "DT" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
@@ -3005,7 +3017,8 @@
     "name": "Meg. Chausses +2",
     "priority": 35,
     "set_list": [ {
-      "BST": [ "Mode_1Hybrid" ]
+      "BST": [ "Mode_1Hybrid" ],
+      "RUN": [ "Resolution" ]
     } ]
   }, {
     "augments": [ "Path: A" ],
@@ -3013,6 +3026,26 @@
     "priority": 43,
     "set_list": [ {
       "BLM": [ "Mode_1DT" ]
+    } ]
+  }, {
+    "augments": [ "MP+80", "Mag. Acc.+15", "\"Fast Cast\"+7" ],
+    "name": "Psycloth Lappas",
+    "priority": 43,
+    "set_list": [ {
+      "BLM": [ "DeathFastcast", "Myrkr", "IdleRegen" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Agwu's Slops",
+    "priority": 50,
+    "set_list": [ {
+      "BLM": [ "Midcast_Death", "MagicBurst" ]
+    } ]
+  }, {
+    "name": "Spae. Tonban +2",
+    "priority": 64,
+    "set_list": [ {
+      "BLM": [ "Drain" ]
     } ]
   } ],
   "main": [ {
@@ -3199,7 +3232,7 @@
     "name": "Sanctity Necklace",
     "priority": 35,
     "set_list": [ {
-      "BLM": [ "Mode_3Death" ],
+      "BLM": [ "Mode_3Death", "Midcast_Death", "Myrkr", "Drain" ],
       "BLU": [ "MagicAtk", "MagicAcc", "Sanguine Blade" ],
       "BST": [ "Primal Rend" ],
       "COR": [ "Wildfire", "Leaden Salute" ],
@@ -3274,7 +3307,7 @@
     "name": "Voltsurge Torque",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Fastcast" ],
+      "BLM": [ "Fastcast", "DeathFastcast" ],
       "BLU": [ "Fastcast" ],
       "BST": [ "Fastcast" ],
       "COR": [ "Fastcast" ],
@@ -3343,7 +3376,7 @@
     "name": "Mizu. Kubikazari",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicBurst", "CometBurst", "Shadow of Death", "Flash Nova", "Spirit Taker" ],
+      "BLM": [ "CometBurst", "Shadow of Death", "Flash Nova", "Spirit Taker", "MagicBurst" ],
       "GEO": [ "Black Halo", "Elemental", "Flash Nova" ],
       "SCH": [ "MagicBurst", "MagicBurstHelix" ],
       "WHM": [ "MagicBurst" ]
@@ -3369,7 +3402,7 @@
     "name": "Erra Pendant",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicAccuracy", "Drain" ],
+      "BLM": [ "MagicAccuracy" ],
       "DRK": [ "DarkSkill", "DrainAspir", "MagicAcc" ]
     } ]
   }, {
@@ -3476,6 +3509,12 @@
     "priority": 0,
     "set_list": [ {
       "BONE": [ "Bonecrafting" ]
+    } ]
+  }, {
+    "name": "Rep. Plat. Medal",
+    "priority": 0,
+    "set_list": [ {
+      "COR": [ "Savage Blade" ]
     } ]
   } ],
   "range": [ {
@@ -3612,6 +3651,7 @@
     "name": "Defending Ring",
     "priority": 0,
     "set_list": [ {
+      "BLM": [ "IdleRegen" ],
       "BLU": [ "Mode_2DT", "IdleRegen" ],
       "DRG": [ "IdleRegen" ],
       "GEO": [ "IdleRefresh", "IdleRegen", "Mode_4MeleeDWDT" ],
@@ -3642,7 +3682,7 @@
     "name": "Chirich Ring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_1DT", "Mode_2Melee" ],
+      "BLM": [ "Mode_1DT", "Mode_2Melee" ],
       "BST": [ "IdleRegen" ],
       "COR": [ "Mode_1HybridDW", "IdleRegen" ],
       "DNC": [ "IdleRegen" ],
@@ -3660,7 +3700,7 @@
     "name": "Archon Ring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "CometBurst" ],
+      "BLM": [ "CometBurst", "Midcast_Death", "Drain" ],
       "BLU": [ "Sanguine Blade" ],
       "DRK": [ "DarkMagicAtk", "DrainAspir", "MagicAtk" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
@@ -3695,7 +3735,6 @@
     "name": "Evanescence Ring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Drain" ],
       "BLU": [ "Mode_3HighAcc" ],
       "DRK": [ "DarkSkill" ],
       "RUN": [ "Midcast_DT" ]
@@ -3783,7 +3822,7 @@
     "name": "Freke Ring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Spirit Taker" ],
+      "BLM": [ "Shadow of Death", "Flash Nova", "Spiral Hell", "Spirit Taker", "MagicBurst" ],
       "SCH": [ "Flash Nova", "MagicBurst", "MagicBurstHelix" ],
       "WHM": [ "Flash Nova", "MagicBurst" ]
     } ]
@@ -3805,7 +3844,7 @@
     "name": "Mephitas's Ring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Mode_3Death" ]
+      "BLM": [ "Mode_3Death", "DeathFastcast", "Myrkr" ]
     } ]
   } ],
   "ring2": [ {
@@ -3948,7 +3987,7 @@
     "name": "Metamor. Ring +1",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Flash Nova", "Spiral Hell", "Spirit Taker", "Retribution" ],
+      "BLM": [ "Flash Nova", "Spiral Hell", "Spirit Taker", "Retribution" ],
       "BLU": [ "MagicAtk", "MagicAcc", "Sanguine Blade" ],
       "DRK": [ "DarkMagicAtk", "MagicAtk" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
@@ -3986,7 +4025,7 @@
     "name": "Archon Ring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Shadow of Death", "Drain" ],
+      "BLM": [ "Shadow of Death" ],
       "COR": [ "Leaden Salute" ],
       "NIN": [ "Blade: Ei" ],
       "RUN": [ "Sanguine Blade" ]
@@ -4060,7 +4099,7 @@
     "name": "Mujin Band",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicBurst", "CometBurst" ],
+      "BLM": [ "CometBurst", "MagicBurst" ],
       "NIN": [ "NinjutsuMB" ],
       "SCH": [ "MagicBurst", "MagicBurstHelix" ],
       "WHM": [ "MagicBurst" ]
@@ -4075,7 +4114,7 @@
     "name": "Shneddick Ring",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Movement" ],
+      "BLM": [ "Movement", "IdleRegen" ],
       "BLU": [ "Movement" ],
       "BST": [ "Movement" ],
       "COR": [ "Movement" ],
@@ -4122,6 +4161,13 @@
     "priority": 0,
     "set_list": [ {
       "BLM": [ "Mode_3Death" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Mephitas's Ring +1",
+    "priority": 0,
+    "set_list": [ {
+      "BLM": [ "DeathFastcast", "Midcast_Death", "Myrkr", "Drain" ]
     } ]
   } ],
   "sub": [ {
@@ -4232,7 +4278,7 @@
     "name": "Eschan Stone",
     "priority": 20,
     "set_list": [ {
-      "BLM": [ "IdleRegen", "Mode_1DT", "MagicBurst", "MagicAccuracy", "CometBurst" ],
+      "BLM": [ "Mode_1DT", "MagicAccuracy", "CometBurst" ],
       "BST": [ "Primal Rend" ],
       "COR": [ "Wildfire", "Leaden Salute", "IdleRegen" ],
       "DNC": [ "MagicAtk" ],
@@ -4286,7 +4332,7 @@
     "name": "Sacro Cord",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Shadow of Death", "Flash Nova", "Spirit Taker", "Retribution", "Drain" ],
+      "BLM": [ "Shadow of Death", "Flash Nova", "Spirit Taker", "Retribution" ],
       "BLU": [ "MagicAtk", "MagicAcc", "Sanguine Blade" ],
       "GEO": [ "Elemental", "Black Halo", "Flash Nova", "MACC" ],
       "SCH": [ "Flash Nova", "MagicBurst", "MagicBurstHelix", "Cure" ],
@@ -4424,7 +4470,7 @@
     "name": "Shinjutsu-no-Obi +1",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Mode_3Death" ]
+      "BLM": [ "Mode_3Death", "DeathFastcast", "Myrkr", "Drain", "IdleRegen" ]
     } ]
   }, {
     "augments": [ "Path: A" ],
@@ -4433,6 +4479,13 @@
     "set_list": [ {
       "DNC": [ "Rudra's Storm" ],
       "THF": [ "Rudra's Storm" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Acuity Belt +1",
+    "priority": 0,
+    "set_list": [ {
+      "BLM": [ "Midcast_Death", "MagicBurst" ]
     } ]
   } ]
 }

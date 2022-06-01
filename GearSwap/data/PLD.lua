@@ -30,5 +30,5 @@ function custom_get_sets()
 	sets["Midcast_Banish II"] = sets["Midcast_Holy"] 
 	sets["Midcast_Banish"] = sets["Midcast_Holy"] 
 	
-	send_command('@input /macro book 21')
+	send_command('@input /macro book 21;wait 1;input /macro set 1')
 end

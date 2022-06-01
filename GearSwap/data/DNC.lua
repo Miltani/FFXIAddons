@@ -6,7 +6,7 @@ dnc_help_text = [[${combo_status}: ${combo_info}
 :${disabled}, ${TP}, ${finishing_moves}, ${climactic_recast}, ${reverse_recast}, ${gp_recast}, ${tr_recast}
 ]]
 
-current_ws = ""
+current_ws = "Rudra's Storm"
 
 function setup_text_window()
 	local default_settings = {}
@@ -111,7 +111,7 @@ function update_combo_info()
 		dnc_text_hub.disabled = string.text_color("Status", 255, 0, 0)
 	end
 	
-	if player.tp == 3000 then
+	if player.tp >= 1000 then
 		dnc_text_hub.TP = string.text_color("TP", 0, 255, 0)
 	else
 		dnc_text_hub.TP = string.text_color("TP", 255, 0, 0)
@@ -149,7 +149,6 @@ function update_combo_info()
 end
 
 function custom_get_sets()
-	current_ws = "Rudra's Storm"
 	can_combo = false
 	doing_combo = false
 	combo_step = 1
@@ -241,6 +240,10 @@ function custom_command(args)
 		end
 		commandstring = string.sub(commandstring, 1, #commandstring - 1)
 		current_ws = commandstring
+		climactic_combo.command = 'input /ja "Climactic Flourish" <me>;wait 1;input /ws "'.. current_ws .. '" <t>'
+		reverse_combo.command = 'input /ja "Reverse Flourish" <me>;wait 1;input /ws "'.. current_ws .. '" <t>'
+		grand_combo.command = 'input /ja "Reverse Flourish" <me>;wait 1;input /ja "Grand Pas" <me>;wait 1;input /ws "'.. current_ws .. '" <t>'
+		trance_combo.command = 'input /ja "Trance" <me>;wait 1;input /ws "'.. current_ws .. '" <t>'
 		print_current_ws()
 	elseif args[1] == "combo" then
 		do_combo()

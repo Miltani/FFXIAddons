@@ -32,7 +32,7 @@ function custom_get_sets()
 	ws["Sunburst"] = { set = sets["Shadow of Death"], tp_bonus = true }
 	ws["Cataclysm"] = { set = sets["Shadow of Death"], tp_bonus = true }
 	ws["Vidohunir"] = { set = sets["Shadow of Death"], tp_bonus = false }
-	ws["Myrkr"] = { set = sets["Mode_3Death"], tp_bonus = true }
+	ws["Myrkr"] = { set = sets["Myrkr"], tp_bonus = true }
 	
 	sets["Midcast_Fire VI"] = sets["MagicBurst"]
 	sets["Midcast_Fire V"] = sets["MagicBurst"]
@@ -104,15 +104,11 @@ function custom_get_sets()
 	
 	sets["Midcast_Comet"] = sets["CometBurst"]
 	
-	sets["DeathFastcast"] = sets["Mode_3Death"]
-	sets["Midcast_Death"] = sets["Mode_3Death"]
+	sets["Midcast_Aspir III"] = sets["Drain"]
+	sets["Midcast_Aspir II"] = sets["Drain"]
+	sets["Midcast_Aspir I"] = sets["Drain"]
 	
-	sets["Midcast_Aspir III"] = sets["Mode_3Death"]
-	sets["Midcast_Aspir II"] = sets["Mode_3Death"]
-	sets["Midcast_Aspir I"] = sets["Mode_3Death"]
-	
-	sets["Midcast_Drain"] = sets["Drain"]
-	
+	sets["Midcast_Drain"] = sets["Drain"]	
 	
 	sets["Midcast_Burn"] = sets["MagicAccuracy"]
 	sets["Midcast_Frost"] = sets["MagicAccuracy"]
@@ -139,7 +135,7 @@ function custom_get_sets()
 	sets["Midcast_Voidstorm"] = sets["EnhDur"]
 	sets["Midcast_Aurorastorm"] = sets["EnhDur"]
 	
-	send_command('@input /macro book 16')
+	send_command('@input /macro book 16;wait 1;input /macro set 1')
 end
 
 function custom_command(args)

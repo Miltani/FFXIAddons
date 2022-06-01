@@ -41,8 +41,22 @@ function custom_get_sets()
 	sets["Midcast_Protect III"] = sets["EnhDur"]
 	sets["Midcast_Protect IV"] = sets["EnhDur"]
 	sets["Midcast_Protect V"] = sets["EnhDur"]
+	sets["Midcast_Haste"] = sets["EnhDur"]
+	sets["Midcast_Regen IV"] = sets["EnhDur"]
 	
-	sets["Haste"] = sets["EnhDur"]
+	sets["Midcast_Cure"] = sets["Cure"]
+	sets["Midcast_Cure II"] = sets["Cure"]
+	sets["Midcast_Cure III"] = sets["Cure"]
+	sets["Midcast_Cure IV"] = sets["Cure"]
+	sets["Midcast_Cure V"] = sets["Cure"]
+	sets["Midcast_Cure V"] = sets["Cure"]
+	sets["Midcast_Curaga"] = sets["Cure"]
+	sets["Midcast_Curaga II"] = sets["Cure"]
+	sets["Midcast_Curaga III"] = sets["Cure"]
+	sets["Midcast_Curaga IV"] = sets["Cure"]
+	sets["Midcast_Curaga V"] = sets["Cure"]
+	sets["Midcast_Cura"] = sets["Cure"]
+	sets["Midcast_Cura III"] = sets["Cure"]
 	
-	send_command('@input /macro book 16')
+	send_command('@input /macro book 8;wait 1;input /macro set 1')
 end

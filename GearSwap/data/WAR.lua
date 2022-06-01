@@ -29,7 +29,7 @@ function custom_get_sets()
 	ws["Scourge"] = { set = sets["Steel Cyclone"], tp_bonus = false }
 	ws["Resolution"] = { set = sets["Upheaval"], tp_bonus = true }
 	
-	send_command('@input /macro book 19')
+	send_command('@input /macro book 19;wait 1;input /macro set 1')
 end
 
 function custom_precast(spell)
