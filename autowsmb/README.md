@@ -1,4 +1,7 @@
 #Auto WS and MB
+1.3.1:
+- Added skillchain level 4 to setsclvl
+
 1.3.0:
 - Added function to MB only when the skillchain is at a certain step or above.
 
@@ -110,7 +113,7 @@ Set the name of ws to open with and the minimum tp to use the ws.
 
 Set the name of ws and tp of ws to try to skillchain with. will try to make skillchains in the order of input.
 
-## //awsmb setsclevel (1-3)
+## //awsmb setsclevel (1-4)
 
 Will only try to skillchain and make skillchains of the level set here or above.
 

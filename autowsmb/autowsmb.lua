@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.3.0'
+_addon.version  = '1.3.1'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -241,9 +241,9 @@ function get_next_skillchain_level(target_index, element_to_use)
 				if element_to_use == "fusion" then return 3
 				elseif element_to_use == "distortion" then return 2 end
 			elseif element == "light" then
-				if element_to_use == "light" then return 3 end
+				if element_to_use == "light" then return 4 end
 			elseif element == "darkness" then
-				if element_to_use == "darkness" then return 3 end
+				if element_to_use == "darkness" then return 4 end
 			end
 		end
 	end
@@ -723,12 +723,12 @@ local function handle_command(...)
 	elseif args[1] == "setsclevel" and args[2] then
 		local level = tonumber(args[2])
 		if level then
-			if level >= 1 and level <= 3 then
+			if level >= 1 and level <= 4 then
 				settings[current_main_job]["sc_level"] = level
 				notice("SC Level: " .. tostring(settings[current_main_job]["sc_level"]))
 				config.save(settings)
 			else
-				notice("SC Level needs to be between 1 and 3, not " .. tostring(level))
+				notice("SC Level needs to be between 1 and 4, not " .. tostring(level))
 			end
 		else
 			notice("Error parsing " .. args[2])
