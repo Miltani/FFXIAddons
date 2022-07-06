@@ -21,7 +21,7 @@
       "BLU": [ "Fastcast" ],
       "BST": [ "IdleRegen", "Mode_2PetDT" ],
       "DNC": [ "IdleRegen" ],
-      "DRG": [ "IdleRegen" ],
+      "DRG": [ "IdleRegen", "Mode_3HassoHybrid" ],
       "DRK": [ "IdleRegen" ],
       "MNK": [ "IdleRegen" ],
       "NIN": [ "IdleRegen", "Fastcast" ],
@@ -44,7 +44,7 @@
     "name": "Knobkierrie",
     "priority": 0,
     "set_list": [ {
-      "DRG": [ "Impulse Drive", "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment" ],
+      "DRG": [ "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment", "Impulse Drive" ],
       "DRK": [ "Catastrophe" ],
       "MNK": [ "Howling Fist" ],
       "RUN": [ "FastcastEnhancing", "EnhancingAny", "Requiescat", "Dimidiation", "Savage Blade" ],
@@ -87,6 +87,7 @@
       "BLU": [ "MagicAtk", "Sanguine Blade" ],
       "BST": [ "Primal Rend" ],
       "DNC": [ "MagicAtk" ],
+      "DRG": [ "Raiden Thrust", "Cataclysm" ],
       "DRK": [ "Entropy" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
       "NIN": [ "Aeolian Edge" ],
@@ -114,7 +115,7 @@
     "set_list": [ {
       "DNC": [ "Pyrrhic Kleos", "Rudra's Storm", "Dancing Edge", "Extenterator" ],
       "NIN": [ "Blade: Ten" ],
-      "THF": [ "Dancing Edge", "Exenterator", "Rudra's Storm", "Mode_3HighAcc" ]
+      "THF": [ "Dancing Edge", "Exenterator", "Mode_3HighAcc", "Rudra's Storm" ]
     } ]
   }, {
     "name": "Hesperiidae",
@@ -134,20 +135,19 @@
     "set_list": [ {
       "BLM": [ "MagicAccuracy" ],
       "SCH": [ "Fastcast", "Flash Nova", "MagicBurst", "Cure" ],
-      "THF": [ "Midcast_Absorb-TP" ],
+      "THF": [ "Midcast_Absorb-TP", "MagicAcc" ],
       "WHM": [ "Flash Nova", "MagicBurst", "IdleRegen" ]
     } ]
   }, {
     "name": "Crepuscular Pebble",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Savage Blade" ],
+      "BLU": [ "Savage Blade", "Black Halo", "True Strike" ],
       "BST": [ "Evisceration" ],
-      "DNC": [ "XeviosoEvisceration" ],
       "MNK": [ "Victory Smite", "Shijin Spiral", "Asuran Fists", "Raging Fists", "DTVictory Smite", "DTHowling Fist", "DTRaging Fists" ],
       "PLD": [ "Savage Blade", "Swift Blade", "Torcleaver", "Resolution", "Impulse Drive" ],
       "SCH": [ "Black Halo", "Mode_3Melee" ],
-      "THF": [ "Savage Blade" ],
+      "THF": [ "Savage Blade", "Raging Fists" ],
       "WAR": [ "Upheaval" ]
     } ]
   }, {
@@ -178,19 +178,19 @@
     "name": "Charis Feather",
     "priority": 0,
     "set_list": [ {
-      "DNC": [ "CritDmg", "Evisceration" ]
+      "DNC": [ "CritDmg", "Evisceration", "XeviosoEvisceration" ]
     } ]
   }, {
     "augments": [ "Path: A" ],
     "name": "Coiste Bodhar",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Chant Du Cygne", "MagicAcc", "Mode_1Hybrid", "Mode_2DT", "Black Halo", "Requiescat", "Mode_3HighAcc" ],
-      "BST": [ "Decimation", "Calamity", "Mode_1Hybrid" ],
+      "BLU": [ "Chant Du Cygne", "MagicAcc", "Mode_1Hybrid", "Mode_2DT", "Requiescat", "Mode_3HighAcc" ],
+      "BST": [ "Decimation", "Mode_1Hybrid", "Calamity" ],
       "DNC": [ "Mode_1Hybrid", "Mode_2Xevioso" ],
-      "DRG": [ "Mode_2MagEva", "Mode_1Hybrid", "SO_Drakesbane", "Drakesbane", "Stardiver" ],
+      "DRG": [ "Mode_2MagEva", "SO_Drakesbane", "Drakesbane", "Stardiver", "Mode_1Hybrid" ],
       "DRK": [ "Mode_2HighAcc", "Mode_3SubtleBlow", "Mode_1Hybrid", "Mode_4VimTP" ],
-      "MNK": [ "Mode_1Hybrid", "Mode_2DT", "DTShijin Spiral" ],
+      "MNK": [ "Mode_2DT", "DTShijin Spiral", "Mode_1Hybrid" ],
       "NIN": [ "Blade: Shun" ],
       "PLD": [ "Mode_1Hybrid", "Chant Du Cygne" ],
       "RUN": [ "Mode_1Hybrid" ],
@@ -199,17 +199,18 @@
       "WAR": [ "Mode_1Hybrid" ]
     } ]
   }, {
-    "name": "Hauksbok Arrow",
-    "priority": 0,
-    "set_list": [ {
-      "RNG": [ "Savage Blade" ]
-    } ]
-  }, {
     "augments": [ "Path: A" ],
     "name": "Epitaph",
     "priority": 0,
     "set_list": [ {
       "SMN": [ "DT" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Hesperiidae",
+    "priority": 0,
+    "set_list": [ {
+      "BST": [ "PetMagicalTPAcc", "PetPhysicalTPAcc" ]
     } ]
   } ],
   "back": [ {
@@ -231,7 +232,7 @@
     "name": "Belenus's Cape",
     "priority": 0,
     "set_list": [ {
-      "RNG": [ "Last Stand", "Apex Arrow", "Decimation", "Dulling Arrow", "Blast Shot" ]
+      "RNG": [ "Last Stand", "Apex Arrow", "Dulling Arrow", "Blast Shot" ]
     } ]
   }, {
     "augments": [ "DEX+20", "Accuracy+20 Attack+20", "DEX+10", "\"Store TP\"+10", "Phys. dmg. taken-10%" ],
@@ -244,8 +245,9 @@
     "name": "Izdubar Mantle",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "MagicAccuracy", "CometBurst", "MagicBurst" ],
+      "BLM": [ "MagicAccuracy" ],
       "BLU": [ "MagicAtk", "MagicAcc", "Sanguine Blade" ],
+      "DRG": [ "Raiden Thrust", "Cataclysm" ],
       "DRK": [ "DarkMagicAtk", "MagicAtk" ],
       "GEO": [ "Elemental", "Flash Nova", "MACC" ],
       "RUN": [ "Lunge", "Sanguine Blade" ],
@@ -272,7 +274,6 @@
     "name": "Solemnity Cape",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Mode_1DT" ],
       "GEO": [ "Healing" ],
       "NIN": [ "Fastcast" ],
       "WHM": [ "IdleRegen" ]
@@ -282,18 +283,18 @@
     "name": "Toutatis's Cape",
     "priority": 0,
     "set_list": [ {
-      "THF": [ "SneakAttack", "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc" ]
+      "THF": [ "SneakAttack", "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Raging Fists" ]
     } ]
   }, {
     "name": "Sacro Mantle",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Primal Rend" ],
+      "BST": [ "Primal Rend", "Calamity" ],
       "DNC": [ "MagicAtk", "Pyrrhic Kleos", "Rudra's Storm" ],
       "MNK": [ "Howling Fist", "Sunburst", "Rock Crusher" ],
       "NIN": [ "Savage Blade", "Blade: Ten", "Blade: Hi", "Blade: Ei", "Blade: Jin", "Mode_2Mpaca" ],
       "PUP": [ "Dragon Kick" ],
-      "THF": [ "Savage Blade", "Rudra's Storm", "Dancing Edge", "Exenterator", "Midcast_Absorb-TP" ]
+      "THF": [ "Dancing Edge", "Exenterator", "Midcast_Absorb-TP", "Rudra's Storm", "MagicAcc" ]
     } ]
   }, {
     "augments": [ "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20", "Eva.+20 /Mag. Eva.+20", "Pet: Attack+10 Pet: Rng.Atk.+10", "Pet: \"Regen\"+10", "Pet: Damage taken -5%" ],
@@ -314,7 +315,7 @@
     "name": "Belenus's Cape",
     "priority": 0,
     "set_list": [ {
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge" ]
+      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Trueflight" ]
     } ]
   }, {
     "augments": [ "DEX+20", "Rng.Acc.+20 Rng.Atk.+20", "none", "Crit.hit rate+10", "Phys. dmg. taken-10%" ],
@@ -356,14 +357,14 @@
     "name": "Rosmerta's Cape",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Mode_1Hybrid", "Mode_2DT", "Chant Du Cygne", "Requiescat", "Mode_3HighAcc", "Savage Blade" ]
+      "BLU": [ "Mode_1Hybrid", "Mode_2DT", "Chant Du Cygne", "Requiescat", "Mode_3HighAcc" ]
     } ]
   }, {
     "augments": [ "STR+20", "Accuracy+20 Attack+20", "STR+10", "\"Dbl.Atk.\"+10", "Phys. dmg. taken-10%" ],
     "name": "Artio's Mantle",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Decimation", "PetPhysicalTP", "Precast_Reward", "Evisceration", "PetMagicalAcc", "Calamity", "Viper Bite", "Mode_1Hybrid" ]
+      "BST": [ "Decimation", "Precast_Reward", "Evisceration", "PetMagicalAcc", "Viper Bite", "Mode_1Hybrid" ]
     } ]
   }, {
     "augments": [ "HP+60", "Eva.+20 /Mag. Eva.+20", "none", "\"Fast Cast\"+10", "Spell interruption rate down-10%" ],
@@ -508,15 +509,14 @@
     "name": "Artio's Mantle",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "PetMagicalTP" ]
+      "BST": [ "PetMagicalTP", "PetMagicalTPAcc" ]
     } ]
   }, {
     "augments": [ "Path: A" ],
     "name": "Aurist's Cape +1",
     "priority": 0,
     "set_list": [ {
-      "BLM": [ "Mode_2Melee", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death", "DeathFastcast", "Midcast_Death", "Myrkr", "Drain", "IdleRegen" ],
-      "BLU": [ "Black Halo" ]
+      "BLM": [ "Mode_2Melee", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Drain", "IdleRegen" ]
     } ]
   }, {
     "augments": [ "STR+20", "Accuracy+20 Attack+20", "STR+10", "\"Dbl.Atk.\"+10", "Phys. dmg. taken-10%" ],
@@ -530,7 +530,7 @@
     "name": "Segomo's Mantle",
     "priority": 0,
     "set_list": [ {
-      "MNK": [ "Mode_1Hybrid", "Shijin Spiral", "DTShijin Spiral" ]
+      "MNK": [ "Shijin Spiral", "DTShijin Spiral", "Mode_1Hybrid" ]
     } ]
   }, {
     "augments": [ "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20", "Accuracy+20 Attack+20", "none", "Pet: Haste+10", "System: 1 ID: 1246 Val: 4" ],
@@ -551,21 +551,56 @@
     "name": "Belenus's Cape",
     "priority": 0,
     "set_list": [ {
-      "RNG": [ "Mode_2MeleeHybrid", "Evisceration" ]
+      "RNG": [ "Evisceration", "Viper Bite", "Mode_3MeleeMalignance", "Mode_2MeleeHybrid" ]
     } ]
   }, {
     "augments": [ "STR+20", "Accuracy+20 Attack+20", "none", "Weapon skill damage +10%", "none" ],
     "name": "Belenus's Cape",
     "priority": 0,
     "set_list": [ {
-      "RNG": [ "Savage Blade" ]
+      "RNG": [ "Savage Blade", "Decimation" ]
     } ]
   }, {
     "augments": [ "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20", "Accuracy+20 Attack+20", "Pet: Attack+10 Pet: Rng.Atk.+10", "Pet: \"Regen\"+10", "Pet: Damage taken -5%" ],
     "name": "Artio's Mantle",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Mode_2PetDT" ]
+      "BST": [ "Mode_2PetDT", "PetPhysicalTPAcc", "PetPhysicalTP" ]
+    } ]
+  }, {
+    "augments": [ "STR+20", "Accuracy+20 Attack+20", "STR+10", "\"Dbl.Atk.\"+10", "Phys. dmg. taken-10%" ],
+    "name": "Brigantia's Mantle",
+    "priority": 0,
+    "set_list": [ {
+      "DRG": [ "Mode_2MagEva", "SO_Drakesbane", "Drakesbane", "Stardiver", "Jump", "Mode_3HassoHybrid", "Mode_1Hybrid" ]
+    } ]
+  }, {
+    "augments": [ "STR+20", "Accuracy+20 Attack+20", "none", "Weapon skill damage +10%", "none" ],
+    "name": "Rosmerta's Cape",
+    "priority": 0,
+    "set_list": [ {
+      "BLU": [ "Savage Blade", "Black Halo", "True Strike" ]
+    } ]
+  }, {
+    "augments": [ "STR+20", "Accuracy+20 Attack+20", "STR+10", "Weapon skill damage +10%", "none" ],
+    "name": "Brigantia's Mantle",
+    "priority": 0,
+    "set_list": [ {
+      "DRG": [ "Impulse Drive", "Camlann's Torment", "SO_Impulse Drive", "SO_DIImpulse Drive", "SO_Camlann's Torment" ]
+    } ]
+  }, {
+    "augments": [ "MP+60", "Mag. Acc+20 /Mag. Dmg.+20", "none", "\"Mag.Atk.Bns.\"+10", "Phys. dmg. taken-10%" ],
+    "name": "Taranus's Cape",
+    "priority": 0,
+    "set_list": [ {
+      "BLM": [ "Mode_1DT", "Mode_3Death", "CometBurst", "Midcast_Death", "DeathFastcast", "MagicBurst", "Myrkr" ]
+    } ]
+  }, {
+    "augments": [ "STR+20", "Accuracy+20 Attack+20", "none", "Weapon skill damage +10%", "none" ],
+    "name": "Toutatis's Cape",
+    "priority": 0,
+    "set_list": [ {
+      "THF": [ "Savage Blade" ]
     } ]
   } ],
   "body": [ {
@@ -613,7 +648,7 @@
       "DRK": [ "DarkMagicAtk", "DrainAspir", "MagicAcc", "HP", "MagicAtk" ],
       "GEO": [ "Elemental", "Hexa Strike", "Black Halo", "Mode_3CombatIdleDT", "Mode_2MeleeDW", "Mode_4MeleeDWDT", "Flash Nova" ],
       "NIN": [ "Savage Blade" ],
-      "RNG": [ "Savage Blade", "Decimation" ],
+      "RNG": [ "Savage Blade" ],
       "RUN": [ "EnhancingAny", "Lunge", "Fastcast", "Resolution", "Savage Blade", "Requiescat", "Sanguine Blade", "Dimidiation" ],
       "THF": [ "MagicAtk", "Savage Blade" ],
       "WHM": [ "MagicBurst" ]
@@ -678,11 +713,11 @@
       "BST": [ "Mode_1Hybrid" ],
       "COR": [ "Mode_1HybridDW", "MidshotDT", "AM3DT" ],
       "DNC": [ "Mode_1Hybrid", "Mode_2Xevioso" ],
-      "MNK": [ "Mode_1Hybrid", "IdleRegen", "Mode_2DT" ],
+      "MNK": [ "IdleRegen", "Mode_2DT" ],
       "NIN": [ "Mode_1Hybrid", "IdleRegen" ],
       "PUP": [ "IdleRegen" ],
-      "RNG": [ "MidshotDT", "Mode_1RangedIdleDT", "Mode_2MeleeHybrid", "IdleRegen", "TH", "AM3DT", "Dulling Arrow" ],
-      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP" ]
+      "RNG": [ "MidshotDT", "Mode_1RangedIdleDT", "IdleRegen", "AM3DT", "Dulling Arrow", "Mode_3MeleeMalignance" ],
+      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP", "MagicAcc" ]
     } ]
   }, {
     "name": "Con. Doublet +3",
@@ -699,7 +734,7 @@
       "BLU": [ "MagicAtk", "MagicAcc" ],
       "GEO": [ "MACC" ],
       "PLD": [ "Midcast_Holy" ],
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Trueflight" ],
       "SMN": [ "MACC" ],
       "WHM": [ "Flash Nova" ]
     } ]
@@ -707,8 +742,8 @@
     "name": "Gleti's Cuirass",
     "priority": 91,
     "set_list": [ {
-      "BLU": [ "Chant Du Cygne", "Black Halo", "Requiescat" ],
-      "BST": [ "Decimation", "PetMagicalTP" ],
+      "BLU": [ "Chant Du Cygne", "Requiescat" ],
+      "BST": [ "Decimation" ],
       "DNC": [ "Evisceration", "IdleRegen", "Pyrrhic Kleos" ],
       "THF": [ "IdleRegen", "Dancing Edge", "Exenterator" ]
     } ]
@@ -724,8 +759,8 @@
     "name": "Sacro Breastplate",
     "priority": 182,
     "set_list": [ {
-      "BST": [ "IdleRegen", "Primal Rend", "Fastcast" ],
-      "DRG": [ "IdleRegen", "Fastcast" ],
+      "BST": [ "IdleRegen", "Fastcast" ],
+      "DRG": [ "Fastcast" ],
       "DRK": [ "Fastcast", "IdleRegen", "Mode_3SubtleBlow" ],
       "PLD": [ "IdleRegen", "Fastcast" ],
       "SAM": [ "Fastcast" ],
@@ -778,6 +813,7 @@
       "NIN": [ "TH" ],
       "PLD": [ "TH" ],
       "PUP": [ "TH" ],
+      "RNG": [ "TH" ],
       "RUN": [ "TH" ],
       "SAM": [ "TH" ],
       "SCH": [ "TH" ],
@@ -786,8 +822,8 @@
       "WHM": [ "TH" ]
     } ]
   }, {
-    "name": "Maxixi Casaque +2",
-    "priority": 88,
+    "name": "Maxixi Casaque +3",
+    "priority": 98,
     "set_list": [ {
       "DNC": [ "Waltz", "Step" ]
     } ]
@@ -851,15 +887,15 @@
     "priority": 91,
     "set_list": [ {
       "BST": [ "Evisceration", "PetMagicalAcc" ],
-      "DNC": [ "Dancing Edge", "Extenterator", "XeviosoEvisceration" ],
-      "DRG": [ "Impulse Drive", "Stardiver", "Camlann's Torment" ],
-      "THF": [ "Evisceration" ]
+      "DNC": [ "Dancing Edge", "Extenterator" ],
+      "DRG": [ "Stardiver", "Mode_1Hybrid" ],
+      "THF": [ "Evisceration", "Raging Fists" ]
     } ]
   }, {
     "name": "Hjarrandi Breast.",
     "priority": 228,
     "set_list": [ {
-      "DRG": [ "Mode_1Hybrid", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "SO_Camlann's Torment" ],
+      "DRG": [ "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "SO_Camlann's Torment", "Mode_3HassoHybrid" ],
       "PLD": [ "Chant Du Cygne", "Impulse Drive" ],
       "WAR": [ "Ukko's Fury" ]
     } ]
@@ -892,14 +928,15 @@
     "priority": 136,
     "set_list": [ {
       "BLM": [ "Mode_1DT", "Mode_2Melee", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution" ],
-      "BLU": [ "Savage Blade" ],
-      "BST": [ "Calamity", "Viper Bite" ],
-      "DRG": [ "Mode_2MagEva" ],
+      "BLU": [ "Savage Blade", "Black Halo", "True Strike" ],
+      "BST": [ "Viper Bite", "PetMagicalTP", "PetMagicalTPAcc", "PetPhysicalTPAcc", "Primal Rend", "Calamity" ],
+      "DNC": [ "XeviosoEvisceration" ],
+      "DRG": [ "Mode_2MagEva", "Camlann's Torment", "Impulse Drive", "Raiden Thrust", "Cataclysm" ],
       "GEO": [ "Mode_1Melee" ],
       "MNK": [ "Howling Fist", "Sunburst", "Rock Crusher", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
       "NIN": [ "Blade: Ten", "Blade: Chi", "Blade: Ei", "Aeolian Edge" ],
       "PLD": [ "Savage Blade", "Seraph Blade", "Sanguine Blade", "Torcleaver" ],
-      "RNG": [ "Blast Shot" ],
+      "RNG": [ "Blast Shot", "Viper Bite" ],
       "RUN": [ "Mode_2TankPhy" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_1DT", "Flash Nova", "MagicBurst", "MagicBurstHelix", "Black Halo", "Mode_3Melee", "Myrkr" ],
       "SMN": [ "Mode_2Melee", "DT" ],
@@ -943,7 +980,8 @@
     "priority": 61,
     "set_list": [ {
       "BLU": [ "Phalanx" ],
-      "RUN": [ "EnhancingPhalanx" ]
+      "RUN": [ "EnhancingPhalanx" ],
+      "THF": [ "Midcast_Phalanx" ]
     } ]
   }, {
     "augments": [ "Summoning magic skill +20", "Enmity-6", "Pet: Damage taken -4%" ],
@@ -1022,6 +1060,33 @@
     "set_list": [ {
       "BLM": [ "Midcast_Death", "MagicBurst", "IdleRegen" ]
     } ]
+  }, {
+    "name": "Vishap Mail +2",
+    "priority": 91,
+    "set_list": [ {
+      "DRG": [ "Jump" ]
+    } ]
+  }, {
+    "augments": [ "none", "none", "Enhances \"Spirit Surge\" effect", "none" ],
+    "name": "Ptero. Mail +1",
+    "priority": 82,
+    "set_list": [ {
+      "DRG": [ "Precast_Call Wyvern", "Precast_Spirit Surge", "IdleRegen" ]
+    } ]
+  }, {
+    "name": "Hervor Haubert",
+    "priority": 77,
+    "set_list": [ {
+      "DomainHeavy": [ "DI" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Tatena. Harama. +1",
+    "priority": 66,
+    "set_list": [ {
+      "MNK": [ "Mode_1Hybrid" ],
+      "RNG": [ "Decimation", "Mode_2MeleeHybrid" ]
+    } ]
   } ],
   "ear1": [ {
     "name": "Ishvara Earring",
@@ -1029,7 +1094,7 @@
     "set_list": [ {
       "BLM": [ "Spiral Hell", "Slice", "Vorpal Scythe" ],
       "DNC": [ "Rudra's Storm" ],
-      "DRG": [ "Impulse Drive", "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment" ],
+      "DRG": [ "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment", "Impulse Drive" ],
       "MNK": [ "Howling Fist", "DTHowling Fist" ],
       "NIN": [ "Savage Blade", "Blade: Ten" ],
       "RNG": [ "Savage Blade", "Heavy Shot" ],
@@ -1043,6 +1108,7 @@
     "set_list": [ {
       "BLM": [ "DeathFastcast" ],
       "BST": [ "Fastcast" ],
+      "DNC": [ "Fastcast" ],
       "NIN": [ "Fastcast" ],
       "RUN": [ "FastcastEnhancing", "Fastcast" ],
       "SAM": [ "Fastcast" ],
@@ -1093,17 +1159,17 @@
     "priority": 0,
     "set_list": [ {
       "BLM": [ "Mode_2Melee" ],
-      "BLU": [ "Mode_1Hybrid", "Mode_2DT", "Mode_3HighAcc", "Savage Blade" ],
-      "BST": [ "Mode_1Hybrid" ],
+      "BLU": [ "Mode_1Hybrid", "Mode_2DT", "Mode_3HighAcc" ],
+      "BST": [ "Mode_1Hybrid", "Mode_2PetDT" ],
       "COR": [ "Mode_1HybridDW", "Last Stand", "Midshot", "MidshotDT", "AM3DT", "AM3" ],
       "DNC": [ "Mode_1Hybrid", "Mode_2Xevioso" ],
-      "DRG": [ "Mode_1Hybrid", "Mode_2MagEva" ],
+      "DRG": [ "Mode_2MagEva" ],
       "DRK": [ "Mode_1Hybrid", "Mode_2HighAcc", "Mode_3SubtleBlow", "Entropy", "Insurgency", "Mode_4VimTP" ],
-      "MNK": [ "Mode_1Hybrid", "Mode_2DT" ],
+      "MNK": [ "Mode_2DT", "Mode_1Hybrid" ],
       "NIN": [ "Mode_1Hybrid", "Mode_2Mpaca" ],
       "PLD": [ "Mode_1Hybrid" ],
       "PUP": [ "Mode_1TP", "Raging Fists", "Victory Smite", "Mode_4Gigetank" ],
-      "RNG": [ "Midshot", "MidshotDT", "Mode_2MeleeHybrid", "Precast_Eagle Eye Shot", "Dulling Arrow", "Blast Shot" ],
+      "RNG": [ "Midshot", "MidshotDT", "Precast_Eagle Eye Shot", "Dulling Arrow", "Blast Shot", "Mode_3MeleeMalignance", "Mode_2MeleeHybrid" ],
       "RUN": [ "Mode_1Hybrid", "Mode_3TankMag" ],
       "SAM": [ "Mode_1Mpaca", "Mode_2Hybrid" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_3Melee" ],
@@ -1137,9 +1203,9 @@
     "name": "Odnowa Earring +1",
     "priority": 0,
     "set_list": [ {
+      "BLU": [ "Savage Blade" ],
       "BST": [ "IdleRegen" ],
       "DNC": [ "IdleRegen" ],
-      "DRG": [ "IdleRegen" ],
       "DRK": [ "HP" ],
       "GEO": [ "Geomancy", "IdleRegen" ],
       "MNK": [ "Asuran Fists", "DTRaging Fists" ],
@@ -1156,7 +1222,7 @@
       "DRK": [ "DarkMagicAtk", "DrainAspir", "MagicAtk" ],
       "NIN": [ "NinjutsuMB", "Aeolian Edge" ],
       "PLD": [ "Seraph Blade", "Sanguine Blade", "Midcast_Holy" ],
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Trueflight" ],
       "RUN": [ "Lunge", "Sanguine Blade" ],
       "THF": [ "MagicAtk", "Midcast_Stun" ]
     } ]
@@ -1166,8 +1232,7 @@
     "set_list": [ {
       "BLU": [ "Fastcast" ],
       "COR": [ "IdleRegen", "Fastcast" ],
-      "DNC": [ "Fastcast" ],
-      "DRG": [ "Fastcast" ],
+      "DRG": [ "Fastcast", "IdleRegen", "Mode_3HassoHybrid" ],
       "DRK": [ "IdleRegen" ],
       "MNK": [ "Fastcast", "IdleRegen" ],
       "NIN": [ "IdleRegen" ],
@@ -1191,7 +1256,7 @@
     "priority": 0,
     "set_list": [ {
       "BLM": [ "CometBurst", "MagicBurst" ],
-      "BLU": [ "Black Halo", "Requiescat" ],
+      "BLU": [ "Requiescat", "Black Halo", "True Strike" ],
       "GEO": [ "MACC" ],
       "SCH": [ "Cure" ]
     } ]
@@ -1203,15 +1268,14 @@
       "MNK": [ "Victory Smite", "Shijin Spiral", "Raging Fists" ],
       "NIN": [ "Evisceration", "Blade: Shun", "Blade: Hi", "Blade: Jin" ],
       "RNG": [ "AM3", "AM3DT" ],
-      "THF": [ "Dancing Edge", "Evisceration" ]
+      "THF": [ "Dancing Edge", "Evisceration", "Raging Fists" ]
     } ]
   }, {
     "name": "Sherida Earring",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Decimation", "Evisceration", "Calamity", "Viper Bite" ],
-      "MNK": [ "DTShijin Spiral", "DTVictory Smite" ],
-      "RNG": [ "Last Stand", "Apex Arrow", "Evisceration", "Jishnu's Radiance" ]
+      "BST": [ "Decimation", "Evisceration", "Viper Bite" ],
+      "MNK": [ "DTShijin Spiral", "DTVictory Smite" ]
     } ]
   }, {
     "name": "Eabani Earring",
@@ -1240,6 +1304,7 @@
     "name": "Lugra Earring +1",
     "priority": 0,
     "set_list": [ {
+      "BST": [ "Calamity" ],
       "DRK": [ "Catastrophe" ],
       "PLD": [ "Savage Blade", "Torcleaver", "Resolution" ],
       "SAM": [ "Impulse Drive", "Stardiver" ]
@@ -1250,7 +1315,6 @@
     "set_list": [ {
       "COR": [ "Evisceration" ],
       "GEO": [ "Hexa Strike" ],
-      "RNG": [ "Decimation" ],
       "RUN": [ "Resolution", "Requiescat" ],
       "THF": [ "Exenterator" ]
     } ]
@@ -1258,7 +1322,7 @@
     "name": "Rimeice Earring",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "PetMagicalAcc", "Mode_2PetDT" ],
+      "BST": [ "PetMagicalAcc" ],
       "PUP": [ "Mode_2SSOverdrive", "PetEnmity" ]
     } ]
   }, {
@@ -1278,8 +1342,9 @@
     "priority": 0,
     "set_list": [ {
       "BLU": [ "Chant Du Cygne" ],
-      "DRG": [ "SO_Drakesbane", "Drakesbane", "Stardiver" ],
-      "PLD": [ "Chant Du Cygne" ]
+      "DRG": [ "SO_Drakesbane", "Drakesbane", "Stardiver", "Mode_1Hybrid" ],
+      "PLD": [ "Chant Du Cygne" ],
+      "RNG": [ "Decimation" ]
     } ]
   }, {
     "name": "Mimir Earring",
@@ -1291,12 +1356,13 @@
     "name": "Enmerkar Earring",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "PetMagicalTP", "PetPhysicalTP" ]
+      "BST": [ "PetMagicalTP", "PetPhysicalTP", "PetMagicalTPAcc", "PetPhysicalTPAcc" ]
     } ]
   }, {
     "name": "Thrud Earring",
     "priority": 0,
     "set_list": [ {
+      "DRG": [ "Raiden Thrust", "Cataclysm" ],
       "PLD": [ "Swift Blade", "Impulse Drive" ],
       "WAR": [ "Upheaval", "Ukko's Fury", "Steel Cyclone" ]
     } ]
@@ -1304,7 +1370,8 @@
     "name": "Crep. Earring",
     "priority": 0,
     "set_list": [ {
-      "GEO": [ "Mode_1Melee" ]
+      "GEO": [ "Mode_1Melee" ],
+      "THF": [ "MagicAcc" ]
     } ]
   } ],
   "ear2": [ {
@@ -1313,8 +1380,7 @@
     "set_list": [ {
       "BLM": [ "Mode_1DT", "Mode_3Death", "DeathFastcast", "Midcast_Death", "Myrkr", "Drain", "IdleRegen" ],
       "BST": [ "Fastcast" ],
-      "DNC": [ "IdleRegen" ],
-      "DRG": [ "IdleRegen" ],
+      "DNC": [ "IdleRegen", "Fastcast" ],
       "DRK": [ "HP" ],
       "GEO": [ "Healing", "Fastcast", "Geomancy", "IdleRegen" ],
       "NIN": [ "Fastcast" ],
@@ -1330,11 +1396,11 @@
     "name": "Odr Earring",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Chant Du Cygne", "Mode_3HighAcc" ],
+      "BLU": [ "Chant Du Cygne" ],
       "COR": [ "AM3", "AM3DT", "IdleRegen", "Evisceration" ],
       "DNC": [ "Rudra's Storm" ],
       "MNK": [ "DTShijin Spiral", "DTVictory Smite" ],
-      "RNG": [ "Precast_Eagle Eye Shot", "Heavy Shot", "Evisceration", "Jishnu's Radiance" ],
+      "RNG": [ "Precast_Eagle Eye Shot", "Heavy Shot", "Evisceration", "Jishnu's Radiance", "Viper Bite" ],
       "RUN": [ "Dimidiation" ],
       "THF": [ "Rudra's Storm" ]
     } ]
@@ -1344,7 +1410,7 @@
     "priority": 0,
     "set_list": [ {
       "BLM": [ "Slice", "Vorpal Scythe" ],
-      "DNC": [ "XeviosoEvisceration" ],
+      "DRG": [ "IdleRegen", "Mode_3HassoHybrid" ],
       "DRK": [ "IdleRegen" ],
       "GEO": [ "IdleRefresh", "Hexa Strike", "Mode_4MeleeDWDT" ],
       "MNK": [ "IdleRegen", "DTHowling Fist" ],
@@ -1366,7 +1432,7 @@
     "name": "Cessance Earring",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Mode_2DT" ],
+      "BLU": [ "Mode_2DT", "Mode_3HighAcc" ],
       "NIN": [ "Mode_1Hybrid", "Mode_2Mpaca" ],
       "PUP": [ "Raging Fists", "Victory Smite" ]
     } ]
@@ -1374,12 +1440,12 @@
     "name": "Sherida Earring",
     "priority": 0,
     "set_list": [ {
-      "DNC": [ "Mode_1Hybrid", "Evisceration", "Pyrrhic Kleos", "Dancing Edge", "Extenterator", "Mode_2Xevioso" ],
-      "DRG": [ "Mode_1Hybrid", "SO_Drakesbane", "Drakesbane", "Stardiver", "Mode_2MagEva" ],
-      "MNK": [ "Mode_1Hybrid", "Victory Smite", "Shijin Spiral", "Asuran Fists", "Raging Fists", "Howling Fist", "Mode_2DT", "DTRaging Fists" ],
-      "RNG": [ "Mode_2MeleeHybrid", "Savage Blade", "Decimation" ],
+      "DNC": [ "Mode_1Hybrid", "Evisceration", "Pyrrhic Kleos", "Dancing Edge", "Extenterator", "Mode_2Xevioso", "XeviosoEvisceration" ],
+      "DRG": [ "SO_Drakesbane", "Drakesbane", "Stardiver", "Mode_2MagEva", "Mode_1Hybrid" ],
+      "MNK": [ "Victory Smite", "Shijin Spiral", "Asuran Fists", "Raging Fists", "Howling Fist", "Mode_2DT", "DTRaging Fists", "Mode_1Hybrid" ],
+      "RNG": [ "Savage Blade", "Decimation", "Mode_3MeleeMalignance", "Mode_2MeleeHybrid" ],
       "RUN": [ "Resolution", "Savage Blade", "Requiescat", "Mode_1Hybrid", "Mode_3TankMag" ],
-      "THF": [ "Hybrid", "Savage Blade", "Dancing Edge", "Exenterator", "Mode_1Hybrid", "Mode_2CaitSith", "Evisceration", "Mode_3HighAcc" ]
+      "THF": [ "Hybrid", "Savage Blade", "Dancing Edge", "Exenterator", "Mode_1Hybrid", "Mode_2CaitSith", "Evisceration", "Mode_3HighAcc", "Raging Fists" ]
     } ]
   }, {
     "name": "Gelos Earring",
@@ -1393,9 +1459,9 @@
     "set_list": [ {
       "NIN": [ "NinjutsuMB", "Aeolian Edge" ],
       "PLD": [ "Midcast_Holy" ],
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Trueflight" ],
       "RUN": [ "Lunge", "Sanguine Blade" ],
-      "THF": [ "MagicAtk" ]
+      "THF": [ "MagicAtk", "MagicAcc" ]
     } ]
   }, {
     "name": "Telos Earring",
@@ -1413,7 +1479,6 @@
       "BLM": [ "Fastcast" ],
       "BLU": [ "Fastcast" ],
       "COR": [ "Fastcast" ],
-      "DNC": [ "Fastcast" ],
       "DRK": [ "Fastcast" ],
       "MNK": [ "Fastcast" ],
       "PLD": [ "Fastcast" ],
@@ -1426,7 +1491,7 @@
     "name": "Lugra Earring +1",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Decimation", "Evisceration", "Calamity", "Viper Bite", "Mode_1Hybrid" ],
+      "BST": [ "Decimation", "Evisceration", "Viper Bite", "Mode_1Hybrid" ],
       "DRK": [ "Mode_3SubtleBlow", "Entropy", "Insurgency", "Mode_1Hybrid" ],
       "NIN": [ "Savage Blade", "Evisceration", "Blade: Shun", "Blade: Ten", "Blade: Hi", "Blade: Jin" ],
       "PLD": [ "Chant Du Cygne", "Swift Blade", "Impulse Drive" ],
@@ -1446,7 +1511,7 @@
     "name": "Ishvara Earring",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Black Halo", "Savage Blade" ],
+      "BLU": [ "Savage Blade", "Black Halo", "True Strike" ],
       "COR": [ "Last Stand" ],
       "PUP": [ "Dragon Kick" ],
       "RNG": [ "Last Stand", "Apex Arrow", "Blast Shot" ]
@@ -1457,7 +1522,7 @@
     "set_list": [ {
       "BLM": [ "Mode_2Melee" ],
       "BLU": [ "MagicAcc" ],
-      "BST": [ "PetMagicalTP", "PetMagicalAcc" ],
+      "BST": [ "PetMagicalTP", "PetMagicalAcc", "PetMagicalTPAcc", "PetPhysicalTPAcc" ],
       "COR": [ "Midshot", "MidshotDT", "Mode_1HybridDW" ],
       "DRK": [ "MagicAcc", "Mode_2HighAcc", "Mode_4VimTP" ],
       "PUP": [ "Mode_1TP", "Mode_4Gigetank" ],
@@ -1481,6 +1546,7 @@
       "BST": [ "Primal Rend" ],
       "COR": [ "Wildfire", "Leaden Salute" ],
       "DNC": [ "MagicAtk" ],
+      "DRG": [ "Raiden Thrust", "Cataclysm" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
       "NIN": [ "Blade: Chi", "Blade: Ei" ]
     } ]
@@ -1488,7 +1554,8 @@
     "name": "Thrud Earring",
     "priority": 0,
     "set_list": [ {
-      "DRG": [ "Impulse Drive", "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment" ],
+      "BST": [ "Calamity" ],
+      "DRG": [ "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment", "Impulse Drive" ],
       "DRK": [ "Catastrophe" ],
       "PLD": [ "Savage Blade", "Seraph Blade", "Sanguine Blade", "Torcleaver", "Resolution" ],
       "SAM": [ "Impulse Drive", "Stardiver" ]
@@ -1521,7 +1588,6 @@
     "name": "Enmerkar Earring",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Mode_2PetDT" ],
       "PUP": [ "Mode_2SSOverdrive", "Mode_3VEOverdrive" ]
     } ]
   }, {
@@ -1536,6 +1602,18 @@
     "priority": 0,
     "set_list": [ {
       "PLD": [ "Mode_1Hybrid" ]
+    } ]
+  }, {
+    "name": "Pratik Earring",
+    "priority": 0,
+    "set_list": [ {
+      "DRG": [ "Precast_Spirit Link" ]
+    } ]
+  }, {
+    "name": "Rimeice Earring",
+    "priority": 0,
+    "set_list": [ {
+      "BST": [ "Mode_2PetDT" ]
     } ]
   } ],
   "feet": [ {
@@ -1563,10 +1641,10 @@
       "DRK": [ "DarkMagicAtk", "DrainAspir", "HP", "IdleRegen", "MagicAtk" ],
       "GEO": [ "Hexa Strike", "Black Halo", "Mode_3CombatIdleDT", "Mode_2MeleeDW", "Mode_4MeleeDWDT", "Flash Nova" ],
       "NIN": [ "Savage Blade" ],
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge", "Savage Blade", "Decimation" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Savage Blade" ],
       "RUN": [ "EnhancingAny", "Lunge", "Fastcast", "Savage Blade", "Requiescat", "Sanguine Blade", "IdleRegen", "Dimidiation" ],
       "SMN": [ "MACC" ],
-      "THF": [ "MagicAtk", "Savage Blade", "Rudra's Storm" ],
+      "THF": [ "MagicAtk", "Savage Blade" ],
       "WHM": [ "Mode_1MeleeDW", "Flash Nova", "MagicBurst", "IdleRegen" ]
     } ]
   }, {
@@ -1616,8 +1694,8 @@
       "MNK": [ "IdleRegen", "Mode_2DT" ],
       "NIN": [ "Mode_1Hybrid", "IdleRegen" ],
       "PUP": [ "IdleRegen" ],
-      "RNG": [ "Midshot", "MidshotDT", "Mode_1RangedIdleDT", "Mode_2MeleeHybrid", "IdleRegen", "AM3DT", "Dulling Arrow" ],
-      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP" ]
+      "RNG": [ "Midshot", "MidshotDT", "Mode_1RangedIdleDT", "IdleRegen", "AM3DT", "Dulling Arrow", "Mode_3MeleeMalignance" ],
+      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP", "MagicAcc" ]
     } ]
   }, {
     "augments": [ "none", "none", "Inc. Sp. \"Blood Pact\" magic crit. dmg.", "none" ],
@@ -1642,7 +1720,7 @@
     "name": "Gleti's Boots",
     "priority": 57,
     "set_list": [ {
-      "BLU": [ "IdleRegen", "Chant Du Cygne", "Black Halo", "Requiescat" ],
+      "BLU": [ "IdleRegen", "Chant Du Cygne", "Requiescat" ],
       "BST": [ "Decimation", "IdleRegen", "Precast_Call Beast", "Precast_Bestial Loyalty", "PetPhysicalTP", "PetMagicalTP", "PetTP" ],
       "DNC": [ "Evisceration", "IdleRegen", "Pyrrhic Kleos" ],
       "THF": [ "IdleRegen", "Evisceration", "Dancing Edge", "Exenterator" ]
@@ -1718,15 +1796,16 @@
     "name": "Gleti's Boots",
     "priority": 57,
     "set_list": [ {
-      "BST": [ "PetMagicalAcc" ],
-      "DNC": [ "Dancing Edge", "Extenterator", "XeviosoEvisceration" ],
-      "DRG": [ "IdleRegen", "Impulse Drive", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment", "Camlann's Torment" ]
+      "BST": [ "PetMagicalAcc", "PetMagicalTPAcc", "PetPhysicalTPAcc" ],
+      "DNC": [ "Dancing Edge", "Extenterator" ],
+      "DRG": [ "IdleRegen", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment" ],
+      "THF": [ "Raging Fists" ]
     } ]
   }, {
     "name": "Flam. Gambieras +2",
     "priority": 40,
     "set_list": [ {
-      "DRG": [ "Mode_1Hybrid" ],
+      "DRG": [ "Mode_3HassoHybrid", "Mode_1Hybrid" ],
       "SAM": [ "Mode_2Hybrid" ]
     } ]
   }, {
@@ -1741,17 +1820,19 @@
     "priority": 68,
     "set_list": [ {
       "BLM": [ "Mode_1DT", "Mode_2Melee", "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death", "Myrkr", "IdleRegen" ],
-      "BLU": [ "Savage Blade" ],
-      "BST": [ "Calamity", "Viper Bite" ],
-      "DRG": [ "Mode_2MagEva" ],
+      "BLU": [ "Savage Blade", "Black Halo" ],
+      "BST": [ "Viper Bite", "Calamity" ],
+      "DNC": [ "XeviosoEvisceration" ],
+      "DRG": [ "Mode_2MagEva", "Camlann's Torment", "Impulse Drive", "Raiden Thrust", "Cataclysm" ],
       "GEO": [ "IdleRegen", "Elemental", "Mode_1Melee" ],
       "MNK": [ "Howling Fist", "Sunburst", "Rock Crusher", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
       "NIN": [ "Blade: Ten", "Blade: Chi", "Blade: Ei", "Aeolian Edge", "Fastcast" ],
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Sanguine Blade", "Midcast_Holy", "Torcleaver" ],
-      "RNG": [ "Blast Shot" ],
+      "RNG": [ "Blast Shot", "Viper Bite", "Trueflight" ],
       "RUN": [ "Mode_2TankPhy", "Midcast_DT", "Mode_1Hybrid", "Mode_3TankMag", "Resolution" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_1DT", "Flash Nova", "MagicBurst", "MagicBurstHelix", "Black Halo", "Mode_3Melee", "Myrkr", "Regen" ],
       "SMN": [ "DT" ],
+      "THF": [ "Rudra's Storm" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
     } ]
   }, {
@@ -1789,7 +1870,8 @@
     "priority": 9,
     "set_list": [ {
       "BLU": [ "Phalanx" ],
-      "RUN": [ "EnhancingPhalanx" ]
+      "RUN": [ "EnhancingPhalanx" ],
+      "THF": [ "Midcast_Phalanx" ]
     } ]
   }, {
     "augments": [ "none", "none", "Enh. Ninj. Mag. Acc/Cast Time Red.", "none" ],
@@ -1828,6 +1910,7 @@
     "name": "Thereoid Greaves",
     "priority": 13,
     "set_list": [ {
+      "BLU": [ "True Strike" ],
       "BST": [ "Evisceration" ],
       "RNG": [ "Evisceration" ],
       "WAR": [ "Ukko's Fury" ]
@@ -1856,7 +1939,8 @@
     "name": "Tatena. Sune. +1",
     "priority": 15,
     "set_list": [ {
-      "MNK": [ "Mode_1Hybrid" ]
+      "MNK": [ "Mode_1Hybrid" ],
+      "RNG": [ "Decimation", "Mode_2MeleeHybrid" ]
     } ]
   }, {
     "name": "Waders",
@@ -1883,6 +1967,25 @@
     "set_list": [ {
       "BLM": [ "DeathFastcast", "Midcast_Death", "MagicBurst", "Drain" ]
     } ]
+  }, {
+    "name": "Ostro Greaves",
+    "priority": 15,
+    "set_list": [ {
+      "DRG": [ "Jump" ]
+    } ]
+  }, {
+    "name": "Pelt. Schyn. +1",
+    "priority": 15,
+    "set_list": [ {
+      "DRG": [ "Spirit Jump" ]
+    } ]
+  }, {
+    "name": "Hervor Sollerets",
+    "priority": 31,
+    "set_list": [ {
+      "DIHeavy": [ "DIHeavy" ],
+      "DomainHeavy": [ "DI" ]
+    } ]
   } ],
   "hands": [ {
     "augments": [ "Rng.Atk.+20", "\"Mag.Atk.Bns.\"+12", "\"Store TP\"+6" ],
@@ -1899,8 +2002,8 @@
       "RNG": [ "Precast_Bounty Shot" ]
     } ]
   }, {
-    "name": "Orion Bracers +2",
-    "priority": 37,
+    "name": "Orion Bracers +3",
+    "priority": 47,
     "set_list": [ {
       "RNG": [ "Barrage" ]
     } ]
@@ -1949,8 +2052,8 @@
       "GEO": [ "Precast_Full Circle" ]
     } ]
   }, {
-    "name": "Pill. Armlets +2",
-    "priority": 37,
+    "name": "Pill. Armlets +3",
+    "priority": 47,
     "set_list": [ {
       "THF": [ "TrickAttack" ]
     } ]
@@ -1984,7 +2087,7 @@
       "DRK": [ "Catastrophe", "MagicAcc", "HP", "IdleRegen", "MagicAtk" ],
       "GEO": [ "IdleRefresh", "IdleRegen", "Flash Nova" ],
       "NIN": [ "Savage Blade" ],
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge" ],
       "RUN": [ "Lunge", "Fastcast", "Sanguine Blade", "IdleRegen", "Resolution" ],
       "SMN": [ "MACC" ],
       "THF": [ "MagicAtk" ],
@@ -1994,7 +2097,6 @@
     "name": "Jhakri Cuffs +2",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "MagicAcc", "Black Halo", "Savage Blade" ],
       "GEO": [ "Fastcast", "Hexa Strike", "Black Halo" ]
     } ]
   }, {
@@ -2010,7 +2112,7 @@
     "name": "Mummu Wrists +2",
     "priority": 45,
     "set_list": [ {
-      "RNG": [ "Evisceration", "Jishnu's Radiance", "AM3", "Heavy Shot", "Precast_Eagle Eye Shot" ]
+      "RNG": [ "Jishnu's Radiance", "AM3", "Heavy Shot", "Precast_Eagle Eye Shot", "Evisceration" ]
     } ]
   }, {
     "name": "Assim. Bazu. +2",
@@ -2057,15 +2159,15 @@
     "name": "Malignance Gloves",
     "priority": 57,
     "set_list": [ {
-      "BLU": [ "Mode_1Hybrid", "Mode_2DT" ],
+      "BLU": [ "Mode_1Hybrid", "Mode_2DT", "MagicAcc" ],
       "BST": [ "Mode_1Hybrid" ],
       "COR": [ "Mode_1HybridDW", "Midshot", "MidshotDT", "AM3DT", "AM3" ],
       "DNC": [ "Mode_1Hybrid", "Mode_2Xevioso" ],
       "MNK": [ "IdleRegen", "Mode_2DT" ],
       "NIN": [ "Mode_1Hybrid", "IdleRegen" ],
       "PUP": [ "IdleRegen" ],
-      "RNG": [ "MidshotDT", "Midshot", "Mode_1RangedIdleDT", "Mode_2MeleeHybrid", "IdleRegen", "AM3DT", "Dulling Arrow", "Last Stand", "Savage Blade", "Blast Shot", "Apex Arrow", "Decimation" ],
-      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Midcast_Absorb-TP" ]
+      "RNG": [ "MidshotDT", "Midshot", "Mode_1RangedIdleDT", "IdleRegen", "AM3DT", "Dulling Arrow", "Last Stand", "Blast Shot", "Apex Arrow", "Mode_3MeleeMalignance" ],
+      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Midcast_Absorb-TP", "MagicAcc" ]
     } ]
   }, {
     "name": "Ig. Gauntlets +2",
@@ -2125,9 +2227,10 @@
     "name": "Gleti's Gauntlets",
     "priority": 68,
     "set_list": [ {
-      "BST": [ "Evisceration", "PetMagicalAcc", "Mode_2PetDT" ],
+      "BST": [ "Evisceration", "PetMagicalAcc", "Mode_2PetDT", "PetMagicalTPAcc", "PetPhysicalTPAcc" ],
       "DNC": [ "Dancing Edge", "Extenterator" ],
-      "DRG": [ "IdleRegen", "Impulse Drive", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment", "Camlann's Torment" ]
+      "DRG": [ "IdleRegen", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment", "Mode_3HassoHybrid", "Mode_1Hybrid" ],
+      "THF": [ "Raging Fists" ]
     } ]
   }, {
     "augments": [ "MP+40", "Healing magic skill +4", "\"Conserve MP\"+3", "\"Fast Cast\"+4", "none" ],
@@ -2164,18 +2267,20 @@
     "priority": 91,
     "set_list": [ {
       "BLM": [ "Mode_1DT", "MagicAccuracy", "Fastcast", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death", "Myrkr", "IdleRegen" ],
-      "BST": [ "Calamity", "Viper Bite" ],
+      "BLU": [ "Black Halo", "True Strike", "Savage Blade" ],
+      "BST": [ "Viper Bite", "Calamity" ],
       "COR": [ "Evisceration" ],
       "DNC": [ "XeviosoEvisceration" ],
-      "DRG": [ "Mode_2MagEva" ],
+      "DRG": [ "Mode_2MagEva", "Camlann's Torment", "Impulse Drive", "Raiden Thrust", "Cataclysm" ],
       "GEO": [ "Elemental" ],
       "MNK": [ "Howling Fist", "Sunburst", "Rock Crusher", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
       "NIN": [ "Blade: Ten", "Blade: Chi", "Blade: Ei", "Aeolian Edge" ],
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Sanguine Blade", "Midcast_Holy", "Torcleaver" ],
+      "RNG": [ "Viper Bite", "Savage Blade", "Trueflight" ],
       "RUN": [ "Midcast_DT", "Mode_1Hybrid", "Mode_3TankMag", "Savage Blade", "Requiescat", "Dimidiation" ],
       "SCH": [ "Mode_1DT", "IdleRegen", "Flash Nova", "MagicBurst", "MagicBurstHelix", "Black Halo", "Myrkr" ],
       "SMN": [ "DT" ],
-      "THF": [ "Rudra's Storm", "Savage Blade" ],
+      "THF": [ "Savage Blade", "Rudra's Storm" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
     } ]
   }, {
@@ -2200,7 +2305,8 @@
     "priority": 20,
     "set_list": [ {
       "BLU": [ "Phalanx" ],
-      "RUN": [ "EnhancingPhalanx" ]
+      "RUN": [ "EnhancingPhalanx" ],
+      "THF": [ "Midcast_Phalanx" ]
     } ]
   }, {
     "name": "Hattori Tekko +1",
@@ -2215,12 +2321,6 @@
       "SCH": [ "Perpetuance" ]
     } ]
   }, {
-    "name": "Sulev. Gauntlets +2",
-    "priority": 30,
-    "set_list": [ {
-      "DRG": [ "Mode_1Hybrid" ]
-    } ]
-  }, {
     "augments": [ "none", "none", "Enhances \"Invigorate\" effect", "none" ],
     "name": "Hes. Gloves +1",
     "priority": 60,
@@ -2232,7 +2332,8 @@
     "name": "Tatena. Gote +1",
     "priority": 27,
     "set_list": [ {
-      "MNK": [ "Mode_1Hybrid" ]
+      "MNK": [ "Mode_1Hybrid" ],
+      "RNG": [ "Decimation", "Mode_2MeleeHybrid" ]
     } ]
   }, {
     "name": "Heyoka Mittens",
@@ -2246,6 +2347,32 @@
     "priority": 38,
     "set_list": [ {
       "BLM": [ "DeathFastcast", "Midcast_Death", "MagicBurst", "Drain" ]
+    } ]
+  }, {
+    "name": "Vis. Fng. Gaunt. +2",
+    "priority": 40,
+    "set_list": [ {
+      "DRG": [ "Jump" ]
+    } ]
+  }, {
+    "name": "Pel. Vambraces +1",
+    "priority": 27,
+    "set_list": [ {
+      "DRG": [ "Precast_Spirit Link" ]
+    } ]
+  }, {
+    "name": "Hervor Mouffles",
+    "priority": 43,
+    "set_list": [ {
+      "DIHeavy": [ "DIHeavy" ],
+      "DomainHeavy": [ "DI" ]
+    } ]
+  }, {
+    "augments": [ "none", "none", "Enhances \"Angon\" effect", "none" ],
+    "name": "Ptero. Fin. G. +1",
+    "priority": 57,
+    "set_list": [ {
+      "DRG": [ "Precast_Angon" ]
     } ]
   } ],
   "head": [ {
@@ -2265,7 +2392,6 @@
     "name": "Herculean Helm",
     "priority": 38,
     "set_list": [ {
-      "BLU": [ "Black Halo" ],
       "DNC": [ "Fastcast" ],
       "MNK": [ "Fastcast" ],
       "NIN": [ "Savage Blade", "Fastcast" ],
@@ -2276,7 +2402,6 @@
     "name": "Nyame Helm",
     "priority": 91,
     "set_list": [ {
-      "BLU": [ "MagicAtk" ],
       "BST": [ "Primal Rend" ],
       "COR": [ "Wildfire", "Last Stand", "IdleRegen" ],
       "DNC": [ "MagicAtk", "Rudra's Storm" ],
@@ -2323,12 +2448,6 @@
       "WHM": [ "Fastcast" ]
     } ]
   }, {
-    "name": "Pill. Bonnet +3",
-    "priority": 64,
-    "set_list": [ {
-      "THF": [ "Rudra's Storm" ]
-    } ]
-  }, {
     "name": "Malignance Chapeau",
     "priority": 45,
     "set_list": [ {
@@ -2336,11 +2455,11 @@
       "BST": [ "Mode_1Hybrid", "Mode_2PetDT" ],
       "COR": [ "Mode_1HybridDW", "Midshot", "MidshotDT", "AM3DT" ],
       "DNC": [ "Mode_1Hybrid", "Mode_2Xevioso" ],
-      "MNK": [ "Mode_1Hybrid", "IdleRegen", "Mode_2DT" ],
+      "MNK": [ "IdleRegen", "Mode_2DT", "Mode_1Hybrid" ],
       "NIN": [ "Mode_1Hybrid", "IdleRegen" ],
       "PUP": [ "IdleRegen" ],
-      "RNG": [ "Mode_1RangedIdleDT", "IdleRegen", "AM3DT" ],
-      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP" ]
+      "RNG": [ "Mode_1RangedIdleDT", "IdleRegen", "AM3DT", "Mode_3MeleeMalignance", "Mode_2MeleeHybrid" ],
+      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP", "MagicAcc" ]
     } ]
   }, {
     "name": "Beckoner's Horn +1",
@@ -2357,17 +2476,17 @@
     } ]
   }, {
     "augments": [ "none", "none", "Enhances \"Recycle\" effect", "none" ],
-    "name": "Arcadian Beret +2",
-    "priority": 46,
+    "name": "Arcadian Beret +3",
+    "priority": 56,
     "set_list": [ {
-      "RNG": [ "Midshot", "MidshotDT", "Dulling Arrow" ]
+      "RNG": [ "Midshot", "MidshotDT", "Dulling Arrow", "Sniper Shot" ]
     } ]
   }, {
     "name": "Gleti's Mask",
     "priority": 68,
     "set_list": [ {
       "BLU": [ "IdleRegen", "Chant Du Cygne", "Requiescat" ],
-      "BST": [ "IdleRegen", "PetMagicalTP" ],
+      "BST": [ "IdleRegen" ],
       "DNC": [ "IdleRegen", "Pyrrhic Kleos" ],
       "THF": [ "IdleRegen", "Evisceration", "Dancing Edge", "Exenterator" ]
     } ]
@@ -2378,6 +2497,7 @@
       "BLM": [ "CometBurst", "Shadow of Death", "Mode_3Death", "DeathFastcast", "Midcast_Death", "Myrkr", "Drain" ],
       "BLU": [ "Sanguine Blade" ],
       "COR": [ "Leaden Salute" ],
+      "DRG": [ "Cataclysm" ],
       "DRK": [ "DarkMagicAtk", "DrainAspir" ],
       "MNK": [ "Sunburst" ],
       "NIN": [ "Blade: Ei" ],
@@ -2438,13 +2558,13 @@
     "set_list": [ {
       "BLM": [ "Mode_2Melee", "Vorpal Scythe" ],
       "BLU": [ "Mode_3HighAcc" ],
-      "BST": [ "Decimation", "Evisceration", "Viper Bite" ],
+      "BST": [ "Evisceration", "Viper Bite" ],
       "COR": [ "Evisceration" ],
       "DNC": [ "Dancing Edge" ],
       "DRG": [ "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "SO_Camlann's Torment" ],
       "GEO": [ "Mode_2MeleeDW", "Hexa Strike" ],
       "PLD": [ "Chant Du Cygne", "Impulse Drive" ],
-      "RNG": [ "Decimation", "Evisceration" ],
+      "RNG": [ "Decimation" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_3Melee" ],
       "WAR": [ "Ukko's Fury" ]
     } ]
@@ -2455,8 +2575,8 @@
       "DNC": [ "Climactic", "CritDmg" ]
     } ]
   }, {
-    "name": "Maxixi Tiara +2",
-    "priority": 54,
+    "name": "Maxixi Tiara +3",
+    "priority": 64,
     "set_list": [ {
       "DNC": [ "Samba", "Step" ]
     } ]
@@ -2509,14 +2629,9 @@
     "name": "Gleti's Mask",
     "priority": 68,
     "set_list": [ {
-      "BST": [ "PetMagicalAcc" ],
-      "DRG": [ "IdleRegen", "Impulse Drive", "Stardiver", "Camlann's Torment" ]
-    } ]
-  }, {
-    "name": "Hjarrandi Helm",
-    "priority": 114,
-    "set_list": [ {
-      "DRG": [ "Mode_1Hybrid" ]
+      "BST": [ "PetMagicalAcc", "Decimation" ],
+      "DRG": [ "IdleRegen", "Stardiver" ],
+      "THF": [ "Raging Fists" ]
     } ]
   }, {
     "augments": [ "Pet: Attack+20 Pet: Rng.Atk.+20", "Pet: \"Dbl. Atk.\"+4", "Enh. Mag. eff. dur. +10", "none", "none" ],
@@ -2546,18 +2661,20 @@
     "priority": 91,
     "set_list": [ {
       "BLM": [ "Mode_1DT", "Flash Nova", "Spiral Hell", "Slice", "Spirit Taker", "Retribution", "IdleRegen" ],
-      "BLU": [ "Savage Blade" ],
-      "BST": [ "Calamity" ],
-      "DRG": [ "Mode_2MagEva" ],
+      "BLU": [ "Savage Blade", "Black Halo" ],
+      "BST": [ "PetMagicalTP", "PetMagicalTPAcc", "PetPhysicalTPAcc", "Calamity" ],
+      "DNC": [ "XeviosoEvisceration" ],
+      "DRG": [ "Mode_2MagEva", "Camlann's Torment", "Impulse Drive", "Raiden Thrust", "Mode_1Hybrid" ],
       "GEO": [ "Mode_3CombatIdleDT", "Mode_1Melee" ],
       "MNK": [ "Howling Fist", "Rock Crusher", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
       "NIN": [ "Blade: Ten", "Blade: Chi", "NinjutsuMB", "Aeolian Edge" ],
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Torcleaver" ],
       "PUP": [ "Mode_4Gigetank" ],
-      "RNG": [ "Savage Blade", "Blast Shot" ],
+      "RNG": [ "Savage Blade", "Blast Shot", "Viper Bite" ],
       "RUN": [ "Mode_2TankPhy", "Mode_3TankMag", "Resolution" ],
       "SCH": [ "Mode_1DT", "IdleRegen", "Flash Nova", "MagicBurstHelix", "Black Halo" ],
       "SMN": [ "Mode_2Melee", "DT" ],
+      "THF": [ "Rudra's Storm" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
     } ]
   }, {
@@ -2616,8 +2733,9 @@
     "name": "Adhemar Bonnet +1",
     "priority": 41,
     "set_list": [ {
-      "DNC": [ "Evisceration", "Extenterator", "XeviosoEvisceration" ],
-      "RNG": [ "Jishnu's Radiance", "Heavy Shot" ]
+      "BLU": [ "True Strike" ],
+      "DNC": [ "Evisceration", "Extenterator" ],
+      "RNG": [ "Jishnu's Radiance", "Heavy Shot", "Evisceration" ]
     } ]
   }, {
     "name": "Anchor. Crown +1",
@@ -2650,7 +2768,6 @@
     "name": "Dampening Tam",
     "priority": 36,
     "set_list": [ {
-      "RNG": [ "Mode_2MeleeHybrid" ],
       "RUN": [ "Mode_1Hybrid" ]
     } ]
   }, {
@@ -2671,6 +2788,38 @@
     "set_list": [ {
       "BONE": [ "Bonecrafting" ]
     } ]
+  }, {
+    "name": "Hervor Galea",
+    "priority": 54,
+    "set_list": [ {
+      "DomainHeavy": [ "DI" ]
+    } ]
+  }, {
+    "augments": [ "none", "none", "Enhances \"Deep Breathing\" effect", "none" ],
+    "name": "Ptero. Armet +1",
+    "priority": 60,
+    "set_list": [ {
+      "DRG": [ "Healing Breath" ]
+    } ]
+  }, {
+    "name": "Hjarrandi Helm",
+    "priority": 114,
+    "set_list": [ {
+      "DRG": [ "Mode_3HassoHybrid" ]
+    } ]
+  }, {
+    "name": "Pill. Bonnet +3",
+    "priority": 64,
+    "set_list": [ {
+      "THF": [ "SneakAttack", "TrickAttack" ]
+    } ]
+  }, {
+    "augments": [ "none", "none", "Enhances \"Trance\" effect", "none" ],
+    "name": "Horos Tiara +3",
+    "priority": 86,
+    "set_list": [ {
+      "DNC": [ "Waltz" ]
+    } ]
   } ],
   "legs": [ {
     "name": "Nyame Flanchard",
@@ -2682,10 +2831,10 @@
       "DNC": [ "MagicAtk", "Rudra's Storm" ],
       "DRK": [ "DarkMagicAtk", "MagicAcc", "HP", "IdleRegen", "MagicAtk" ],
       "GEO": [ "Hexa Strike", "Black Halo", "Mode_3CombatIdleDT", "Mode_4MeleeDWDT", "Flash Nova" ],
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge" ],
       "RUN": [ "Lunge", "Fastcast", "Savage Blade", "Sanguine Blade", "IdleRegen" ],
       "SMN": [ "MACC" ],
-      "THF": [ "MagicAtk", "Savage Blade", "Rudra's Storm" ],
+      "THF": [ "MagicAtk", "Savage Blade" ],
       "WHM": [ "Mode_1MeleeDW", "Flash Nova", "MagicBurst" ]
     } ]
   }, {
@@ -2710,8 +2859,8 @@
     } ]
   }, {
     "augments": [ "none", "none", "Enhances \"Inspire\" effect", "none" ],
-    "name": "Futhark Trousers +1",
-    "priority": 87,
+    "name": "Futhark Trousers +2",
+    "priority": 97,
     "set_list": [ {
       "RUN": [ "Valiance", "FastcastEnhancing" ]
     } ]
@@ -2742,7 +2891,7 @@
     "priority": 79,
     "set_list": [ {
       "BLU": [ "IdleRegen", "Chant Du Cygne", "Requiescat" ],
-      "BST": [ "Decimation", "IdleRegen", "PetMagicalTP" ],
+      "BST": [ "Decimation", "IdleRegen" ],
       "DNC": [ "Evisceration", "IdleRegen", "Pyrrhic Kleos" ],
       "THF": [ "IdleRegen", "Evisceration", "Dancing Edge", "Exenterator" ]
     } ]
@@ -2756,14 +2905,14 @@
     "name": "Malignance Tights",
     "priority": 45,
     "set_list": [ {
-      "BLU": [ "Mode_2DT", "Mode_3HighAcc" ],
+      "BLU": [ "Mode_2DT", "Mode_3HighAcc", "Mode_1Hybrid" ],
       "COR": [ "Midshot", "MidshotDT", "AM3DT", "IdleRegen", "Mode_1HybridDW" ],
       "DNC": [ "Mode_1Hybrid", "Mode_2Xevioso" ],
       "MNK": [ "IdleRegen", "Mode_2DT" ],
       "NIN": [ "IdleRegen" ],
       "PUP": [ "IdleRegen" ],
-      "RNG": [ "Midshot", "MidshotDT", "Mode_1RangedIdleDT", "IdleRegen", "AM3DT", "Dulling Arrow" ],
-      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP" ]
+      "RNG": [ "Midshot", "MidshotDT", "Mode_1RangedIdleDT", "IdleRegen", "AM3DT", "Dulling Arrow", "Mode_3MeleeMalignance" ],
+      "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc", "Midcast_Absorb-TP", "MagicAcc" ]
     } ]
   }, {
     "augments": [ "none", "none", "Enhances \"Eagle Eye Shot\" effect", "none" ],
@@ -2812,8 +2961,8 @@
     } ]
   }, {
     "augments": [ "none", "none", "Enhances \"Saber Dance\" effect", "none" ],
-    "name": "Horos Tights +2",
-    "priority": 57,
+    "name": "Horos Tights +3",
+    "priority": 67,
     "set_list": [ {
       "DNC": [ "Jig", "Precast_Saber Dance" ]
     } ]
@@ -2822,11 +2971,9 @@
     "name": "Samnuha Tights",
     "priority": 41,
     "set_list": [ {
-      "BLU": [ "Mode_1Hybrid" ],
       "COR": [ "Evisceration" ],
       "DNC": [ "Mode1_Hybrid" ],
       "NIN": [ "Mode_1Hybrid" ],
-      "RNG": [ "Mode_2MeleeHybrid", "Decimation" ],
       "RUN": [ "Dimidiation", "Mode_1Hybrid" ]
     } ]
   }, {
@@ -2877,7 +3024,8 @@
     "set_list": [ {
       "BST": [ "Ready", "PetMagicalAcc" ],
       "DNC": [ "Dancing Edge", "Extenterator" ],
-      "DRG": [ "IdleRegen", "Impulse Drive", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment", "Camlann's Torment" ]
+      "DRG": [ "IdleRegen", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment" ],
+      "THF": [ "Raging Fists" ]
     } ]
   }, {
     "augments": [ "Pet: Attack+19 Pet: Rng.Atk.+19", "Pet: \"Dbl. Atk.\"+4", "Enh. Mag. eff. dur. +8", "none", "none" ],
@@ -2907,19 +3055,20 @@
     "priority": 114,
     "set_list": [ {
       "BLM": [ "Mode_2Melee", "MagicAccuracy", "CometBurst", "Shadow of Death", "Flash Nova", "Spiral Hell", "Slice", "Vorpal Scythe", "Spirit Taker", "Retribution", "Mode_3Death" ],
-      "BLU": [ "Savage Blade", "Black Halo" ],
-      "BST": [ "Calamity" ],
+      "BLU": [ "Savage Blade", "Black Halo", "True Strike" ],
+      "BST": [ "PetMagicalTP", "PetMagicalTPAcc", "PetPhysicalTPAcc", "Calamity" ],
       "DNC": [ "XeviosoEvisceration" ],
-      "DRG": [ "Mode_2MagEva" ],
+      "DRG": [ "Mode_2MagEva", "Camlann's Torment", "Impulse Drive", "Raiden Thrust", "Cataclysm" ],
       "GEO": [ "Elemental", "Mode_1Melee" ],
       "MNK": [ "Howling Fist", "Sunburst", "Rock Crusher", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
       "NIN": [ "Blade: Ten", "Blade: Chi", "Blade: Ei", "NinjutsuMB", "Aeolian Edge", "Fastcast", "Savage Blade" ],
       "PLD": [ "Savage Blade", "IdleRegen", "Seraph Blade", "Sanguine Blade", "Midcast_Holy", "Torcleaver" ],
       "PUP": [ "Mode_4Gigetank" ],
-      "RNG": [ "Savage Blade", "Blast Shot" ],
+      "RNG": [ "Savage Blade", "Blast Shot", "Trueflight" ],
       "RUN": [ "Mode_2TankPhy", "Midcast_DT", "Mode_3TankMag" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_1DT", "Flash Nova", "MagicBurst", "MagicBurstHelix", "Black Halo", "Mode_3Melee", "Myrkr" ],
       "SMN": [ "DT" ],
+      "THF": [ "Rudra's Storm" ],
       "WAR": [ "Steel Cyclone", "Armor Break" ]
     } ]
   }, {
@@ -2927,7 +3076,7 @@
     "name": "Mpaca's Hose",
     "priority": 72,
     "set_list": [ {
-      "MNK": [ "Victory Smite", "Shijin Spiral", "Asuran Fists", "Raging Fists", "Mode_1Hybrid" ],
+      "MNK": [ "Victory Smite", "Shijin Spiral", "Asuran Fists", "Raging Fists" ],
       "NIN": [ "Blade: Shun", "Blade: Hi", "Blade: Jin", "Mode_2Mpaca" ],
       "SAM": [ "Mode_1Mpaca", "Impulse Drive", "Stardiver", "Mode_2Hybrid" ]
     } ]
@@ -2944,13 +3093,8 @@
     "priority": 38,
     "set_list": [ {
       "BLU": [ "Phalanx" ],
-      "RUN": [ "EnhancingPhalanx" ]
-    } ]
-  }, {
-    "name": "Pill. Culottes +2",
-    "priority": 70,
-    "set_list": [ {
-      "THF": [ "SATA" ]
+      "RUN": [ "EnhancingPhalanx" ],
+      "THF": [ "Midcast_Phalanx" ]
     } ]
   }, {
     "name": "Maxixi Tights +2",
@@ -2964,7 +3108,6 @@
     "priority": 47,
     "set_list": [ {
       "BST": [ "Evisceration", "Viper Bite" ],
-      "RNG": [ "Evisceration" ],
       "WAR": [ "Ukko's Fury" ]
     } ]
   }, {
@@ -2977,7 +3120,7 @@
     "name": "Sulev. Cuisses +2",
     "priority": 50,
     "set_list": [ {
-      "DRG": [ "Mode_1Hybrid" ]
+      "DRG": [ "Mode_3HassoHybrid", "Mode_1Hybrid" ]
     } ]
   }, {
     "augments": [ "none", "none", "Enhances \"Hundred Fists\" effect", "none" ],
@@ -3011,7 +3154,7 @@
     "name": "Jokushu Haidate",
     "priority": 50,
     "set_list": [ {
-      "RNG": [ "Jishnu's Radiance" ]
+      "RNG": [ "Jishnu's Radiance", "Evisceration", "Viper Bite" ]
     } ]
   }, {
     "name": "Meg. Chausses +2",
@@ -3046,6 +3189,32 @@
     "priority": 64,
     "set_list": [ {
       "BLM": [ "Drain" ]
+    } ]
+  }, {
+    "name": "Hervor Brayettes",
+    "priority": 66,
+    "set_list": [ {
+      "DomainHeavy": [ "DI" ]
+    } ]
+  }, {
+    "name": "Vishap Brais +1",
+    "priority": 50,
+    "set_list": [ {
+      "DRG": [ "Precast_Ancient Circle" ]
+    } ]
+  }, {
+    "augments": [ "Path: A" ],
+    "name": "Tatena. Haidate +1",
+    "priority": 50,
+    "set_list": [ {
+      "MNK": [ "Mode_1Hybrid" ],
+      "RNG": [ "Decimation", "Mode_2MeleeHybrid" ]
+    } ]
+  }, {
+    "name": "Pill. Culottes +2",
+    "priority": 70,
+    "set_list": [ {
+      "THF": [ "SneakAttack" ]
     } ]
   } ],
   "main": [ {
@@ -3104,7 +3273,8 @@
     "name": "Dolichenus",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Doli" ]
+      "BST": [ "Doli" ],
+      "RNG": [ "Doli" ]
     } ]
   }, {
     "name": "Sakpata's Fists",
@@ -3237,15 +3407,16 @@
       "BST": [ "Primal Rend" ],
       "COR": [ "Wildfire", "Leaden Salute" ],
       "DNC": [ "MagicAtk" ],
+      "DRG": [ "IdleRegen", "Raiden Thrust", "Cataclysm", "Mode_3HassoHybrid" ],
       "DRK": [ "DarkMagicAtk", "HP", "IdleRegen", "MagicAtk" ],
       "GEO": [ "IdleRefresh", "MACC" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
       "NIN": [ "IdleRegen", "Blade: Chi", "Blade: Ei", "NinjutsuMB", "Aeolian Edge" ],
       "PLD": [ "IdleRegen", "Seraph Blade", "Sanguine Blade", "Midcast_Holy" ],
-      "RNG": [ "IdleRegen", "Trueflight", "Flaming Arrow", "Aeolian Edge" ],
+      "RNG": [ "IdleRegen", "Flaming Arrow", "Aeolian Edge" ],
       "RUN": [ "Lunge", "Sanguine Blade" ],
       "SCH": [ "Flash Nova", "Myrkr" ],
-      "THF": [ "MagicAtk", "IdleRegen", "Midcast_Absorb-TP" ],
+      "THF": [ "MagicAtk", "IdleRegen", "Midcast_Absorb-TP", "MagicAcc" ],
       "WAR": [ "Armor Break" ],
       "WHM": [ "Flash Nova" ]
     } ]
@@ -3264,10 +3435,10 @@
       "NIN": [ "Blade: Shun", "Blade: Jin" ],
       "PLD": [ "Chant Du Cygne", "Swift Blade", "Resolution" ],
       "PUP": [ "Raging Fists", "Victory Smite" ],
-      "RNG": [ "Jishnu's Radiance", "Decimation" ],
+      "RNG": [ "Jishnu's Radiance", "Evisceration", "Decimation" ],
       "RUN": [ "Resolution", "Requiescat" ],
       "SAM": [ "Stardiver" ],
-      "THF": [ "Evisceration", "Dancing Edge", "Exenterator" ],
+      "THF": [ "Evisceration", "Dancing Edge", "Exenterator", "Raging Fists" ],
       "WAR": [ "Upheaval" ]
     } ]
   }, {
@@ -3275,15 +3446,15 @@
     "priority": 0,
     "set_list": [ {
       "BLM": [ "Spiral Hell", "Slice", "Vorpal Scythe", "Retribution" ],
-      "BLU": [ "Black Halo", "Savage Blade" ],
-      "BST": [ "Calamity", "Viper Bite" ],
+      "BLU": [ "Savage Blade", "Black Halo", "True Strike" ],
+      "BST": [ "Viper Bite", "Calamity" ],
       "DNC": [ "Rudra's Storm" ],
       "DRG": [ "SO_Camlann's Torment", "Camlann's Torment" ],
       "MNK": [ "Howling Fist" ],
       "NIN": [ "Savage Blade", "Evisceration", "Blade: Ten", "Blade: Hi" ],
       "PLD": [ "Savage Blade", "Torcleaver", "Impulse Drive" ],
       "PUP": [ "Dragon Kick" ],
-      "RNG": [ "Savage Blade" ],
+      "RNG": [ "Savage Blade", "Viper Bite" ],
       "RUN": [ "Dimidiation" ],
       "SAM": [ "Impulse Drive" ],
       "SCH": [ "Black Halo" ],
@@ -3347,7 +3518,7 @@
       "COR": [ "IdleRegen" ],
       "DNC": [ "Mode_1Hybrid" ],
       "NIN": [ "Mode_1Hybrid", "Mode_2Mpaca" ],
-      "RNG": [ "Mode_2MeleeHybrid" ],
+      "RNG": [ "Mode_3MeleeMalignance", "Mode_2MeleeHybrid" ],
       "SAM": [ "Mode_1Mpaca", "Mode_2Hybrid" ],
       "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith" ]
     } ]
@@ -3365,7 +3536,6 @@
     "set_list": [ {
       "BLM": [ "Mode_1DT" ],
       "BST": [ "Mode_2PetDT" ],
-      "DRG": [ "IdleRegen" ],
       "GEO": [ "Mode_3CombatIdleDT" ],
       "RNG": [ "Mode_1RangedIdleDT" ],
       "RUN": [ "SIR" ],
@@ -3415,8 +3585,8 @@
     "name": "Shulmanu Collar",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "PetPhysicalTP", "Mode_1Hybrid" ],
-      "DRG": [ "Mode_1Hybrid", "Mode_2MagEva" ],
+      "BST": [ "PetPhysicalTP", "Mode_1Hybrid", "PetPhysicalTPAcc" ],
+      "DRG": [ "Mode_2MagEva", "Mode_1Hybrid" ],
       "PUP": [ "Mode_1TP", "Mode_2SSOverdrive", "Mode_3VEOverdrive", "Mode_4Gigetank" ],
       "SMN": [ "PhyBPDmg" ]
     } ]
@@ -3431,7 +3601,7 @@
     "name": "Adad Amulet",
     "priority": 25,
     "set_list": [ {
-      "BST": [ "PetMagicalTP", "PetMagicalAcc" ]
+      "BST": [ "PetMagicalTP", "PetMagicalAcc", "PetMagicalTPAcc" ]
     } ]
   }, {
     "augments": [ "Path: A" ],
@@ -3489,14 +3659,14 @@
     "name": "Scout's Gorget +1",
     "priority": 0,
     "set_list": [ {
-      "RNG": [ "AM3", "Heavy Shot", "AM3DT", "MidshotDT", "Midshot", "Last Stand", "Flurry0", "Flurry1", "Flurry2", "Apex Arrow", "Precast_Eagle Eye Shot", "Evisceration", "Dulling Arrow", "Blast Shot" ]
+      "RNG": [ "AM3", "Heavy Shot", "AM3DT", "MidshotDT", "Midshot", "Last Stand", "Flurry0", "Flurry1", "Flurry2", "Apex Arrow", "Precast_Eagle Eye Shot", "Dulling Arrow", "Blast Shot", "Trueflight" ]
     } ]
   }, {
     "augments": [ "Path: A" ],
     "name": "Mnk. Nodowa +1",
     "priority": 0,
     "set_list": [ {
-      "MNK": [ "Mode_1Hybrid", "Footwork_Swap", "Mode_2DT", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists", "Shijin Spiral" ]
+      "MNK": [ "Footwork_Swap", "Mode_2DT", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists", "Shijin Spiral", "Mode_1Hybrid" ]
     } ]
   }, {
     "name": "Fisher's Torque",
@@ -3567,13 +3737,13 @@
     "set_list": [ {
       "COR": [ "Wildfire", "Leaden Salute", "Last Stand" ],
       "NIN": [ "Blade: Chi", "Blade: Ei", "NinjutsuMB", "Aeolian Edge" ],
-      "RNG": [ "Last Stand", "Apex Arrow", "Trueflight", "Flaming Arrow", "Aeolian Edge", "AM3", "Heavy Shot" ]
+      "RNG": [ "Last Stand", "Apex Arrow", "Flaming Arrow", "Aeolian Edge", "AM3", "Heavy Shot", "Trueflight" ]
     } ]
   }, {
     "name": "Petrov Ring",
     "priority": 0,
     "set_list": [ {
-      "DRG": [ "Mode_1Hybrid", "SO_Drakesbane", "Drakesbane", "Stardiver", "Mode_2MagEva" ],
+      "DRG": [ "SO_Drakesbane", "Drakesbane", "Stardiver" ],
       "NIN": [ "Mode_1Hybrid", "Mode_2Mpaca" ],
       "RUN": [ "Emnity" ],
       "THF": [ "Hybrid", "Mode_1Hybrid" ],
@@ -3599,8 +3769,7 @@
     "priority": 0,
     "set_list": [ {
       "BLM": [ "MagicAccuracy" ],
-      "BLU": [ "Black Halo", "Requiescat" ],
-      "BST": [ "Primal Rend" ],
+      "BLU": [ "Requiescat" ],
       "DRK": [ "MagicAcc", "Entropy" ],
       "GEO": [ "Black Halo", "Flash Nova", "MACC" ],
       "RUN": [ "Lunge", "Sanguine Blade" ],
@@ -3629,10 +3798,9 @@
     "priority": 0,
     "set_list": [ {
       "BLU": [ "Mode_1Hybrid" ],
-      "DNC": [ "Mode_2Xevioso" ],
       "DRK": [ "Mode_4VimTP" ],
       "GEO": [ "Mode_2MeleeDW", "Mode_1Melee" ],
-      "RNG": [ "Mode_2MeleeHybrid" ]
+      "RNG": [ "Mode_3MeleeMalignance" ]
     } ]
   }, {
     "name": "Evoker's Ring",
@@ -3641,7 +3809,7 @@
       "SMN": [ "PrecastBP", "SmnSkill" ]
     } ]
   }, {
-    "bag": "wardrobe2",
+    "bag": "wardrobe3",
     "name": "Varar Ring +1",
     "priority": 0,
     "set_list": [ {
@@ -3653,9 +3821,9 @@
     "set_list": [ {
       "BLM": [ "IdleRegen" ],
       "BLU": [ "Mode_2DT", "IdleRegen" ],
-      "DRG": [ "IdleRegen" ],
+      "DRG": [ "IdleRegen", "Mode_3HassoHybrid" ],
       "GEO": [ "IdleRefresh", "IdleRegen", "Mode_4MeleeDWDT" ],
-      "RNG": [ "MidshotDT", "Mode_1RangedIdleDT", "IdleRegen" ],
+      "RNG": [ "MidshotDT", "Mode_1RangedIdleDT", "IdleRegen", "Mode_2MeleeHybrid" ],
       "RUN": [ "SIR" ],
       "SCH": [ "Mode_1DT", "IdleRegen", "Regen" ],
       "SMN": [ "Mode_1IdleDT", "Mode_2Melee", "DT" ]
@@ -3685,7 +3853,8 @@
       "BLM": [ "Mode_1DT", "Mode_2Melee" ],
       "BST": [ "IdleRegen" ],
       "COR": [ "Mode_1HybridDW", "IdleRegen" ],
-      "DNC": [ "IdleRegen" ],
+      "DNC": [ "IdleRegen", "Mode_2Xevioso" ],
+      "DRG": [ "Mode_2MagEva", "Mode_1Hybrid" ],
       "DRK": [ "IdleRegen", "Mode_3SubtleBlow" ],
       "MNK": [ "IdleRegen" ],
       "NIN": [ "IdleRegen" ],
@@ -3702,6 +3871,7 @@
     "set_list": [ {
       "BLM": [ "CometBurst", "Midcast_Death", "Drain" ],
       "BLU": [ "Sanguine Blade" ],
+      "DRG": [ "Cataclysm" ],
       "DRK": [ "DarkMagicAtk", "DrainAspir", "MagicAtk" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
       "PLD": [ "Sanguine Blade" ]
@@ -3714,20 +3884,20 @@
       "DNC": [ "Mode_1Hybrid", "Evisceration", "MagicAtk", "Pyrrhic Kleos", "Rudra's Storm", "Dancing Edge", "Extenterator", "XeviosoEvisceration" ],
       "NIN": [ "Blade: Shun", "Blade: Ten", "Blade: Hi", "Blade: Jin" ],
       "RNG": [ "Midshot" ],
-      "THF": [ "Rudra's Storm", "Dancing Edge", "Exenterator" ]
+      "THF": [ "Dancing Edge", "Exenterator", "Rudra's Storm", "Raging Fists" ]
     } ]
   }, {
     "augments": [ "Path: A" ],
     "name": "Cacoethic Ring +1",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Chant Du Cygne" ],
+      "BLU": [ "Chant Du Cygne", "Mode_3HighAcc" ],
       "BST": [ "Viper Bite" ],
       "DRK": [ "Mode_2HighAcc" ],
       "NIN": [ "Evisceration" ],
       "PLD": [ "Chant Du Cygne" ],
       "PUP": [ "Raging Fists", "Dragon Kick" ],
-      "RNG": [ "Evisceration", "AM3DT", "Precast_Eagle Eye Shot", "Dulling Arrow", "Jishnu's Radiance" ],
+      "RNG": [ "AM3DT", "Precast_Eagle Eye Shot", "Dulling Arrow", "Jishnu's Radiance", "Viper Bite" ],
       "THF": [ "Evisceration" ],
       "WAR": [ "Armor Break" ]
     } ]
@@ -3735,7 +3905,6 @@
     "name": "Evanescence Ring",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Mode_3HighAcc" ],
       "DRK": [ "DarkSkill" ],
       "RUN": [ "Midcast_DT" ]
     } ]
@@ -3757,14 +3926,14 @@
     "name": "C. Palug Ring",
     "priority": 40,
     "set_list": [ {
-      "BST": [ "PetPhysicalTP", "PetMagicalTP", "PetMagicalAcc", "Mode_2PetDT" ],
+      "BST": [ "PetPhysicalTP", "PetMagicalTP", "PetMagicalAcc", "Mode_2PetDT", "PetMagicalTPAcc", "PetPhysicalTPAcc" ],
       "PUP": [ "Mode_2SSOverdrive", "Mode_3VEOverdrive", "Mode_4Gigetank" ]
     } ]
   }, {
     "name": "Gere Ring",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "Decimation", "Evisceration", "Calamity", "Mode_1Hybrid" ],
+      "BST": [ "Decimation", "Evisceration", "Mode_1Hybrid" ],
       "PUP": [ "Mode_1TP" ]
     } ]
   }, {
@@ -3789,9 +3958,8 @@
     "name": "Niqmaddu Ring",
     "priority": 0,
     "set_list": [ {
-      "DRG": [ "Impulse Drive" ],
       "DRK": [ "Catastrophe", "Mode_1Hybrid" ],
-      "MNK": [ "Mode_1Hybrid", "Victory Smite", "Shijin Spiral", "Asuran Fists", "Raging Fists", "Howling Fist", "Mode_2DT", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists" ],
+      "MNK": [ "Victory Smite", "Shijin Spiral", "Asuran Fists", "Raging Fists", "Howling Fist", "Mode_2DT", "DTHowling Fist", "DTShijin Spiral", "DTVictory Smite", "DTRaging Fists", "Mode_1Hybrid" ],
       "RUN": [ "Dimidiation", "Savage Blade", "Mode_1Hybrid", "Mode_3TankMag" ],
       "SAM": [ "Mode_1Mpaca", "Impulse Drive", "Stardiver", "Mode_2Hybrid" ],
       "WAR": [ "Upheaval", "Ukko's Fury", "Steel Cyclone" ]
@@ -3809,14 +3977,14 @@
     "set_list": [ {
       "COR": [ "Flurry2", "Flurry1", "Flurry0", "Midshot", "MidshotDT", "AM3DT", "AM3" ],
       "SCH": [ "Mode_2MeleeDW", "Mode_3Melee" ],
-      "THF": [ "Midcast_Absorb-TP" ]
+      "THF": [ "Midcast_Absorb-TP", "MagicAcc" ]
     } ]
   }, {
     "name": "Beithir Ring",
     "priority": 0,
     "set_list": [ {
       "BLU": [ "Savage Blade" ],
-      "DRG": [ "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment" ]
+      "DRG": [ "SO_Impulse Drive", "SO_Camlann's Torment" ]
     } ]
   }, {
     "name": "Freke Ring",
@@ -3837,6 +4005,9 @@
     "name": "Beithir Ring",
     "priority": 0,
     "set_list": [ {
+      "BLU": [ "Black Halo", "True Strike" ],
+      "BST": [ "Primal Rend", "Calamity" ],
+      "DRG": [ "Camlann's Torment", "Impulse Drive", "Raiden Thrust" ],
       "PLD": [ "Seraph Blade", "Impulse Drive" ],
       "RNG": [ "Blast Shot" ]
     } ]
@@ -3846,20 +4017,26 @@
     "set_list": [ {
       "BLM": [ "Mode_3Death", "DeathFastcast", "Myrkr" ]
     } ]
+  }, {
+    "name": "Mummu Ring",
+    "priority": 0,
+    "set_list": [ {
+      "RNG": [ "Evisceration" ]
+    } ]
   } ],
   "ring2": [ {
     "name": "Apate Ring",
     "priority": 0,
     "set_list": [ {
       "BLM": [ "Slice", "Vorpal Scythe" ],
-      "BST": [ "Decimation", "Calamity" ],
       "PLD": [ "Impulse Drive" ]
     } ]
   }, {
     "name": "Rufescent Ring",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Black Halo", "Requiescat", "Savage Blade" ],
+      "BLU": [ "Requiescat", "Savage Blade", "Black Halo", "True Strike" ],
+      "BST": [ "Calamity" ],
       "GEO": [ "Hexa Strike", "Black Halo" ],
       "RUN": [ "Savage Blade" ],
       "THF": [ "Savage Blade" ],
@@ -3888,18 +4065,18 @@
       "DNC": [ "IdleRegen" ],
       "DRK": [ "IdleRegen" ],
       "GEO": [ "Healing", "Geomancy", "Mode_3CombatIdleDT" ],
-      "MNK": [ "IdleRegen" ],
+      "MNK": [ "IdleRegen", "Mode_1Hybrid" ],
       "PUP": [ "IdleRegen" ],
       "RNG": [ "AM3DT" ],
       "RUN": [ "Mode_2TankPhy", "Midcast_DT", "Mode_3TankMag" ],
       "WHM": [ "IdleRegen" ]
     } ]
   }, {
-    "bag": "wardrobe3",
+    "bag": "wardrobe4",
     "name": "Varar Ring +1",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "PetPhysicalTP" ],
+      "BST": [ "PetPhysicalTP", "PetPhysicalTPAcc" ],
       "PUP": [ "Mode_2SSOverdrive", "Mode_3VEOverdrive" ],
       "SMN": [ "PrecastBP", "SmnSkill", "MagicBPDmg", "PhyBPDmg", "MeritBPBurst" ]
     } ]
@@ -3907,13 +4084,12 @@
     "name": "Chirich Ring",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Mode_1Hybrid", "Mode_3HighAcc", "IdleRegen" ],
+      "BLU": [ "Mode_1Hybrid", "IdleRegen", "Mode_3HighAcc" ],
       "BST": [ "Mode_1Hybrid" ],
-      "DNC": [ "Mode_2Xevioso" ],
       "DRG": [ "IdleRegen" ],
       "DRK": [ "Mode_1Hybrid", "Mode_4VimTP" ],
       "GEO": [ "IdleRefresh", "IdleRegen", "Mode_2MeleeDW", "Mode_1Melee" ],
-      "RNG": [ "Mode_1RangedIdleDT", "IdleRegen", "Mode_2MeleeHybrid" ],
+      "RNG": [ "Mode_1RangedIdleDT", "IdleRegen", "Mode_3MeleeMalignance", "Mode_2MeleeHybrid" ],
       "SAM": [ "Mode_1Mpaca", "Mode_2Hybrid" ],
       "SCH": [ "Mode_2MeleeDW", "IdleRegen", "Mode_3Melee" ],
       "SMN": [ "Mode_2Melee" ],
@@ -3943,7 +4119,7 @@
     "priority": 0,
     "set_list": [ {
       "COR": [ "Midshot", "MidshotDT" ],
-      "RNG": [ "Precast_Eagle Eye Shot", "Blast Shot" ],
+      "RNG": [ "Precast_Eagle Eye Shot", "Blast Shot", "Sniper Shot" ],
       "THF": [ "MagicAtk" ]
     } ]
   }, {
@@ -3951,6 +4127,7 @@
     "priority": 0,
     "set_list": [ {
       "BLM": [ "Mode_2Melee" ],
+      "DNC": [ "Mode_2Xevioso" ],
       "THF": [ "Hybrid", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc" ]
     } ]
   }, {
@@ -3958,11 +4135,11 @@
     "priority": 60,
     "set_list": [ {
       "BLU": [ "Chant Du Cygne" ],
-      "BST": [ "Primal Rend", "Evisceration", "Viper Bite" ],
+      "BST": [ "Evisceration", "Viper Bite" ],
       "COR": [ "Last Stand", "Mode_1HybridDW" ],
       "MNK": [ "Shijin Spiral", "DTShijin Spiral", "DTVictory Smite" ],
       "NIN": [ "Evisceration" ],
-      "RNG": [ "Evisceration" ],
+      "RNG": [ "Evisceration", "Viper Bite" ],
       "RUN": [ "Dimidiation" ],
       "THF": [ "Evisceration" ]
     } ]
@@ -3978,8 +4155,10 @@
     "name": "Petrov Ring",
     "priority": 0,
     "set_list": [ {
+      "BST": [ "Decimation" ],
       "DNC": [ "Precast_Animated Flourish" ],
       "PLD": [ "Mode_1Hybrid", "Chant Du Cygne" ],
+      "RNG": [ "Decimation" ],
       "THF": [ "Midcast_Stun" ]
     } ]
   }, {
@@ -3989,11 +4168,13 @@
     "set_list": [ {
       "BLM": [ "Flash Nova", "Spiral Hell", "Spirit Taker", "Retribution" ],
       "BLU": [ "MagicAtk", "MagicAcc", "Sanguine Blade" ],
+      "DRG": [ "Raiden Thrust", "Cataclysm" ],
       "DRK": [ "DarkMagicAtk", "MagicAtk" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
       "PLD": [ "Seraph Blade", "Sanguine Blade", "Swift Blade" ],
       "RUN": [ "Requiescat" ],
       "SCH": [ "Flash Nova", "Black Halo" ],
+      "THF": [ "MagicAcc" ],
       "WHM": [ "Flash Nova" ]
     } ]
   }, {
@@ -4004,7 +4185,7 @@
       "BST": [ "PetMagicalTP", "PetMagicalAcc" ],
       "DNC": [ "Evisceration", "MagicAtk", "Dancing Edge", "Extenterator", "XeviosoEvisceration" ],
       "RNG": [ "Last Stand", "Apex Arrow", "Heavy Shot" ],
-      "THF": [ "Rudra's Storm", "Dancing Edge", "Exenterator" ]
+      "THF": [ "Dancing Edge", "Exenterator" ]
     } ]
   }, {
     "name": "Evanescence Ring",
@@ -4017,9 +4198,10 @@
     "priority": 0,
     "set_list": [ {
       "DNC": [ "Pyrrhic Kleos" ],
-      "MNK": [ "Mode_1Hybrid", "Victory Smite", "Asuran Fists", "Raging Fists", "Howling Fist", "Mode_2DT", "DTRaging Fists" ],
+      "MNK": [ "Victory Smite", "Asuran Fists", "Raging Fists", "Howling Fist", "Mode_2DT", "DTRaging Fists" ],
       "NIN": [ "Mode_1Hybrid", "IdleRegen", "Savage Blade", "Blade: Shun", "Blade: Jin", "Mode_2Mpaca" ],
-      "PUP": [ "Raging Fists", "Victory Smite", "Dragon Kick" ]
+      "PUP": [ "Raging Fists", "Victory Smite", "Dragon Kick" ],
+      "THF": [ "Raging Fists" ]
     } ]
   }, {
     "name": "Archon Ring",
@@ -4044,7 +4226,7 @@
     "name": "Niqmaddu Ring",
     "priority": 0,
     "set_list": [ {
-      "DRG": [ "Mode_1Hybrid", "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment", "Camlann's Torment", "Mode_2MagEva" ],
+      "DRG": [ "SO_Impulse Drive", "SO_Drakesbane", "Drakesbane", "Stardiver", "SO_Camlann's Torment", "Mode_2MagEva", "Camlann's Torment", "Impulse Drive", "Mode_1Hybrid" ],
       "DRK": [ "Mode_3SubtleBlow", "Entropy", "Insurgency", "Mode_2HighAcc" ],
       "PUP": [ "Mode_1TP", "Mode_4Gigetank" ],
       "RUN": [ "Resolution" ],
@@ -4067,10 +4249,9 @@
     "priority": 0,
     "set_list": [ {
       "DNC": [ "Rudra's Storm" ],
-      "DRG": [ "Impulse Drive" ],
       "DRK": [ "Catastrophe" ],
       "NIN": [ "Blade: Ten", "Blade: Hi" ],
-      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Savage Blade", "Decimation" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Savage Blade" ],
       "SAM": [ "Impulse Drive", "Stardiver" ]
     } ]
   }, {
@@ -4090,6 +4271,7 @@
     "name": "Arvina Ringlet +1",
     "priority": 0,
     "set_list": [ {
+      "BST": [ "Primal Rend" ],
       "COR": [ "Wildfire" ],
       "NIN": [ "Blade: Chi", "Aeolian Edge" ],
       "PLD": [ "Midcast_Holy" ],
@@ -4119,7 +4301,7 @@
       "BST": [ "Movement" ],
       "COR": [ "Movement" ],
       "DNC": [ "Movement" ],
-      "DRG": [ "Movement" ],
+      "DRG": [ "Movement", "Mode_3HassoHybrid" ],
       "DRK": [ "Movement" ],
       "GEO": [ "Movement" ],
       "MNK": [ "Movement" ],
@@ -4148,6 +4330,7 @@
     "set_list": [ {
       "MNK": [ "DTHowling Fist" ],
       "PLD": [ "Savage Blade", "Torcleaver", "Resolution" ],
+      "THF": [ "Rudra's Storm" ],
       "WAR": [ "Upheaval", "Ukko's Fury", "Steel Cyclone" ]
     } ]
   }, {
@@ -4238,10 +4421,10 @@
       "NIN": [ "Blade: Shun", "Blade: Jin" ],
       "PLD": [ "Chant Du Cygne", "Swift Blade", "Resolution" ],
       "PUP": [ "Raging Fists", "Victory Smite" ],
-      "RNG": [ "Jishnu's Radiance", "Decimation", "Evisceration" ],
+      "RNG": [ "Jishnu's Radiance", "Evisceration", "Decimation" ],
       "RUN": [ "Resolution", "Requiescat" ],
       "SAM": [ "Stardiver" ],
-      "THF": [ "Evisceration", "Dancing Edge", "Exenterator" ]
+      "THF": [ "Evisceration", "Dancing Edge", "Exenterator", "Raging Fists" ]
     } ]
   }, {
     "name": "Tellen Belt",
@@ -4282,16 +4465,17 @@
       "BST": [ "Primal Rend" ],
       "COR": [ "Wildfire", "Leaden Salute", "IdleRegen" ],
       "DNC": [ "MagicAtk" ],
+      "DRG": [ "Raiden Thrust", "Cataclysm" ],
       "DRK": [ "DarkMagicAtk", "DrainAspir", "MagicAcc", "HP", "MagicAtk" ],
       "GEO": [ "IdleRegen" ],
       "MNK": [ "Sunburst", "Rock Crusher" ],
       "NIN": [ "Blade: Chi", "Blade: Ei", "NinjutsuMB", "Aeolian Edge" ],
       "PLD": [ "Seraph Blade", "Sanguine Blade", "Midcast_Holy" ],
-      "RNG": [ "Trueflight", "Flaming Arrow", "Aeolian Edge", "Dulling Arrow" ],
+      "RNG": [ "Flaming Arrow", "Aeolian Edge", "Dulling Arrow", "Trueflight" ],
       "RUN": [ "Lunge", "Fastcast", "Sanguine Blade" ],
       "SCH": [ "Mode_1DT", "Myrkr" ],
       "SMN": [ "MACC" ],
-      "THF": [ "MagicAtk", "Midcast_Absorb-TP" ],
+      "THF": [ "MagicAtk", "Midcast_Absorb-TP", "MagicAcc" ],
       "WAR": [ "Armor Break" ]
     } ]
   }, {
@@ -4324,7 +4508,7 @@
     "priority": 0,
     "set_list": [ {
       "BST": [ "IdleRegen", "Mode_2PetDT" ],
-      "DRG": [ "IdleRegen" ],
+      "DRG": [ "IdleRegen", "Mode_3HassoHybrid" ],
       "GEO": [ "Healing", "IdleRefresh", "Geomancy", "Mode_3CombatIdleDT" ],
       "PUP": [ "IdleRegen", "Mode_4Gigetank" ]
     } ]
@@ -4360,15 +4544,15 @@
     "name": "Sailfi Belt +1",
     "priority": 0,
     "set_list": [ {
-      "BLU": [ "Black Halo", "Mode_1Hybrid", "Mode_2DT", "Mode_3HighAcc", "Savage Blade" ],
-      "BST": [ "Calamity", "Mode_1Hybrid" ],
+      "BLU": [ "Mode_1Hybrid", "Mode_2DT", "Savage Blade", "Mode_3HighAcc", "Black Halo", "True Strike" ],
+      "BST": [ "Mode_1Hybrid", "Calamity" ],
       "COR": [ "Mode_1HybridDW" ],
       "DNC": [ "Mode_1Hybrid", "Mode_2Xevioso" ],
-      "DRG": [ "Mode_1Hybrid", "Impulse Drive", "SO_Impulse Drive", "SO_Camlann's Torment", "Camlann's Torment", "Mode_2MagEva" ],
+      "DRG": [ "SO_Impulse Drive", "SO_Camlann's Torment", "Mode_2MagEva", "Camlann's Torment", "Impulse Drive", "Mode_1Hybrid" ],
       "DRK": [ "Catastrophe", "Mode_1Hybrid", "Mode_2HighAcc", "Mode_3SubtleBlow", "Mode_4VimTP" ],
       "NIN": [ "Mode_1Hybrid", "Mode_2Mpaca" ],
       "PLD": [ "Mode_1Hybrid", "Savage Blade", "IdleRegen", "Torcleaver", "Impulse Drive" ],
-      "RNG": [ "Mode_2MeleeHybrid", "Savage Blade" ],
+      "RNG": [ "Savage Blade", "Mode_3MeleeMalignance", "Mode_2MeleeHybrid" ],
       "RUN": [ "Savage Blade", "Mode_1Hybrid" ],
       "SAM": [ "Mode_1Mpaca", "Impulse Drive", "Mode_2Hybrid" ],
       "THF": [ "Hybrid", "Savage Blade", "Mode_1Hybrid", "Mode_2CaitSith", "Mode_3HighAcc" ],
@@ -4378,7 +4562,7 @@
     "name": "Incarnation Sash",
     "priority": 0,
     "set_list": [ {
-      "BST": [ "PetPhysicalTP", "PetMagicalTP", "PetMagicalAcc" ],
+      "BST": [ "PetPhysicalTP", "PetMagicalTP", "PetMagicalAcc", "PetMagicalTPAcc", "PetPhysicalTPAcc" ],
       "SMN": [ "PhyBPDmg", "MeritBPBurst" ]
     } ]
   }, {
@@ -4456,7 +4640,7 @@
     "name": "Moonbow Belt",
     "priority": 0,
     "set_list": [ {
-      "MNK": [ "Mode_1Hybrid", "Raging Fists", "Asuran Fists", "Howling Fist", "DTHowling Fist", "Victory Smite" ],
+      "MNK": [ "Raging Fists", "Asuran Fists", "Howling Fist", "DTHowling Fist", "Victory Smite", "Mode_1Hybrid" ],
       "PUP": [ "Mode_1TP" ]
     } ]
   }, {
@@ -4478,6 +4662,7 @@
     "priority": 0,
     "set_list": [ {
       "DNC": [ "Rudra's Storm" ],
+      "RNG": [ "Viper Bite" ],
       "THF": [ "Rudra's Storm" ]
     } ]
   }, {

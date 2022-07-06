@@ -42,7 +42,8 @@ pets = {
 	["FatsoFargann"] = "Leech",
 }
 
-pet_info = [[${pet_name|none}
+pet_info = [[Pet Acc Mode: ${pet_acc_mode|Off}
+${pet_name|none}
 ${info|}
 ]]
 
@@ -88,14 +89,15 @@ function setup_text_window()
 end
 
 function custom_get_sets()
-	cancel_haste = 1
+	cancel_haste = 0
 	auto_pet = false
+	pet_acc_mode = false
 	ws = {}
 	ws["Raging Axe"] = { set = sets["Decimation"], tp_bonus = true }
 	ws["Decimation"] = { set = sets["Decimation"], tp_bonus = false }
 	ws["Ruinator"] = { set = sets["Decimation"], tp_bonus = false }
-	ws["Calamity"] = { set = sets["Decimation"], tp_bonus = true }
-	ws["Mistral Axe"] = { set = sets["Decimation"], tp_bonus = true }
+	ws["Calamity"] = { set = sets["Calamity"], tp_bonus = true }
+	ws["Mistral Axe"] = { set = sets["Calamity"], tp_bonus = true }
 	ws["Primal Rend"] = { set = sets["Primal Rend"], tp_bonus = true }
 	ws["Cloudsplitter"] = { set = sets["Primal Rend"], tp_bonus = true }
 	
@@ -103,7 +105,7 @@ function custom_get_sets()
 	ws["Viper Bite"] = { set = sets["Viper Bite"], tp_bonus = false }
 	ws["Aeolian Edge"] = { set = sets["Primal Rend"], tp_bonus = true }
 	
-	ws["Savage Blade"] = { set = sets["Viper Bite"], tp_bonus = false }
+	ws["Savage Blade"] = { set = sets["Calamity"], tp_bonus = true }
 	
 	setup_text_window()
 	if pet.isvalid then update_pet_info(pet.name) end
@@ -122,6 +124,7 @@ function pet_change(pet,gain)
 end
 
 function update_pet_info(name)
+	pet_text_hub.pet_acc_mode = pet_acc_mode and "On" or "Off"
 	pet_text_hub.pet_name = name
 	if pets[name] then
 		local infoString = ""
@@ -174,7 +177,11 @@ function pet_midcast(spell)
 	if pet.isvalid and ready[pets[pet.name]] then
 		for k,v in pairs(ready[pets[pet.name]]) do
 			if v.name == spell.name then
-				equip(sets[v.set])
+				if pet_acc_mode then
+					equip(sets[v.set .. "Acc"])
+				else
+					equip(sets[v.set])
+				end
 				return true
 			end
 		end
@@ -201,6 +208,13 @@ function custom_command(args)
 	elseif args[1] == "autopet" then
 		auto_pet = not auto_pet
 		add_to_chat(122, "AutoPet: " .. tostring(auto_pet))
+	elseif args[1] == "petacc" then
+		pet_acc_mode = not pet_acc_mode
+		add_to_chat(122, "Pet Acc Mode: " .. tostring(pet_acc_mode))
+		if pet.isvalid then update_pet_info(pet.name)
+		else update_pet_info("none")
+		end
+		
 	end
 end
 

@@ -90,28 +90,35 @@ function custom_get_sets()
 	ws["Hot Shot"] = { set = sets["Trueflight"], tp_bonus = true }
 	ws["Trueflight"] = { set = sets["Trueflight"], tp_bonus = true }
 	ws["Wildfire"] = { set = sets["Trueflight"], tp_bonus = false }
+	ws["Split Shot"] = { set = sets["Blast Shot"], tp_bonus = false }
 	ws["Slug Shot"] = { set = sets["Blast Shot"], tp_bonus = false }
 	ws["Blast Shot"] = { set = sets["Blast Shot"], tp_bonus = false }
 	ws["Heavy Shot"] = { set = sets["Heavy Shot"], tp_bonus = false }
 	ws["Last Stand"] = { set = sets["Last Stand"], tp_bonus = true }
+	ws["Sniper Shot"] = { set = sets["Sniper Shot"], tp_bonus = false }
 	
 	ws["Evisceration"] = { set = sets["Evisceration"], tp_bonus = true }
-	ws["Viper Bite"] = { set = sets["Evisceration"], tp_bonus = true }
-	ws["Aeolian Edge"] = { set = sets["Aeolian Edge"], tp_bonus = true }
+	ws["Viper Bite"] = { set = sets["Viper Bite"], tp_bonus = false }
+	ws["Aeolian Edge"] = { set = sets["Aeolian Edge"], tp_bonus = true, hauksbok_bullet = true }
 	
-	ws["Burning Blade"] = { set = sets["Aeolian Edge"], tp_bonus = true }
-	ws["Red Lotus Blade"] = { set = sets["Aeolian Edge"], tp_bonus = true }
-	ws["Flat Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
-	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
+	ws["Burning Blade"] = { set = sets["Aeolian Edge"], tp_bonus = true, hauksbok_bullet = true }
+	ws["Red Lotus Blade"] = { set = sets["Aeolian Edge"], tp_bonus = true, hauksbok_bullet = true }
+	ws["Flat Blade"] = { set = sets["Savage Blade"], tp_bonus = true, hauksbok_arrow = true }
+	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true, hauksbok_arrow = true }
 	
-	ws["Ruinator"] = { set = sets["Decimation"], tp_bonus = false }
-	ws["Decimation"] = { set = sets["Decimation"], tp_bonus = false }
+	ws["Smash Axe"] = { set = sets["Savage Blade"], tp_bonus = false, hauksbok_arrow = true }
+	ws["Avalanche Axe"] = { set = sets["Savage Blade"], tp_bonus = true, hauksbok_arrow = true }
+	ws["Raging Axe"] = { set = sets["Decimation"], tp_bonus = true, hauksbok_arrow = true }
+	ws["Ruinator"] = { set = sets["Decimation"], tp_bonus = false, hauksbok_arrow = true }
+	ws["Decimation"] = { set = sets["Decimation"], tp_bonus = false, hauksbok_arrow = true }
 	
+	ws["Blast Arrow"] = { set = sets["Dulling Arrow"], tp_bonus = false }
 	ws["Dulling Arrow"] = { set = sets["Dulling Arrow"], tp_bonus = false }
 	ws["Flaming Arrow"] = { set = sets["Flaming Arrow"], tp_bonus = true }
 	ws["Empyreal Arrow"] = { set = sets["Apex Arrow"], tp_bonus = true }
 	ws["Apex Arrow"] = { set = sets["Apex Arrow"], tp_bonus = false }
 	ws["Jishnu's Radiance"] = { set = sets["Jishnu's Radiance"], tp_bonus = true }
+	ws["Namas Arrow"] = { set = sets["Apex Arrow"], tp_bonus = false }
 	
 	check_buffs()
 	update_rng_info()	
@@ -119,22 +126,13 @@ function custom_get_sets()
 	send_command('@input /macro book 7;wait 1;input /macro set 1')
 end
 
-function pretarget(spell)
-	if player.equipment.ammo == "Hauksbok Arrow" then
-		if spell.action_type == "Ranged Attack" 
-		or spell.name == "Bounty Shot" or spell.name == "Shadowbind"
-		then
-			if player.inventory["Chrono Arrow"] and player.inventory["Chrono Arrow"].count > 0 then
-				equip({ammo = "Chrono Arrow"})
-			else
-				add_to_chat("Get more Arrows or spend your Hauksbok!")
-				cancel_spell()
-			end
-		end
-	end
-end
- 
 function custom_precast(spell)
+	if player.equipment.ammo == "Hauksbok Arrow" then
+		equip({ammo = "Chrono Arrow"})
+	end
+	if player.equipment.ammo == "Hauksbok Bullet" then
+		equip({ammo = "Chrono Bullet"})
+	end
 	if spell.action_type == "Ranged Attack" then
 		equip(get_preshot_set())
 		return true
@@ -161,6 +159,16 @@ function custom_precast(spell)
 				setToUse = set_combine(setToUse, sets["WeatherObi"])
 			end
 			equip(setToUse)
+			if (player.equipment.range == "Accipiter" or player.equipment.range == "Gandiva")
+			and ws[spell.english].hauksbok_arrow
+			then
+				equip({ammo = "Hauksbok Arrow"})
+			end
+			if (player.equipment.range == "Armageddon" or player.equipment.range == "Ataktos")
+			and ws[spell.english].hausbok_bullet
+			then
+				equip({ammo = "Hauksbok Bullet"})
+			end
 		end
 		return true
     end
@@ -188,6 +196,11 @@ end
  
 function custom_aftercast(spell)
 	update_rng_info()
+	if player.equipment.ammo == "Hauksbok Arrow" then
+		equip({ammo = "Chrono Arrow"})
+	elseif player.equipment.ammo == "Hauksbok Bullet" then
+		equip({ammo = "Chrono Bullet"})
+	end
 end
  
 function get_distance_sq(playerpos)
@@ -295,6 +308,7 @@ function check_buffs()
 	local hover_found = false
 	local double_found = false
 	local AM_found = false
+	flurry = 0
 	for k, _buff_id in pairs(playerbuffs) do
 		if buff_ids:contains(_buff_id) then
 			if not hover_found then

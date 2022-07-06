@@ -4,12 +4,15 @@ function custom_get_sets()
 	learn_blu_mode = false
 		
 	ws = {}
-	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
-	ws["Expiacion"] = { set = sets["Savage Blade"], tp_bonus = true }
+	
+	ws["True Strike"] = {set = sets["True Strike"], tp_bonus = false }
 	ws["Judgment"] = { set = sets["Black Halo"], tp_bonus = true }
 	ws["Black Halo"] = { set = sets["Black Halo"], tp_bonus = true }
 	ws["Flash Nova"] = { set = sets["MagicAtk"], tp_bonus = false }
 	ws["Seraph Strike"] = { set = sets["MagicAtk"], tp_bonus = true }
+	
+	ws["Expiacion"] = { set = sets["Savage Blade"], tp_bonus = true }
+	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
 	ws["Chant du Cygne"] = { set = sets["Chant Du Cygne"], tp_bonus = false }
 	ws["Requiescat"] = { set = sets["Requiescat"], tp_bonus = true }
 	ws["Realmrazer"] = { set = sets["Requiescat"], tp_bonus = false }

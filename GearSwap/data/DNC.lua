@@ -4,6 +4,10 @@ require('chat')
 
 dnc_help_text = [[${combo_status}: ${combo_info}
 :${disabled}, ${TP}, ${finishing_moves}, ${climactic_recast}, ${reverse_recast}, ${gp_recast}, ${tr_recast}
+Box: ${box_lv}:${box_duration}
+Feather: ${feather_lv}:${feather_duration}
+Stutter: ${stutter_lv}:${stutter_duration}
+Quick: ${quick_lv}:${quick_duration}
 ]]
 
 current_ws = "Rudra's Storm"
@@ -60,6 +64,22 @@ combo_steps = {
 	trance_combo,
 	reverse_combo,
 	reverse_combo,
+}
+
+target_step_info = {}
+
+abil_status_map = {
+	[202] = 391, -- Box Step
+	[312] = 448, -- Feather Step
+	[203] = 396, -- Stutter Step
+	[201] = 386, -- Quick Step 
+}
+
+message_id_status_map = {
+	[519] = 386,
+	[520] = 391,
+	[521] = 396,
+	[591] = 448,
 }
 
 function update_combo_info()
@@ -148,6 +168,44 @@ function update_combo_info()
 	end
 end
 
+function get_duration_text(time_left)
+	if time_left < 10 then
+		return string.text_color(string.format("%.1f", time_left), 255, 0, 0)
+	else
+		return string.text_color(string.format("%.1f", time_left), 0, 255, 0)
+	end
+end
+
+function update_step_info()
+	if dnc_text_hub == nil then return end
+	dnc_text_hub.box_lv = 0
+	dnc_text_hub.feather_lv = 0
+	dnc_text_hub.stutter_lv = 0
+	dnc_text_hub.quick_lv = 0
+	dnc_text_hub.box_duration = 0
+	dnc_text_hub.feather_duration = 0
+	dnc_text_hub.stutter_duration = 0
+	dnc_text_hub.quick_duration = 0
+	if target_step_info[player.target.id] then
+		local time_now = os.clock()
+		for k,v in pairs(target_step_info[player.target.id]) do
+			if k == 391 then
+				dnc_text_hub.box_duration = get_duration_text(v.end_time - time_now)
+				dnc_text_hub.box_lv = v.lv
+			elseif k == 448 then
+				dnc_text_hub.feather_duration = get_duration_text(v.end_time - time_now)
+				dnc_text_hub.feather_lv = v.lv
+			elseif k == 396 then
+				dnc_text_hub.stutter_duration = get_duration_text(v.end_time - time_now)
+				dnc_text_hub.stutter_lv = v.lv
+			elseif k == 386 then
+				dnc_text_hub.quick_duration = get_duration_text(v.end_time - time_now)
+				dnc_text_hub.quick_lv = v.lv
+			end
+		end
+	end
+end
+
 function custom_get_sets()
 	can_combo = false
 	doing_combo = false
@@ -170,6 +228,7 @@ function custom_get_sets()
 	print_current_ws()
 	setup_text_window()
 	update_combo_info()
+	update_step_info()
 	send_command('@input /macro book 12;wait 1;input /macro set 1')
 end
  
@@ -209,7 +268,7 @@ function custom_precast(spell)
 	elseif spell.english:contains("Step") then
 		equip(sets["Step"])
 		return true
-	elseif spell.english:contains("Healing Waltz") or spell.english == "Divine Waltz" then
+	elseif spell.english:contains("Curing Waltz") or spell.english == "Divine Waltz" then
 		equip(sets["Waltz"])
 		return true
 	elseif spell.english:contains("Jig") then
@@ -247,6 +306,49 @@ function custom_command(args)
 		print_current_ws()
 	elseif args[1] == "combo" then
 		do_combo()
+	elseif args[1] == "applystep" and args[2] then
+		local recasts = windower.ffxi.get_ability_recasts()
+		local presto = true
+		local ja_string = nil
+		if recasts[220] == 0 then 
+			if args[2] == "box" then
+				if target_step_info[player.target.id] and 
+				target_step_info[player.target.id][391] and 
+				target_step_info[player.target.id][391].lv >= 9 then 
+					presto = false 
+				end
+				ja_string = "box step"
+			elseif args[2] == "feather" then
+				if target_step_info[player.target.id] and 
+				target_step_info[player.target.id][448] and 
+				target_step_info[player.target.id][448].lv >= 9  then 
+					presto = false 
+				end
+				ja_string = "feather step"
+			elseif args[2] == "stutter" then
+				if target_step_info[player.target.id] and 
+				target_step_info[player.target.id][396] and 
+				target_step_info[player.target.id][396].lv >= 9  then 
+					presto = false 
+				end
+				ja_string = "stutter step"
+			elseif args[2] == "quick" then
+				if target_step_info[player.target.id] and 
+				target_step_info[player.target.id][386] and 
+				target_step_info[player.target.id][386].lv >= 9  then 
+					presto = false 
+				end
+				ja_string = "quickstep"
+			end
+		end
+		if ja_string ~= nil then
+			local command_string = ""
+			if presto and recasts[236] == 0 then command_string = 'input /ja presto <me>;wait 1;' end
+			command_string = command_string .. 'input /ja "' .. ja_string .. '" <t>'
+			windower.send_command(command_string)
+		else
+			windower.add_to_chat(122, "Step on cooldown")
+		end
 	elseif args[1] == 'tpitemws' then
 		local temp_items = windower.ffxi.get_items(3)
 		local tp_item = nil
@@ -288,4 +390,51 @@ function do_combo()
 	end
 end
 
+function parse_action(act)
+	if act.category == 14 then
+		local abil = act.param
+		if S{201,202,203,312}:contains(abil) then
+			local target = act.targets[1]
+			local status_id = abil_status_map[abil]
+			if status_id then
+				local time_now = os.clock()
+				if target_step_info[target.id] == nil then target_step_info[target.id] = {} end
+				if target_step_info[target.id][status_id] then 
+					target_step_info[target.id][status_id].end_time = target_step_info[target.id][status_id].end_time + 50
+					if target_step_info[target.id][status_id].end_time - time_now > 140 then 
+						target_step_info[target.id][status_id].end_time = time_now + 140 
+					end
+				else 
+					target_step_info[target.id][status_id] = {}
+					target_step_info[target.id][status_id].end_time = time_now + 80 
+				end
+				target_step_info[target.id][status_id].lv = target.actions[1].param
+			end
+		end
+	end
+end
+
+function parse_action_message(actor_id, target_id, actor_index, target_index, message_id, param_1, param_2, param_3)
+	if S{6,20,113,406,605,646}:contains(message_id) then
+		target_step_info[target_id] = nil
+	elseif S{64,204,206,350,531}:contains(message_id) then
+		if target_step_info[target_id] and target_step_info[target_id][param_1] then
+			target_step_info[target_id][param_1] = nil
+		end
+	elseif S{519, 520, 522, 591}:contains(message_id) then
+		local time_now = os.clock()
+		local status_id = message_id_status_map[message_id]
+		if target_step_info[target_id] == nil then target_step_info[target_id] = {} end
+		if target_step_info[target_id][status_id] then 
+			target_step_info[target_id][status_id] = target_step_info[target_id][status_id] + 50
+			if target_step_info[target_id][status_id] - time_now > 140 then target_step_info[target_id][status_id] = time_now + 140 end
+		else 
+			target_step_info[target_id][status_id] = time_now + 80 
+		end
+	end
+end
+
 windower.register_event('time change', update_combo_info)
+windower.register_event('prerender', update_step_info)
+windower.register_event('action', parse_action)
+windower.register_event('action message', parse_action_message)

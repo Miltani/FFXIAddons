@@ -19,7 +19,12 @@ function custom_get_sets()
 	ws["Gust Slash"] = { set = sets["MagicAtk"], tp_bonus = true }
 	
 	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
-	ws["Asuran Fists"] = { set = sets["Dancing Edge"], tp_bonus = false }
+	ws["Circle Blade"] = { set = sets["Savage Blade"], tp_bonus = false }
+	
+	ws["Asuran Fists"] = { set = sets["Raging Fists"], tp_bonus = false }
+	ws["Raging Fists"] = { set = sets["Raging Fists"], tp_bonus = true }
+	
+	sets["Midcast_Sleepga"] = sets["MagicAcc"]
 	
 	print_current_ws()
 	print_throwing()
@@ -113,5 +118,7 @@ function subjob_macro_page(job)
 		send_command('@wait 1;input /macro set 4')
 	elseif job == "DRG" then
 		send_command('@wait 1;input /macro set 5')
+	elseif job == "BLM" then
+		send_command('@wait 1;input /macro set 6')
 	end
 end
