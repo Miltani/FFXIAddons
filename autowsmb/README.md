@@ -1,4 +1,7 @@
 #Auto WS and MB
+1.3.2:
+- Add mbstep setting to status printout
+
 1.3.1:
 - Added skillchain level 4 to setsclvl
 

@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.3.1'
+_addon.version  = '1.3.2'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -635,6 +635,7 @@ local function check_job_and_parse_settings(force)
 		notice("SC Level: " .. tostring(settings[current_main_job]["sc_level"]))
 		notice("Spamming: " .. tostring(spam_mode))
 		notice("Fast Cast: " .. tostring(fast_cast))
+		notice("MB Step: " .. tostring(settings[current_main_job]["mb_step"]))
 		parse_ws_settings()
 		parse_spell_settings()
 		parse_am_ws_settings()
