@@ -1,4 +1,7 @@
 #Auto WS and MB
+1.3.3:
+- Fix amlvl command not accepting multi-word ws names
+
 1.3.2:
 - Add mbstep setting to status printout
 

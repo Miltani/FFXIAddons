@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.3.2'
+_addon.version  = '1.3.3'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -771,7 +771,15 @@ local function handle_command(...)
 			if am_lvl >= 0 and am_lvl <= 3 then
 				if am_lvl > 0 then
 					local old_am_lvl_ws = settings[current_main_job]["am_ws"]
-					if args[3] then settings[current_main_job]["am_ws"] = args[3] end	
+					if args[3] then 
+						local ws_name = ""
+						for i = 3, #args do
+							ws_name = ws_name .. args[i] .. " "
+						end
+						ws_name = string.sub(ws_name, 1, #ws_name - 1)
+						ws_name = string.lower(ws_name)
+						settings[current_main_job]["am_ws"] = ws_name
+					end	
 					if parse_am_ws_settings() then
 						am_level = am_lvl
 						if args[3] then config.save(settings) end
