@@ -45,6 +45,9 @@ Toggles between printing debug messages to console or not. Default is off.
 Make sure your cursor is on the item you want to buy, then enter the command with the number you want to buy. This sends an enter input, then left arrow key input, and finally another enter input to select the item and then select yes.
 
 # Version History
+1.1.3:
+- Added Navigation Helper from mmmbot so that mmbot is faster
+
 1.1.2:
 - Start command now accepts 2nd argument again. Use 0 to go back to automate until you drop.
 
