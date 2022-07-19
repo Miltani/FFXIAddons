@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.3.3'
+_addon.version  = '1.3.4'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -19,6 +19,7 @@ local default_setting = {
 	["spell_priority"] = "",
 	["am_ws"] = "",
 	["mb_step"] = 1,
+	["fast_cast"] = 80,
 }
 
 local aeonic_weapon = {
@@ -79,7 +80,6 @@ local bst_ready_minus_5 = true
 local debug_print = false
 local double_up_time = 0
 local double_up_buffer = 20
-local fast_cast = 80 -- assume cap
 local am_level = 0
 
 local global_delay = 3
@@ -171,6 +171,15 @@ function get_next_skillchain_elements(target_index)
 	return elements_to_return
 end
 
+local function check_mb_condition(target_index, time_now)
+	return last_skillchain[target_index] 
+	and last_skillchain[target_index].name ~= nil 
+	and #last_skillchain[target_index].name >= 1 
+	and time_now - last_skillchain[target_index].time < sc_window_end 
+	and target_sc_step >= 1
+	and (target_sc_step + 1 >= settings[current_main_job]["mb_step"] or double_light_darkness) -- +1 here cos I start from 0
+end
+
 local function check_aeonic(buffs, weapon)
 	local equipment = windower.ffxi.get_items('equipment')
 	local main_bag = equipment.main_bag
@@ -254,6 +263,7 @@ local function get_next_ws(player_tp, time_since_last_skillchain, buffs, target_
 	if not started then return end
 	local time_now = os.clock()
 	if time_now - double_up_time < double_up_buffer then return nil end
+	if should_mb and check_mb_condition(target_index, time_now) then return nil end -- don't ws when 
 	if am_level > 0 and am_level <= 3 then
 		local current_am_level = 0
 		for _, v in pairs(buffs) do
@@ -369,7 +379,7 @@ local function get_mb_spells(animation, target_hp, time_left)
 	local burst_elements = get_burst_elements(animation)
 	local recast = 99
 	if burst_elements ~= nil then
-		local fc_multi = (100 - fast_cast) / 100
+		local fc_multi = (100 - settings[current_main_job]["fast_cast"]) / 100
 		for _,v in pairs(parsed_spells) do
 			if burst_elements:contains(v.element)
 			and mp_available > v.mp 
@@ -404,13 +414,7 @@ local function check_mb()
 	local target_index = player.target_index
 	local time_now = os.clock()
 	if debug_print then notice("Checking MB") end
-	if last_skillchain[target_index] 
-	and last_skillchain[target_index].name ~= nil 
-	and #last_skillchain[target_index].name >= 1 
-	and time_now - last_skillchain[target_index].time < sc_window_end 
-	and target_sc_step >= 1
-	and (target_sc_step + 1 >= settings[current_main_job]["mb_step"] or double_light_darkness) -- +1 here cos I start from 0
-	then
+	if check_mb_condition(target_index, time_now) then
 		local time_left = 8 + sc_window_delay - (time_now - last_skillchain[target_index].time) - target_sc_step
 		local mob = windower.ffxi.get_mob_by_index(target_index)
 		local spell, cast_time, prefix, recast = get_mb_spells(string.lower(last_skillchain[target_index].name[1]), mob.hpp, time_left)
@@ -634,7 +638,7 @@ local function check_job_and_parse_settings(force)
 		notice("Don't Open: " .. tostring(dont_open))
 		notice("SC Level: " .. tostring(settings[current_main_job]["sc_level"]))
 		notice("Spamming: " .. tostring(spam_mode))
-		notice("Fast Cast: " .. tostring(fast_cast))
+		notice("Fast Cast: " .. tostring(settings[current_main_job]["fast_cast"]))
 		notice("MB Step: " .. tostring(settings[current_main_job]["mb_step"]))
 		parse_ws_settings()
 		parse_spell_settings()
@@ -757,8 +761,8 @@ local function handle_command(...)
 		local fc = tonumber(args[2])
 		if fc then
 			if fc >= 0 and fc <= 80 then
-				fast_cast = fc
-				notice("Fast Cast: " .. tostring(fast_cast))
+				settings[current_main_job]["fast_cast"] = fc
+				notice("Fast Cast: " .. tostring(settings[current_main_job]["fast_cast"]))
 			else
 				notice("Fast Cast needs to be between 0 and 80, not " .. tostring(fc))
 			end

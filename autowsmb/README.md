@@ -1,4 +1,8 @@
 #Auto WS and MB
+1.3.4:
+- Add fastcast to config file.
+- Don't open ws until mb window is closed if mb has been started.
+
 1.3.3:
 - Fix amlvl command not accepting multi-word ws names
 
