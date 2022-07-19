@@ -2,7 +2,7 @@
 
 _addon.name     = 'autowsmb'
 _addon.author   = 'Dabidobido'
-_addon.version  = '1.3.4'
+_addon.version  = '1.3.5'
 _addon.commands = {'autowsmb', 'awsmb'}
 
 require('logger')
@@ -458,12 +458,10 @@ local function parse_action(act)
 			local mob = windower.ffxi.get_mob_by_index(target_index)
 			if mob and target.id == mob.id then
 				if category == 'melee' and actor_id == player.id then
-					if running then
-						running = false
-						windower.ffxi.run(false)
-					end
 					local time_since_last_skillchain = os.clock()
-					if last_skillchain[target_index] then time_since_last_skillchain = time_since_last_skillchain - last_skillchain[target_index].time end
+					if last_skillchain[target_index] and last_skillchain[target_index].time ~= nil then 
+						time_since_last_skillchain = time_since_last_skillchain - last_skillchain[target_index].time 
+					end
 					local next_ws = get_next_ws(player.vitals.tp, time_since_last_skillchain, player.buffs, target_index)
 					if next_ws ~= nil then
 						local prefix = "/ws "
@@ -762,6 +760,7 @@ local function handle_command(...)
 		if fc then
 			if fc >= 0 and fc <= 80 then
 				settings[current_main_job]["fast_cast"] = fc
+				config.save(settings)
 				notice("Fast Cast: " .. tostring(settings[current_main_job]["fast_cast"]))
 			else
 				notice("Fast Cast needs to be between 0 and 80, not " .. tostring(fc))

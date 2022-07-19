@@ -1,4 +1,8 @@
 #Auto WS and MB
+1.3.5:
+- Fix fastcast not saving to config file
+- Fix nil value when using ws with no skillchain property
+
 1.3.4:
 - Add fastcast to config file.
 - Don't open ws until mb window is closed if mb has been started.
