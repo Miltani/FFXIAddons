@@ -9,10 +9,10 @@ function custom_get_sets()
 	ws["Shijin Spiral"] = { set = sets["Shijin Spiral"], tp_bonus = false }
 	ws["Asuran Fists"] = { set = sets["Asuran Fists"], tp_bonus = false }
 	ws["Raging Fists"] = { set = sets["Raging Fists"], tp_bonus = true }
-	ws["Howling Fist"] = { set = sets["Howling Fist"], tp_bonus = true }
-	ws["Dragon Kick"] = { set = sets["Howling Fist"], tp_bonus = true }
-	ws["Tornado Kick"] = { set = sets["Howling Fist"], tp_bonus = true }
-	ws["Spinning Attack"] = { set = sets["Howling Fist"], tp_bonus = false }
+	ws["Howling Fist"] = { set = sets["Raging Fists"], tp_bonus = true }
+	ws["Dragon Kick"] = { set = sets["Raging Fists"], tp_bonus = true }
+	ws["Tornado Kick"] = { set = sets["Raging Fists"], tp_bonus = true }
+	ws["Spinning Attack"] = { set = sets["Raging Fists"], tp_bonus = false }
 	
 	ws["Full Swing"] = { set = sets["Howling Fist"], tp_bonus = true }
 	ws["Retribution"] = { set = sets["Howling Fist"], tp_bonus = true }

@@ -1,11 +1,18 @@
 include("MasterGear/MasterGearLua.lua")
 
 function custom_get_sets()
-	cancel_haste = 1
+	cancel_haste = 0
 	
 	ws = {}
 	ws["Flash Nova"] = { set = sets["Flash Nova"], tp_bonus = false }
 	ws["Seraph Strike"] = { set = sets["Flash Nova"], tp_bonus = true }
+	ws["Hexa Strike"] = { set = sets["Hexa Strike"], tp_bonus = true }
+	ws["Realmrazer"] = { set = sets["Hexa Strike"], tp_bonus = false }
+	ws["Black Halo"] = { set = sets["Black Halo"], tp_bonus = true }
+	ws["Mystic Boon"] = { set = sets["Black Halo"], tp_bonus = true }
+	ws["Judgement"] = { set = sets["Black Halo"], tp_bonus = true }
+	ws["True Strike"] = { set = sets["Black Halo"], tp_bonus = false }
+	ws["Skullbreaker"] = { set = sets["Black Halo"], tp_bonus = false }
 	
 	sets["Midcast_Holy"] = sets["MagicBurst"]
 	sets["Midcast_Holy II"] = sets["MagicBurst"]
@@ -49,7 +56,7 @@ function custom_get_sets()
 	sets["Midcast_Cure III"] = sets["Cure"]
 	sets["Midcast_Cure IV"] = sets["Cure"]
 	sets["Midcast_Cure V"] = sets["Cure"]
-	sets["Midcast_Cure V"] = sets["Cure"]
+	sets["Midcast_Cure VI"] = sets["Cure"]
 	sets["Midcast_Curaga"] = sets["Cure"]
 	sets["Midcast_Curaga II"] = sets["Cure"]
 	sets["Midcast_Curaga III"] = sets["Cure"]

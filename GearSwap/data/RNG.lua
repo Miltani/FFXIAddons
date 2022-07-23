@@ -81,7 +81,7 @@ function custom_get_sets()
 	AssistedShootingID = nil
 	RecordPosNextRangedAttack = false
 	HoverShotTarget = nil
-	cancel_haste = 2
+	cancel_haste = 0
 	shoot_status = "Idle"
 	
 	setup_text_window()
@@ -524,7 +524,7 @@ function parse_action_message(actor_id, target_id, actor_index, target_index, me
 	end
 end
 
-windower.register_event('action', rng_action_helper)
-windower.register_event('prerender', update_hover_shot_info)
-windower.register_event('zone change', clear_last_shot_position)
-windower.register_event('action message', parse_action_message)
+windower.raw_register_event('action', rng_action_helper)
+windower.raw_register_event('prerender', update_hover_shot_info)
+windower.raw_register_event('zone change', clear_last_shot_position)
+windower.raw_register_event('action message', parse_action_message)

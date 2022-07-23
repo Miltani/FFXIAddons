@@ -258,20 +258,6 @@ function pet_change(pet,gain)
 	update_puppet_info()
 end
 
-function parse_pup_action(act)
-	if pet.isvalid and puppet_overrides["Enmity"].active == true then
-		local abil_ID = act['param'] - 256
-		local actor_id = act['actor_id']
-		local player_id = windower.ffxi.get_player().id
-		local pet_index = windower.ffxi.get_mob_by_id(player_id)['pet_index']
-		if autoabils[abil_ID] and windower.ffxi.get_mob_by_id(actor_id)['index'] == pet_index and pet_index ~= nil then
-			puppet_overrides["Enmity"].active = false
-			puppet_overrides["Enmity"].ready_time[abil_ID] = os.clock() + autoabils[abil_ID].recast
-			aftercast()
-		end
-	end
-end
-
 function print_current_maneuvers()
 	local text = ""
 	for k,v in pairs(maneuver_cast) do
@@ -329,5 +315,19 @@ function check_auto_stuff(new, old)
 	update_puppet_info()
 end
 
-windower.register_event('time change', check_auto_stuff)
-windower.register_event('action', parse_pup_action)
+function parse_pup_action(act)
+	if pet.isvalid and puppet_overrides["Enmity"].active == true then
+		local abil_ID = act['param'] - 256
+		local actor_id = act['actor_id']
+		local player_id = windower.ffxi.get_player().id
+		local pet_index = windower.ffxi.get_mob_by_id(player_id)['pet_index']
+		if autoabils[abil_ID] and windower.ffxi.get_mob_by_id(actor_id)['index'] == pet_index and pet_index ~= nil then
+			puppet_overrides["Enmity"].active = false
+			puppet_overrides["Enmity"].ready_time[abil_ID] = os.clock() + autoabils[abil_ID].recast
+			aftercast()
+		end
+	end
+end
+
+windower.raw_register_event('time change', check_auto_stuff)
+windower.raw_register_event('action', parse_pup_action)

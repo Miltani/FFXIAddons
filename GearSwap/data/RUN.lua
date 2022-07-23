@@ -104,13 +104,19 @@ function custom_get_sets()
 	ws["Herculean Slash"] = { set = sets["Lunge"], tp_bonus = false }
 	ws["Shockwave"] = { set = sets["Savage Blade"], tp_bonus = false }
 	ws["Resolution"] = { set = sets["Resolution"], tp_bonus = true }
-	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
-	ws["Requiescat"] = { set = sets["Requiescat"], tp_bonus = true }
 	ws["Sickle Moon"] = { set = sets["Savage Blade"], tp_bonus = true }
 	ws["Dimidiation"] = { set = sets["Dimidiation"], tp_bonus = true }
+	
+	ws["Savage Blade"] = { set = sets["Savage Blade"], tp_bonus = true }
+	ws["Requiescat"] = { set = sets["Requiescat"], tp_bonus = true }
 	ws["Red Lotus Blade"] = { set = sets["Lunge"], tp_bonus = true }
 	ws["Seraph Blade"] = { set = sets["Lunge"], tp_bonus = true }
 	ws["Sanguine Blade"] = { set = sets["Sanguine Blade"], tp_bonus = false }
+	
+	ws["Fell Cleave"] = { set = sets["Savage Blade"], tp_bonus = false }
+	ws["Steel Cyclone"] = { set = sets["Savage Blade"], tp_bonus = true }
+	ws["Armor Break"] = { set = sets["Savage Blade"], tp_bonus = true }
+	ws["Upheaval"] = { set = sets["Resolution"], tp_bonus = true }
 	
 	sets["EnhancingRegen"] = set_combine(sets["EnhancingAny"], sets["EnhancingRegen"])
 	sets["EnhancingPhalanx"] = set_combine(sets["EnhancingAny"], sets["EnhancingPhalanx"])
@@ -394,4 +400,4 @@ function auto_rune(new, old)
 	end
 end
 
-windower.register_event('time change', auto_rune)
+windower.raw_register_event('time change', auto_rune)

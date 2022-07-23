@@ -29,6 +29,19 @@ function custom_get_sets()
 	ws["Scourge"] = { set = sets["Steel Cyclone"], tp_bonus = false }
 	ws["Resolution"] = { set = sets["Upheaval"], tp_bonus = true }
 	
+	ws["Decimation"] = { set = sets["Decimation"], tp_bonus = false }
+	ws["Smash Axe"] = { set = sets["Steel Cyclone"], tp_bonus = false }
+	ws["Ruinator"] = { set = sets["Decimation"], tp_bonus = false }
+	ws["Mistral Axe"] = { set = sets["Steel Cyclone"], tp_bonus = true }
+	ws["Calamity"] = { set = sets["Steel Cyclone"], tp_bonus = true }
+	ws["Cloudsplitter"] = { set = sets["Cloudsplitter"], tp_bonus = true }
+	
+	ws["Cataclysm"] = { set = sets["Cloudsplitter"], tp_bonus = true }
+	ws["Earth Crusher"] = { set = sets["Cloudsplitter"], tp_bonus = true }
+	ws["Full Swing"] = { set = sets["Steel Cyclone"], tp_bonus = true }
+	ws["Retribution"] = { set = sets["Steel Cyclone"], tp_bonus = true }
+	ws["Shell Crusher"] = { set = sets["Armor Break"], tp_bonus = false }
+	
 	send_command('@input /macro book 19;wait 1;input /macro set 1')
 end
 

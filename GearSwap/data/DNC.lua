@@ -82,6 +82,24 @@ message_id_status_map = {
 	[591] = 448,
 }
 
+function amount_cured(base, mod)
+	-- Assume 50% waltz potency and 300 CHR + VIT combined and 20 points in Waltz Potency Job Point Category
+	return math.floor(1.5 * math.floor((mod * 300) + base + 40))
+end
+
+curing_waltz_table = {
+	["Curing Waltz V"] = { recast_id = 189, tp_cost = 800, amount = amount_cured(600, 1.25) },
+	["Curing Waltz IV"] = { recast_id = 188, tp_cost = 650, amount = amount_cured(450, 1) },
+	["Curing Waltz III"] = { recast_id = 187, tp_cost = 500, amount = amount_cured(270, 0.75) },
+	["Curing Waltz II"] = { recast_id = 186, tp_cost = 350, amount = amount_cured(130, 0.5) },
+	["Curing Waltz"] = { recast_id = 217, tp_cost = 200, amount = amount_cured(60, 0.25) },
+}
+
+divine_waltz_table = {
+	["Divine Waltz II"] = { recast_id = 190, tp_cost = 800, amount = amount_cured(280, 0.5) },
+	["Divine Waltz"] = { recast_id = 225, tp_cost = 400, amount = amount_cured(60, 0.25) },
+}
+
 function update_combo_info()
 	local recasts = windower.ffxi.get_ability_recasts()
 	local finishing_moves_6 = false
@@ -288,6 +306,39 @@ function custom_midcast(spell)
 		end
 	end
 end
+
+function get_max_missing_hp_in_party(max_distance)
+	local max_missing_hp = 0
+	local max_missing_hp_player_index = 1
+	for i = 1, 6 do -- Get player with most missing hp
+		if party[i].mob ~= nil and party[i].mob.distance < max_distance then 
+			local missing_hp = (party[i].hp / (party[i].hpp / 100)) - party[i].hp
+			if missing_hp > max_missing_hp then
+				max_missing_hp = missing_hp
+				max_missing_hp_player_index = i
+			end
+		end
+	end
+	return max_missing_hp, max_missing_hp_player_index
+end
+
+function get_cure_to_use(waltz_table, max_missing_hp)
+	local cure_to_use = nil
+	if waltz_table ~= nil then
+		local recasts = windower.ffxi.get_ability_recasts()
+		for ja, data in pairs(waltz_table) do
+			if player.tp > data.tp_cost and recasts[data.recast_id] == 0 then
+				-- Use the max Curing Waltz that will top off HP or cure as much as possible
+				if data.amount >= max_missing_hp or cure_to_use == nil then
+					cure_to_use = ja
+				else
+					break
+				end
+			end
+		end
+	end
+	return cure_to_use
+end
  
 function custom_command(args)
 	if args[1] == "ws" then
@@ -348,6 +399,26 @@ function custom_command(args)
 			windower.send_command(command_string)
 		else
 			windower.add_to_chat(122, "Step on cooldown")
+		end
+	elseif args[1] == "cure" then
+		local max_missing_hp, max_missing_hp_player_index = get_max_missing_hp_in_party(20)
+		if max_missing_hp > 0 then
+			local cure_to_use = get_cure_to_use(curing_waltz_table, max_missing_hp)
+			if cure_to_use ~= nil then
+				windower.send_command('input /ja "' .. cure_to_use .. '" <p' .. tostring(max_missing_hp_player_index - 1) .. '>')
+			else
+				windower.add_to_chat("Not enough TP")
+			end
+		end
+	elseif args[1] == "curaga" then
+		local max_missing_hp, max_missing_hp_player_index = get_max_missing_hp_in_party(10)
+		if max_missing_hp > 0 then
+			local cure_to_use = get_cure_to_use(divine_waltz_table, max_missing_hp)
+			if cure_to_use ~= nil then
+				windower.send_command('input /ja "' .. cure_to_use .. '" <me>')
+			else
+				windower.add_to_chat("Not enough TP")
+			end
 		end
 	elseif args[1] == 'tpitemws' then
 		local temp_items = windower.ffxi.get_items(3)
@@ -434,7 +505,12 @@ function parse_action_message(actor_id, target_id, actor_index, target_index, me
 	end
 end
 
-windower.register_event('time change', update_combo_info)
-windower.register_event('prerender', update_step_info)
-windower.register_event('action', parse_action)
-windower.register_event('action message', parse_action_message)
+function zone_change()
+	target_step_info = {}
+end
+
+windower.raw_register_event('time change', update_combo_info)
+windower.raw_register_event('prerender', update_step_info)
+windower.raw_register_event('action', parse_action)
+windower.raw_register_event('action message', parse_action_message)
+windower.raw_register_event('zone change', zone_change)

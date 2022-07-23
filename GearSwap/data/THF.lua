@@ -25,6 +25,7 @@ function custom_get_sets()
 	ws["Raging Fists"] = { set = sets["Raging Fists"], tp_bonus = true }
 	
 	sets["Midcast_Sleepga"] = sets["MagicAcc"]
+	sets["Midcast_Bind"] = sets["MagicAcc"]
 	
 	print_current_ws()
 	print_throwing()
@@ -72,7 +73,11 @@ end
  
 function custom_command(args)
 	if args[1] == "ws" then
-		send_command('input /ws "' .. current_ws .. '" <t>')
+		if player.equipment.main == "Naegling" then
+			send_command('input /ws "Savage Blade" <t>')
+		else
+			send_command('input /ws "' .. current_ws .. '" <t>')
+		end
 	elseif args[1] == "setWS" and args[2] then
 		local commandstring = ""
 		for i = 2, #args do

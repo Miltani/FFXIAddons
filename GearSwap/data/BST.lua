@@ -249,4 +249,4 @@ function auto_pet(new, old)
 	end
 end
 
-windower.register_event('time change', auto_pet)
+windower.raw_register_event('time change', auto_pet)

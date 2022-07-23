@@ -152,4 +152,4 @@ function custom_zone_change()
 	end
 end
 
-windower.register_event('time change', check_addendum)
+windower.raw_register_event('time change', check_addendum)

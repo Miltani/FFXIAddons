@@ -341,4 +341,4 @@ function rng_action_helper(act)
 	end
 end
 
-windower.register_event('action', rng_action_helper)
+windower.raw_register_event('action', rng_action_helper)
