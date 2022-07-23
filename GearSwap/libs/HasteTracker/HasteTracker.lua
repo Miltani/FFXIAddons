@@ -1,4 +1,4 @@
--- Version 1.0.6
+-- Version 1.0.7
 
 haste_level = 0
 cancel_haste = 0
@@ -158,7 +158,7 @@ local function parse_command(...)
 	return false
 end
 
-windower.register_event('action', parse_action)
-windower.register_event('time change', time_change)
-windower.register_event('lose buff', lose_buff)
+windower.raw_register_event('action', parse_action)
+windower.raw_register_event('time change', time_change)
+windower.raw_register_event('lose buff', lose_buff)
 register_unhandled_command(parse_command)

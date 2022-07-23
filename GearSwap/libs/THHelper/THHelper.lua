@@ -1,4 +1,4 @@
--- Version 1.0.1
+-- Version 1.0.3
 
 MobsTagged = {}
 TimeToDead = 300 -- 5mins then remove from table
@@ -156,20 +156,15 @@ function on_status_change_for_th(new_status, old_status)
     end
 end
 
-function on_incoming_chunk_for_th(id, data, modified, injected, blocked)
-    if id == 0x29 then
-        local target_id = data:unpack('I',0x09)
-        local message_id = data:unpack('H',0x19)%32768
-
-        -- Remove mobs that die from our tagged mobs list.
-        if MobsTagged[target_id] then
-            -- 6 == actor defeats target
-            -- 20 == target falls to the ground
-            if message_id == 6 or message_id == 20 then
-                MobsTagged[target_id] = nil
-            end
-        end
-    end
+function parse_action_message(actor_id, target_id, actor_index, target_index, message_id, param_1, param_2, param_3)
+	-- Remove mobs that die from our tagged mobs list.
+	if MobsTagged[target_id] then
+		-- 6 == actor defeats target
+		-- 20 == target falls to the ground
+		if message_id == 6 or message_id == 20 then
+			MobsTagged[target_id] = nil
+		end
+	end
 end
 
 function reset()
@@ -178,10 +173,10 @@ function reset()
 	enable("main", "sub", "range", "ammo", "head", "neck", "ear1", "ear2", "body", "hands", "ring1", "ring2", "back", "waist", "legs", "feet")
 end
 
-windower.register_event('action', parse_action)
-windower.register_event('target change', on_target_change_for_th)
-windower.raw_register_event('incoming chunk', on_incoming_chunk_for_th)
-windower.register_event('zone change', clear_tags)
-windower.register_event('time change', clean_up_tags)
-windower.register_event('job change', reset)
+windower.raw_register_event('action', parse_action)
+windower.raw_register_event('target change', on_target_change_for_th)
+windower.raw_register_event('action message', parse_action_message)
+windower.raw_register_event('zone change', clear_tags)
+windower.raw_register_event('time change', clean_up_tags)
+windower.raw_register_event('job change', reset)
 register_unhandled_command(parse_th_command)

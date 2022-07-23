@@ -1,4 +1,7 @@
 # THHelper
+1.0.3:
+- Use windower.raw_register_event so that there are less frame drops
+
 1.0.2:
 - reset the slot disable state on job change
 

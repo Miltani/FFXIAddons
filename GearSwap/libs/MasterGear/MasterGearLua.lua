@@ -1,4 +1,4 @@
--- Version 1.6.1
+-- Version 1.6.2
 
 include("MasterGear/MasterGearFunctions.lua")
 include('THHelper/THHelper.lua')
@@ -68,7 +68,7 @@ function precast(spell)
 	elseif sets["Precast_" .. modes[mode].name .. spell.english] then equip(sets["Precast_" .. modes[mode].name .. spell.english])
 	elseif sets["Precast_" .. spell.english] then equip(sets["Precast_" .. spell.english])
     end
-	if th_next then
+	if th_next and spell.action_type ~= "Magic" then
 		th_next = false
 		equip(sets["TH"])
 	end

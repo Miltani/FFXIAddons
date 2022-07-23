@@ -1,4 +1,8 @@
 # MasterGear
+1.6.2
+MasterGearLua
+- Don't consume thnext for spells in precast
+
 1.6.1
 MasterGearFunctions
 - Fix removing gear from custom jobs when adding another gear in the same slot
