@@ -1,0 +1,21 @@
+[submodule "libs/bot"]
+	path = libs/bot
+	url = https://github.com/dabidobido/botlib.git
+[submodule "unitypop"]
+	path = unitypop
+	url = https://github.com/dabidobido/unitypop.git
+[submodule "voidwatch"]
+	path = voidwatch
+	url = https://github.com/dabidobido/voidwatch.git
+[submodule "cardfarm"]
+	path = cardfarm
+	url = https://github.com/dabidobido/cardfarm.git
+[submodule "crestcardhelper"]
+	path = crestcardhelper
+	url = https://github.com/dabidobido/crestcardhelper.git
+[submodule "farmermanager"]
+	path = farmermanager
+	url = https://github.com/dabidobido/farmermanager.git
+[submodule "sparky"]
+	path = sparky
+	url = https://github.com/dabidobido/sparky.git
